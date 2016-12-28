@@ -1,0 +1,291 @@
+/*****Style sheet applied to the FoodData.php file*******/
+
+
+html, body {
+	height: 100%;
+	margin: auto;						
+	text-align:center;			
+	width: 100%;
+	min-width: 500px;	
+	}
+
+body{
+	font-family: "Arial", Gadget, sans-serif;
+	font-size:14px;
+}
+.title{	
+	background-color: #4682B4;
+	margin:0 auto;
+	font-size: 150%;		
+	color: white;
+	display: block;
+	padding:2% 2% 2% 15px;
+	text-align: center;	
+	}
+
+/*******Centers content vetically in navbar**********/
+
+
+/*******Main content styling center of page********/
+.content-wrapper{
+	height: 70%;
+	margin-left: auto;					
+	margin-right: auto; 					
+	text-align: left;					
+}
+.content{
+	width: 80%;	
+	margin: 0 auto;	
+	display: flex;
+
+}
+
+.left, .right{
+	width: 50%;
+	text-align: center;
+	padding: 1%;
+	min-width: 250px;
+	min-height: 300px;
+}
+
+/*//////////////////left side styling////////////////////
+//////////////////////////////////////////////////////*/
+.left{
+	display: flex;	
+	flex-direction: column;
+	width: 50%;	
+	min-width: 400px;
+}
+.addbtn{	
+	padding-bottom: 3%;
+}
+.addbtn button{
+	width: 40%;
+	min-width: 130px;
+}
+.input{	
+	display: none;		
+	text-align: left;	
+	padding: 5%;	
+	justify-content: center;
+	margin: 0 auto;
+	width: 80%;
+	background-color: #DCDCDC;
+	border: solid;
+	border-width: 5px;
+	border-width: 3px;
+	border-radius: 8px;
+	border-style: outset;
+}
+.foodInputs{
+	flex-direction: column;
+	display: flex;
+}
+.topFood{	
+	width: 100%;
+	display: inline;
+	float: left;
+}
+.innerFoodBoxLeft{
+	width: 50%;
+	float: left;
+}
+.innerFoodBoxRight{
+	width: 50%;
+	float: right;
+}
+
+.bottomFood{
+	
+	float:right;
+	width: 100%;
+	display: inline;
+}
+
+.saveCancel button{
+	
+	width: 30%;
+	min-width: 60px;
+
+}
+.saveCancel{
+	text-align: right;
+	padding-top: 3%;
+	display: block;
+}
+.foodInputs select, input{
+	padding:2px;
+	margin: 5px 5px 5px 0px;
+	
+	border-radius: 5px;
+	width: 70%;
+
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+
+/*/////////////right side styling//////////////////////
+/////////////////////////////////////////////////////*/
+.right{
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+/*/////////////right select-box//////////////////////*/
+.right select{
+	width: 90%;	
+	text-align: left;	
+	outline: none;
+
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	
+	display: inline;
+	margin: 0 auto;
+}
+
+option {
+	padding: 5px;
+}
+
+option:hover{
+	background-color:#4682B4;
+	color: white; 
+}
+/*///////Edit and Delete Buttons////////////////*/
+.editDelete{
+	display: inline;
+	margin: 10px;
+}
+.editDelete button{
+	min-width: 90px;
+	width: 40%;
+}
+/*//////////////Button Style////////////////////*/
+
+button{
+	border-radius: 3px;
+	
+	font-weight: bold;
+	padding: 5px;	
+	width: 20%;
+	color:white;	
+	outline: none;	
+	background-color: #4682B4;
+}
+
+button:hover{
+	background-color: #ffffff;
+	color: #4682B4;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/***********Menu Button/DropDown Styling*********/
+ 
+.dropbtn {
+           display: none;
+           position: absolute;
+           color: white;                    
+           min-width: 5%;     
+           left: 0px;
+           top: 0px;                
+           padding-left: 15px;         
+           text-align: left;
+           float: left;
+           }
+ 
+ 
+.dropdown-content {
+           position: absolute;
+           text-align: left;
+           left: 0px;
+           top: 0px;
+           top: 100%;
+           font-size: 100%;
+           background-color: #f9f9f9;
+           width: 200%;         /*changes made here 200 to 150%*/
+           padding: 0%;
+           box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+           border-radius: 0px;
+ 
+           }
+ 
+a.dropdown-option {
+           padding: 5% 5% 5% 15px;
+           font-size: 100%;
+           color: black;
+           text-decoration: none;
+           display: block;
+           }
+a.dropdown-option:hover {
+           background-color: #4682B4;
+           color: white;
+}
+/***************************************/
+
+
+#msgInput {
+
+text-align: left;
+
+}
+
+
+/**************************************
+*************Message Box***************/
+
+.messageBox{
+	display: table;
+	
+    
+    margin: 0 auto;
+    width: 250px;
+    min-height: 100px;
+    
+    
+	padding: 2%;
+	background-color: #DCDCDC;
+	border: solid;
+	border-width: 5px;
+	border-width: 3px;
+	border-radius: 8px;
+	border-style: outset;
+}
+
+.messageBox button{
+	min-width: 60px;
+}
+
+#messageCancel{
+	display: none;
+}
+
+#loaderContainer {
+
+	display: block;   
+    	
+	text-align:center;
+	margin: auto;					 
+	height: 100%;
+	width: 100%;					
+	vertical-align: middle;
+	
+	} 
+		
+#msgContainer {
+
+ 	display: none;   
+    	align-items: center;
+	position: absolute;
+	left: 0;
+    	right: 0;
+   	top: 0;
+   	bottom: 0;
+	text-align:center;
+	margin: auto;
+	height: 100%;
+	width: 100%;
+	
+	} 

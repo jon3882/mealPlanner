@@ -1,0 +1,538 @@
+
+/***Styling applied to the file: mealPlanner.php */
+
+
+html, body {
+	height: 100%;
+	margin: auto;					
+	text-align:center;		
+	width: 100%;
+	min-width: 500px;	
+	}
+
+body{
+	font-family: "Arial", Gadget, sans-serif;
+	font-size:14px;
+	
+}
+.title{	
+	background-color: #4682B4;
+	margin:0 auto;
+	font-size: 150%;	
+
+	color: white;
+	display: block;
+	padding:2% 2% 2% 15px;
+	text-align: center;	
+	
+}
+/*******Centers content vetically in navbar**********/
+
+
+
+
+
+#navOptions {
+
+	display: none;
+	 position: absolute;
+           color: white;                    
+           min-width: 5%;     
+           left: 0px;
+           top: 0px;                
+           padding-left: 15px;         
+           text-align: left;
+           float: left;
+           
+	}
+
+#fileOptions {
+
+	display: none;
+	position: absolute;
+        color: white;                    
+        min-width: 5%;     
+        left: 0px;
+        top: 0px;                
+        padding-left: 15px;         
+        text-align: left;
+        float: left;
+     
+	}
+
+
+.dropbtn {
+           display: none;
+           position: absolute;
+           color: white;                    
+           min-width: 5%;     
+           left: 0px;
+           top: 0px;                
+           padding-left: 15px;         
+           text-align: left;
+           float: left;
+           
+           }
+
+ 
+.dropdown-content {
+           position: absolute;
+           text-align: left;
+           left: 0px;
+           top: 0px;
+           top: 100%;
+           font-size: 100%;
+           background-color: #f9f9f9;
+           width: 300%;         /*changes made here 200 to 150%*/
+           padding: 0%;
+           box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+           border-radius: 0px;
+           }
+ 
+a.dropdown-option {
+           padding: 5% 5% 5% 15px;
+           font-size: 100%;
+           color: black;
+           text-decoration: none;
+           display: block;
+           background-color: #f2f2f2;
+           }
+a.dropdown-option:hover {
+           background-color: #4682B4;
+           color: white;
+}
+
+
+/***************************************/
+
+/**************************************
+*************Message Box***************/
+
+.messageBox{
+	display: table;
+    margin: 0 auto;
+    width: 250px;
+    min-height: 100px;
+	padding: 2%;
+	background-color: #DCDCDC;
+	border: solid;
+	border-width: 5px;
+	border-width: 3px;
+	border-radius: 8px;
+	border-style: outset;
+}
+
+.messageBox button{
+	min-width: 60px;
+}
+
+#messageCancel{
+	display: none;
+}
+
+#loaderContainer {
+
+	display: block;   
+	text-align:center;
+	margin: auto;					 
+	height: 100%;
+	width: 100%;					
+	vertical-align: middle;
+	} 
+	
+#msgContainer {
+
+ 	display: none;
+        align-items: center;
+	position: absolute;
+	left: 0;
+    	right: 0;
+   	top: 0;
+   	bottom: 0;
+	text-align:center;
+	margin: auto;
+	height: 100%;
+	width: 100%;
+	
+	} 
+
+/*****************************************************
+*************End of Message Box Content***************/
+
+/*****************************************************
+/**Planner interface **/
+/*****************************************************/
+
+#planner {
+
+	width: 90%;
+	margin: 0 auto;				
+	text-align:center;
+	border: 2px solid #4682B4;
+    	border-radius: 5px;
+	background-color: white;
+
+    	
+
+	}
+	
+
+	
+.dTitle {
+
+	border: 2px solid #4682B4;
+	width: 12%;
+	border-radius: 5px;
+	background-color: #4682B4;
+	color: white;
+
+	}
+	
+.mTitle {
+
+	border: 2px solid #4682B4;
+	width: 12%;
+	border-radius: 5px;
+	background-color: #4682B4;
+	color: white;
+
+	}
+	
+.sq {
+
+	border: 2px solid #4682B4;
+	width: 12%;
+	border-radius: 5px;
+	color: #4682B4;
+	background-color: white;
+	text-align:left;
+	font-size: 70%;
+	padding: 0;
+	}
+
+.dayTotals {
+
+	color: #4682B4;
+	text-align:left;
+	font-size: 80%;
+	background-color: white;
+
+	}
+	
+.totalSQ td{
+
+	background-color: white;
+
+	}
+
+#pdfContent1 {
+
+	width: 80%;
+	text-align:left;
+	color: #4682B4;
+	margin: 0 auto;
+
+	}
+
+
+#notesTitle {
+
+	
+	text-align:left;
+	color: #4682B4;
+
+
+	}
+	
+#notes {
+
+	text-align:left;
+	color: #4682B4;
+	
+
+	}
+	
+#custInfoContainer {
+
+	width: 80%;
+	text-align:left;
+	color: #4682B4;
+	margin: 0 auto;
+	
+
+	}	
+
+	
+#custInfo {
+
+	width: 60%;
+	text-align:left;
+	color: #4682B4;
+	background-color: white;
+	
+	}
+	
+.custInfoLabel {
+
+	font-weight: bold;
+
+	}
+
+button{
+	border-radius: 3px;
+	font-weight: bold;
+	padding: 5px;	
+	color:white;	
+	outline: none;	
+	background-color: #4682B4;
+	display: inline-block;
+	margin:0 auto;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+button:hover{
+	background-color: white;
+	color:#4682B4;
+}
+
+/*****************************************************/
+
+/******Dialogue Container Box*******/
+
+.dialogueBox{
+	display: none; 
+	margin: 0 auto;
+	background-color: #DCDCDC;
+	width: 80%;
+	border: solid;
+	border-width: 5px;
+	border-width: 3px;
+	border-radius: 8px;
+	border-style: outset;
+	min-width: 800px;
+	max-width: 1000px;
+	min-height: 400px;
+	font-size: 90%;
+	
+}
+
+h2{
+	width: 100%;
+	text-align: center;
+}
+
+#meal tr:nth-child(odd) {
+	background: #CCC
+}
+
+/*******Children in dialogue box*******/
+
+.foodDataContainer{
+	display: flex;
+	flex-direction: row;
+
+}
+
+.leftSide, .rightSide{
+	display: inline-block;
+	text-align: center;
+}
+
+.leftSide{
+	width: 28%;
+}
+
+.rightSide{
+	width: 69%;	
+}
+/****Left Side of Dialogue Styling*****/
+
+/******select for food type************/
+#foodType{
+	width: 50%;		
+	padding: 5px;
+	outline: none;
+	border-radius: 5px;
+	display: block;
+	margin:0 auto;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	font-size: 100%;
+}
+
+/*****Food item select box*************/
+#foodSelect {
+	width: 80%;	
+	text-align: left;	
+	outline: none;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;	
+	display: inline;
+	margin: 0 auto;
+	/*margin-bottom: 5px;*/
+	padding: 2px;
+	font-size: 100%;
+}
+option {
+	padding: 5px;
+}
+option:hover{
+	background-color:#4682B4;
+	color: white; 
+}
+
+
+button#add{
+	width: 30%;
+	min-width: 85px;
+}
+
+/***********Right Side Dialogue Styling**********
+*************************************************/
+
+/******Styling for the meal Identifier above table***/
+#mealID{
+	padding: 3px;
+	margin-bottom: 10px;
+	margin-top: 15px;
+	font-size: 125%;
+	display: block;
+}
+
+/**********General Table Properties************/
+table#meal, table#totals{
+	margin:0 auto;
+	background-color: white;
+	border:solid;
+	border-color: #DCDCDC;
+	border-width: 1px;
+	border-radius: 5px;
+	border-collapse: collapse;
+	margin-bottom: 5px;
+
+}
+
+table#meal{
+	width: 560px;
+}
+
+/************makes table scrollabel*********/
+#meal thead, #meal tbody {display: block;  }
+
+/*scroll properties*/
+#meal tbody {
+	height: 177px;      
+    overflow-y: show;    
+    overflow-x: hidden;      
+}
+
+/*******Styling for Table alignment*******
+******************************************/
+
+/*****food description column*****/
+#meal tbody td:first-child{
+    width: 145px;
+}
+
+#meal thead th:first-child{
+	width: 195px;
+}
+
+/****servings column*/
+#meal th:nth-child(2){
+	width: 120px;
+}
+#meal tbody td:nth-child(2){
+	text-align: left;
+	width: 100px;
+}
+
+/****calories column*/
+#meal th:nth-child(3){
+	width: 68px;
+}
+#meal tbody td:nth-child(3){
+	width: 60px;
+}
+
+/****fat column*****/
+#meal th:nth-child(4){
+	width: 68px;
+}
+#meal tbody td:nth-child(4){
+	width: 55px;
+}
+/***carbs column***/
+#meal th:nth-child(5){
+	width: 80px;
+}
+
+/*****protein column****/
+#meal th:nth-child(6){
+	width: 100px;
+}
+
+/*****delete column******/
+#meal thead th:last-child{
+	width: 60px;
+}
+
+/*****general sizeing for remaining columns***/
+#meal tbody td, #meal thead th {
+    width: 70px;
+}
+
+
+/*******General table style for both tables******/
+th{
+	background-color: #4682B4;
+	color: white; 
+	padding: 5px;
+	border-radius: 2px;
+	border:solid;
+	border-width: 1px;
+	font-weight: lighter;
+	height: 20px;
+	padding-left: 6px;
+}
+
+/*
+tr:nth-child(odd) {
+	background: #CCC
+}
+*/
+
+input.servingInput {
+	width: 25px;
+	text-align: center;
+}
+
+button.deleteBtn{
+	width: 40%;
+	background-color: white;
+	border-radius: 5px;
+	margin:0 auto;
+	margin-left: 10px;
+	color: red;
+	font-weight: bolder;	
+}
+
+
+/*******Totals table style*******/
+
+table#totals {
+	border-color: #DCDCDC;	
+	margin-top:5px;
+}
+
+#totals td{
+	padding: 5px;
+}
+
+/*******Save/Cancel Buttons*******/
+button#saveMeal,
+button#cancelMeal{
+	width: 20%;
+	padding: 7px;
+}

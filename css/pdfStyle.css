@@ -1,0 +1,129 @@
+html, body {
+	height: 100%;
+	margin: auto;					
+	text-align:center;		
+	width: 100%;
+	min-width: 500px;	
+	}
+
+body{
+	font-family: "Arial", Gadget, sans-serif;
+	font-size:12px;
+	
+}
+
+
+
+
+
+#planner {
+
+	width: 100%;
+	margin: 0 auto;
+	border: 2px solid #4682B4;
+    	padding: 4px 4px 4px 4px;
+	background-color: white;
+	padding: 1;
+    	
+
+	}
+		
+.dTitle {
+
+	border: 2px solid #4682B4;
+	width: 12%;
+	
+	background-color: #4682B4;
+	color: black;
+
+	}
+	
+.mTitle {
+
+	border: 2px solid #4682B4;
+	width: 12%;
+	
+	background-color: #4682B4;
+	color: white;
+
+	}
+	
+.sq {
+
+	border: 2px solid #4682B4;
+	width: 12%;
+	
+	color: #4682B4;
+	background-color: white;
+	text-align:left;
+	font-size: 100%;
+	padding: 1;
+	}
+
+.dayTotals {
+
+	color: #4682B4;
+	text-align:left;
+	font-size: 100%;
+	background-color: white;
+
+	}
+	
+.totalSQ td{
+
+	background-color: white;
+
+	}
+
+#notesTitle {
+
+	
+	text-align:left;
+	color: black;
+	
+	}
+	
+#notes {
+
+	
+	text-align:left;
+	color: black;
+	
+
+	}
+	
+#pdfContent1 {
+
+	width: 80%;
+	text-align:left;
+	color: #4682B4;
+	margin: 0 auto;
+
+	}
+	
+#custInfoContainer {
+
+	width: 80%;
+	text-align:left;
+	color: black;
+	margin: 0 auto;
+	
+
+	}	
+
+	
+#custInfo {
+
+	width: 60%;
+	text-align:left;
+	color: black;
+	background-color: white;
+	
+	}
+
+#footer {
+
+	color: black;
+	font-size: 10px;
+
+	}
