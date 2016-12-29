@@ -440,7 +440,7 @@ function getPlannerItems() {
 //Function is executed at startup to fill the global
 //variables with the meal plan data for the user.
 //***********************************************//
-function loadDatabaseData() 
+function loadDatabaseData() {
 
 	showLoader();
 	
