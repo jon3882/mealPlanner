@@ -2,60 +2,66 @@
 
 session_start();
 
-$userid = $_POST['userid'];
-$userPassword = $_POST['userPassword'];
+$userid = null;
+$userPassword = null;
+$msg = '';
 
-include('../../private/connectDB.php');
+if(isset($_POST['userid']) && isset($_POST['userPassword'])){
+	$userid = $_POST['userid'];
+	$userPassword = $_POST['userPassword'];
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-	}
-	
-$sql = "SELECT * FROM authorizedUsers WHERE user='".$userid."'";
-$result = $conn->query($sql);
-mysqli_close( $conn );
+	include('../../private/connectDB.php');
 
-if($result->num_rows > 0 ) {
-
-	$row = $result->fetch_assoc();
-
-	$hashed_password = $row["userPassword"];
-	$id = $row["id"];
-	$uName = $row["firstName"];
-	
-	
-	$status = $row["status"];
-
-	//$hashed_password = crypt( $hashed_password ); //remove after hash is saved.
-
-	if (hash_equals($hashed_password, crypt($userPassword, $hashed_password))) {
-   		
-   		if( $status == "active" ) {	
-   		
-   			$_SESSION["validUser"] = $id;
-   			$_SESSION["userName"] = $uName;
-   			header("Location: http://bryankristofferson.com/mealPlanner/");
-			exit;
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+		}
 		
+	$sql = "SELECT * FROM authorizedUsers WHERE user='".$userid."'";
+	$result = $conn->query($sql);
+	mysqli_close( $conn );
+
+	if($result->num_rows > 0 ) {
+
+		$row = $result->fetch_assoc();
+
+		$hashed_password = $row["userPassword"];
+		$id = $row["id"];
+		$uName = $row["firstName"];
+		
+		
+		$status = $row["status"];
+
+		//$hashed_password = crypt( $hashed_password ); //remove after hash is saved.
+
+		if (hash_equals($hashed_password, crypt($userPassword, $hashed_password))) {
+	   		
+	   		if( $status == "active" ) {	
+	   		
+	   			$_SESSION["validUser"] = $id;
+	   			$_SESSION["userName"] = $uName;
+	   			header("Location: http://bryankristofferson.com/mealPlanner/");
+				exit;
+			
+				} else {
+				
+				$msg = "The account associated with email ".$userid." is not active: ".$status;
+				
+				} //end of if statement
+	   		
 			} else {
 			
-			$msg = "The account associated with email ".$userid." is not active: ".$status;
+			if(isset($userid) || isset($userPassword)) $msg = "The email/password combination entered were not found.";
 			
 			} //end of if statement
-   		
+
 		} else {
-		
-		if(isset($userid) || isset($userPassword)) $msg = "The email/password combination entered were not found.";
-		
+
+		if( isset($userid) || isset($userPassword) ) $msg = "The email/password combination entered were not found.";
+
 		} //end of if statement
-
-	} else {
-
-	if( isset($userid) || isset($userPassword) ) $msg = "The email/password combination entered were not found.";
-
-	} //end of if statement
+	}
 
 ?>
 
