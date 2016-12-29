@@ -36,7 +36,7 @@ if($result->num_rows > 0 ) {
    		
    			$_SESSION["validUser"] = $id;
    			$_SESSION["userName"] = $uName;
-   			header("Location: http://31.170.106.44/~chalkboa/vicente/");
+   			header("Location: http://bryankristofferson.com/mealPlanner/");
 			exit;
 		
 			} else {
