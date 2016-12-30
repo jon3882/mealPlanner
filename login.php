@@ -41,7 +41,7 @@ if(isset($_POST['userid']) && isset($_POST['userPassword'])){
 	   		
 	   			$_SESSION["validUser"] = $id;
 	   			$_SESSION["userName"] = $uName;
-	   			header("Location: http://bryankristofferson.com/mealPlanner/");
+	   			header("Location: index.php");
 				exit;
 			
 				} else {
