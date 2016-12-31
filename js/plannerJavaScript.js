@@ -231,7 +231,7 @@ function sendToPDF() {
         	document.getElementById("pdfContainer").alt = "pdf";
 		document.getElementById("pdfQLink").alt = "pdf";
 		document.getElementById("pdfQLink").src = "img/pdfBlue.png";
-				
+
 			displayMessageToUser("Click \"OK\" to access the requested PDF. ", 
 			"",
 			"okc", function() {
@@ -243,7 +243,7 @@ function sendToPDF() {
         	}).fail(function() {
     			
     			//fail
-    			alert( "Problem with page." );
+    			alert( "Problem with page: " + data  );
   			
   			}); //end of fail handler
              
@@ -393,7 +393,7 @@ function writePlanner( plannerName ) {
 
 	var menuItems = getPlannerItems();
 	
-	ajaxPost( "php/writePlanner.php?name="+plannerName+"&customer="+selectedCustomerID+"&data="+menuItems, "No Message", 
+	ajaxPost( "php/writePlanner.php?name="+plannerName+"&data="+menuItems, "No Message", 
 		"Error", dType);
 
 	} //end of function

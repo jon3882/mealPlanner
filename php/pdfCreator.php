@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ERROR | E_PARSE);
+ini_set('display_errors', 'on');
+
 //**************************************************************************************//
 //PHP that is accessed through AJAX requests.  PHP file provides the function of creating
 //a pdf file of the user's meal plan.  Variables are passed post array.  Two variables are
