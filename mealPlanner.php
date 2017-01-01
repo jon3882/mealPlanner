@@ -29,7 +29,6 @@ include('../../private/loginProtect.php');
 
 <body onload="startup()">
 
-<div class="content-wrapper" >
 
 <!--***************Navigation Bar**********************-->
 <?php  
@@ -37,7 +36,7 @@ $thisPage = 'mealPlanner';
 include_once('navBar.php');
 ?>
 <!--************Navigation Bar End**********************-->
-
+<div class="content-wrapper" >
 
 
 <span style="float:right;">
