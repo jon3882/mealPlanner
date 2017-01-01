@@ -78,15 +78,10 @@ if(isset($_POST['userid']) && isset($_POST['userPassword'])){
 <body>
 
 <!--************Title Bar**********************-->
-
-<div id="title" class="title">
- 
-<span style="float:left; color:#4682B4;">Menu</span>
- 
-<span>Login</span>
-<span style="float:right; color:#4682B4;">Menu</span>
- 
-</div>
+<?php 
+$thisPage = "Login";
+include_once('navBar.php');
+?>
 
 
 <div>&nbsp<br>&nbsp</div>

@@ -3,7 +3,7 @@
 //***************************************************************
 //Interface for forgot password webpage.  (Not Complete)
 //***************************************************************
-
+$msg = ""; //needs to be initialized for local server
 ?>
 
 
@@ -21,16 +21,12 @@
 </head>
 <body>
 
-<!--************Title Bar**********************-->
-
-<div id="title" class="title">
- 
-<span style="float:left; color:#4682B4;">Menu</span>
- 
-<span>Forgot Password</span>
-<span style="float:right; color:#4682B4;">Menu</span>
- 
-</div>
+<!--************Navigation Bar**********************-->
+<?php  
+$thisPage = 'forgotPassword';
+include_once('navBar.php');
+?>
+<!--************Navigation Bar end******************-->
 
 
 <div>&nbsp<br>&nbsp</div>

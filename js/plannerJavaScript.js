@@ -497,7 +497,7 @@ function startup() {
 
 		loadDatabaseData();
 	 	populateCalendar();
-	 	document.getElementById("menu").style.height = getTitleHeight() + "px";
+	 	
 		} //end of function
 //***********************************************//
 

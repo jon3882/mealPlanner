@@ -20,8 +20,10 @@ $uName = $_SESSION["userName"];
 <body>
 
 <!--************Title Bar**********************-->
-<div class="title"><span>Slims Fitness</span></div>
-<div>&nbsp</div>
+<?php 
+$thisPage = "Home";
+include_once('navBar.php');
+?>
 
 <!-- *****************Buttons********************* -->
 <div class="content" >

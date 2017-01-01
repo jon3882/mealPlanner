@@ -1,0 +1,48 @@
+/****Styling for navigation bar*********/
+
+#navbar li a:not(#currentPage){
+  color:white;
+}
+
+#navbar li a:hover:not(#currentPage) {
+  background-color: #3F75A2;
+}
+
+#currentPage{
+  background-color: white;
+  color:#4682B4;
+  pointer-events: none;
+  cursor: default;     
+}
+
+#navbar li:not(.links){
+  float:none;
+  margin:0 auto;  
+}
+
+#navbar ul {	
+  font-size: 17px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #4682B4;  
+}
+
+#navbar li {
+  float: left;
+
+}
+
+#navbar li a, #login, #newUser, #forgotPassword {
+  display: block;  
+  text-align: center;
+  padding: 18px 24px;
+  text-decoration: none;
+  
+}
+
+#login, #newUser, #forgotPassword{
+  text-align: center;
+  color: white;
+}
