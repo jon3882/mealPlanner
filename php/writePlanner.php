@@ -10,6 +10,7 @@
 //**************************************************************************************//
 
 include('../../../private/connectDB.php');
+include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["name"]) ) $plannerName = $_GET["name"];
 if( isset($_GET["customer"]) ) $customer = $_GET["customer"];

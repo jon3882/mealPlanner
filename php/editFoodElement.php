@@ -9,6 +9,7 @@
 //**************************************************************************************//
 
 include('../../../private/connectDB.php');
+include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["id"]) ) $foodID = $_GET["id"];
 if( isset($_GET["macroType"]) ) $macroType = $_GET["macroType"];

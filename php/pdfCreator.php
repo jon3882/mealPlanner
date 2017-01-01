@@ -1,8 +1,4 @@
 <?php
-
-error_reporting(E_ERROR | E_PARSE);
-ini_set('display_errors', 'on');
-
 //**************************************************************************************//
 //PHP that is accessed through AJAX requests.  PHP file provides the function of creating
 //a pdf file of the user's meal plan.  Variables are passed post array.  Two variables are
@@ -13,7 +9,12 @@ ini_set('display_errors', 'on');
 //times the original size and then shunk back down to improve resolution for printing.
 //**************************************************************************************//
 
+//error_reporting(E_ERROR | E_PARSE);
+//ini_set('display_errors', 'on');
+
 include('../pdf/Dompdf/autoload.inc.php');
+include('phpFunctionLoginProtect.php');
+
 use Dompdf\Dompdf;
 
 if( isset($_POST["pdfHTML"]) ) $html = $_POST["pdfHTML"];

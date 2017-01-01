@@ -8,6 +8,7 @@
 //**************************************************************************************//
 
 include('../../../private/connectDB.php');
+include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["macroType"]) ) $macroType = $_GET["macroType"];
 if( isset($_GET["cal"]) ) $cal = $_GET["cal"];

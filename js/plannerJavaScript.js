@@ -226,19 +226,26 @@ function sendToPDF() {
 		url, 
 		params,
         	function(data,status){
+				
         	
-        	document.getElementById( "createPDF" ).innerHTML = "Create PDF";
-        	document.getElementById("pdfContainer").alt = "pdf";
-		document.getElementById("pdfQLink").alt = "pdf";
-		document.getElementById("pdfQLink").src = "img/pdfBlue.png";
+			if( data.substring(0, 3) == "You" ) {
+				displayMessageToUser("", data, "ok", function(){ location.reload();}, null);
+				} else { 	
+			
+				document.getElementById( "createPDF" ).innerHTML = "Create PDF";
+				document.getElementById("pdfContainer").alt = "pdf";
+				document.getElementById("pdfQLink").alt = "pdf";
+				document.getElementById("pdfQLink").src = "img/pdfBlue.png";
 
-			displayMessageToUser("Click \"OK\" to access the requested PDF. ", 
-			"",
-			"okc", function() {
-			window.open("./pdf/plan.pdf");
-			hideMessageToUser();
-			}, 
-		 	hideMessageToUser);
+				displayMessageToUser("Click \"OK\" to access the requested PDF. ", 
+				"",
+				"okc", function() {
+				window.open("./pdf/plan.pdf");
+				hideMessageToUser();
+				}, 
+				hideMessageToUser);
+			
+				} //end of if statement
         	
         	}).fail(function() {
     			
@@ -740,39 +747,44 @@ function ajaxPost( url, successMsg, errorMsg, dataType ) {
 		url, 
 		params,
         	function(data,status){
+				
+			if( data.substring(0, 3) == "You" ) {
+				displayMessageToUser("", data, "ok", function(){ location.reload();}, null);
+				} else { 	
 			
-			if( data != "0 results" ) { 
+				if( data != "0 results" ) { 
 			
-				if( successMsg != "No Message" ) {
-					displayMessageToUser("", successMsg, "ok", hideMessageToUser, null);
-					}
+					if( successMsg != "No Message" ) {
+						displayMessageToUser("", successMsg, "ok", hideMessageToUser, null);
+						} //end of if statement
 								 	
-				if( dataType == "f" ) {
-					//alert( "f returned" );
-				 	foods = jQuery.parseJSON( data );
-				 	//alert( foods.length );
-				 	returnFlags[0] = true;
-				 	} //end of if statement
+					if( dataType == "f" ) {
+						//alert( "f returned" );
+						foods = jQuery.parseJSON( data );
+						//alert( foods.length );
+						returnFlags[0] = true;
+						} //end of if statement
 				
-				if( dataType == "m" ) {
-					//alert( "m returned" );
-					meals = jQuery.parseJSON( data ); 	
-				 	returnFlags[1] = true;
-				 	} //end of if statement			
+					if( dataType == "m" ) {
+						//alert( "m returned" );
+						meals = jQuery.parseJSON( data ); 	
+						returnFlags[1] = true;
+						} //end of if statement			
 				
-				} else {
+					} else {
+									
+					if( dataType == "f" ) { 	
 				
-							
-				if( dataType == "f" ) { 	
-				
-					returnFlags[0] = true;
-					} //end of if statement
-				if( dataType == "m" ) { 
+						returnFlags[0] = true;
+						} //end of if statement
+					if( dataType == "m" ) { 
 					
-					returnFlags[1] = true;
-					} //end of if statement			
+						returnFlags[1] = true;
+						} //end of if statement			
 				
-				} //end of if statement			
+					} //end of if statement		
+
+				} //end of if statement
 				
 				}) //end of success handler
 			.fail(function() {
