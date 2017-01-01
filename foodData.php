@@ -14,9 +14,11 @@ include('../../private/loginProtect.php');
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/foodJavaScript.js"></script> 
+<script src="js/messageBox.js"></script> 
 
 	<title>Slims Fitness - Food Data</title>
 	<link rel="stylesheet" href="css/foodStyle.css">
+	<link rel="stylesheet" href="css/messageBoxStyle.css">
 </head>
 <body onload="startup()">
 
@@ -153,20 +155,7 @@ include('../../private/loginProtect.php');
 </div>
 </div>
 
-<!-- //////////////////////Message Box/////////////////////
-////////////////////////////////////////////////////////// -->
-<div id="msgContainer">
-<div class="messageBox">
-	<p id="msgQuestion"></p>
-	<p id="msgItem"></p>
-	<div class="messageButtons">
-	<button id="msgOK" type="button">OK</button> 
-	<button id="msgCancel" type="button">Cancel</button>
-	</div>
-	<div id="loaderContainer" ><img id="loader" src="img/msgBoxLoader.gif">
-	<div>&nbsp</div><div>Working...</div></div>
-</div>
-</div>
+<?php include 'messageBox.php';?>
 
 
 

@@ -17,7 +17,9 @@ include('../../private/loginProtect.php');
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://files.codepedia.info/uploads/iScripts/html2canvas.js"></script>
 <script src="js/plannerJavaScript.js"></script> 
+<script src="js/messageBox.js"></script>
 <link rel="stylesheet" href="css/mealPlannerStyle.css">
+<link rel="stylesheet" href="css/messageBoxStyle.css">
 <!-- ******************************************************************************** -->
 
 <title>Meal Planner</title>	
@@ -306,21 +308,7 @@ Protein:<br>
 
 
 
-<!-- //////////////////////Message Box/////////////////////
-////////////////////////////////////////////////////////// -->
-<div id="msgContainer">
-<div class="messageBox">
-	<p id="msgQuestion" >Are you sure you want to delete: </p>
-	<p id="msgItem">Banana, medium</p>
-	<div class="messageButtons">
-	<button id="msgOK" type="button">OK</button>
-	<button id="msgCancel" type="button">Cancel</button>
-	</div>
-	<div id="loaderContainer" ><img id="loader" src="img/msgBoxLoader.gif">
-	<div>&nbsp</div><div>Working...</div></div>
-</div>
-</div>
-<!-- ////////////////////////////////////////////////////////// -->
+<?php include 'messageBox.php';?>
 
 
 

@@ -676,62 +676,6 @@ function round(value, decimals) {
 } //end of function
 //***********************************************//
 
-
-//*****************Messagebox Javascript*******************************//	
-function showLoader() {
-
-	$("#msgQuestion").hide();
-	$("#msgItem").hide();
-	$(".messageButtons").hide();
-
-	$("#msgContainer").css("display", "flex");
-	$("#msgContainer").show();
-	$("#loaderContainer").show();
-
-	} //end of function
-	
-function hideLoader() {
-
-	$("#msgQuestion").show();
-	$("#msgItem").show();
-	$(".messageButtons").show();
-	
-	$("#loaderContainer").hide();
-
-	} //end of function
-	
-function displayMessageToUser( msgQ, msgI, msgType, okFunction, cancelFunction ) {
-
-	document.getElementById( "msgQuestion" ).innerHTML = msgQ;
-	document.getElementById( "msgItem" ).innerHTML = msgI;
-	
-	if( msgType == "ok" )  $("#msgCancel").hide(); 
-	else $("#msgCancel").show(); 
-
-	$('#msgOK').unbind('click');
-	$('#msgCancel').unbind('click');
-
-	$("#msgOK").click( okFunction );
-	$("#msgCancel").click( cancelFunction );
-	
-	$("#msgContainer").css("display", "flex");
-	$("#msgContainer").show();
-	$(".content-wrapper").fadeTo(.5, .3);
-	$(".content-wrapper *").prop('disabled',true); 
-	$(".messageBox").fadeIn();
-
-	} //end of function
-	
-function hideMessageToUser() {
-
-	$(".content-wrapper").fadeTo(.5, 1);
-	$(".content-wrapper *").prop('disabled',false); 
-	$(".messageBox").fadeOut();
-	$("#msgContainer").hide();
-
-	} //end of function
-//***********************************************************//	
-
 //***********************************************************//
 //Function is used to make ajax requests.  Function also
 //sets returnFlags to True to notify the checkLoadStatus 
