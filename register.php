@@ -122,7 +122,7 @@ mysqli_close( $conn );
 <meta name="keywords" content=""/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/registerJavaScript.js"></script> 
-<link href="loginStyle.css" rel="stylesheet" type="text/css">
+<link href="css/loginStyle.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>

@@ -205,6 +205,10 @@ function ajaxPost( url, successMsg, errorMsg ) {
 			
 			//alert( data );
 			
+			if( data.substring(0, 3) == "You" ) {
+				displayMessageToUser("", data, "ok", function(){ location.reload();}, null);
+				} else { 
+				
 			if( data != "0 results" ) { 
 				if( successMsg != "No Message" ) {
 					displayMessageToUser("", successMsg, "ok", hideMessageToUser, null);
@@ -218,6 +222,8 @@ function ajaxPost( url, successMsg, errorMsg ) {
 				displayMessageToUser("", "The database contains no food elements.", 
 					"ok", hideMessageToUser, null);
 				document.getElementById("foodSelect").innerHTML = "";
+				
+				} //end of if statement
 				
 				} //end of if statement
 				

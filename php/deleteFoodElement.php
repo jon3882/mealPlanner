@@ -8,6 +8,7 @@
 //**************************************************************************************//
 
 include('../../../private/connectDB.php');
+include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["id"]) ) $foodID = $_GET["id"];
 
