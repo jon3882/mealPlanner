@@ -25,7 +25,6 @@ include('../../private/loginProtect.php');
 $thisPage = 'foodData';
 include_once('navBar.php');
 ?>
-
 <!--**************Navigation Bar End*****************-->
 <div>&nbsp<br>&nbsp</div>
 <!--******************Content******************** -->

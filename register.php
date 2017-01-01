@@ -6,6 +6,8 @@
 
 session_start();
 
+
+
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
 $userid = $_POST['userid'];
@@ -127,17 +129,12 @@ mysqli_close( $conn );
 </head>
 <body>
 
-<!--************Title Bar**********************-->
-
-<div id="title" class="title">
- 
-<span style="float:left; color:#4682B4;">Menu</span>
- 
-<span>Register</span>
-<span style="float:right; color:#4682B4;">Menu</span>
- 
-</div>
-
+<!--************Navigation Bar**********************-->
+<?php  
+$thisPage = 'register';
+include_once('navBar.php');
+?>
+<!--************Navigation Bar End******************-->
 
 <div>&nbsp<br>&nbsp</div>
 

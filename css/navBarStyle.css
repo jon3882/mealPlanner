@@ -1,9 +1,11 @@
+/****Styling for navigation bar*********/
+
 #navbar li a:not(#currentPage){
   color:white;
 }
 
 #navbar li a:hover:not(#currentPage) {
-  
+  background-color: #3F75A2;
 }
 
 #currentPage{
@@ -27,19 +29,20 @@
   background-color: #4682B4;  
 }
 
-#navbar {
-
-}
-
 #navbar li {
   float: left;
 
 }
 
-#navbar li a, #login, #newUser {
+#navbar li a, #login, #newUser, #forgotPassword {
   display: block;  
   text-align: center;
   padding: 18px 24px;
   text-decoration: none;
   
+}
+
+#login, #newUser, #forgotPassword{
+  text-align: center;
+  color: white;
 }
