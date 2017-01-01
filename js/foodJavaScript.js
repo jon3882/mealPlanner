@@ -65,10 +65,10 @@ function getTitleHeight(){
 //and populates the listbox.
 function startup() {
 
-	var spanWidth = document.getElementById("menu").clientWidth;
+	// var spanWidth = document.getElementById("menu").clientWidth;
           
-        document.getElementById("menu").style.height = getTitleHeight() + "px";
-        document.getElementById("menu").style.width = (spanWidth * 2) + "px";
+ //        document.getElementById("menu").style.height = getTitleHeight() + "px";
+ //        document.getElementById("menu").style.width = (spanWidth * 2) + "px";
 	
 	showLoader();
 	

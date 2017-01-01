@@ -20,17 +20,13 @@ include('../../private/loginProtect.php');
 </head>
 <body onload="startup()">
 
-<!--************Title Bar**********************-->
+<!--************Navigation Bar**********************-->
+<?php  
+$thisPage = 'foodData';
+include_once('navBar.php');
+?>
 
-
-<div id="title" class="title">
- 
-<span id="menu" class="menu" style="float:left; text-align:left;">Menu</span>
- 
-<span>Food Database</span>
-<span style="float:right; color:#4682B4;">Menu</span>
- 
-</div>
+<!--**************Navigation Bar End*****************-->
 <div>&nbsp<br>&nbsp</div>
 <!--******************Content******************** -->
 <div class="content-wrapper">

@@ -29,16 +29,12 @@ include('../../private/loginProtect.php');
 
 <div class="content-wrapper" >
 
-<!--***************Title Bar**********************-->
-<div id="title" class="title">
- 
-<span id="menu" class="menu" style="float:left; text-align:left;">Menu</span>
- 
-<span>Meal Planner</span>
-<span style="float:right; color:#4682B4;">Menu</span>
- 
-</div>
-<!--************Title Bar End**********************-->
+<!--***************Navigation Bar**********************-->
+<?php  
+$thisPage = 'mealPlanner';
+include_once('navBar.php');
+?>
+<!--************Navigation Bar End**********************-->
 
 
 
