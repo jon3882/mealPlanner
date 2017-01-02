@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 	$("#cancel").click(function(){
     
-        	$("#input").fadeOut();
+        	$("#input").hide();
         	$(".addbtn").show();
         
     		});
@@ -211,7 +211,7 @@ function ajaxPost( url, successMsg, errorMsg ) {
 				food = jQuery.parseJSON( data );
 				populateListBox();
 				$(".addbtn").show();
-				$("#input").fadeOut();
+				$("#input").hide();
 				} else {
 				
 				displayMessageToUser("", "The database contains no food elements.", 
