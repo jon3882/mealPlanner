@@ -124,7 +124,9 @@ mysqli_close( $conn );
 <meta name="keywords" content=""/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/registerJavaScript.js"></script> 
+<script src="js/messageBox.js"></script>
 <link href="css/loginStyle.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/messageBoxStyle.css">
 
 </head>
 <body>
@@ -139,7 +141,7 @@ include_once('navBar.php');
 <div>&nbsp<br>&nbsp</div>
 
 
-	<form name="frmregister"action="<?= $_SERVER['PHP_SELF'] ?>" method="post" >
+	<form id="regForm" name="frmregister" action="<?= $_SERVER['PHP_SELF'] ?>" method="post" >
 		<table class="form" border="0">
 
 			<tr>
@@ -181,7 +183,7 @@ include_once('navBar.php');
 			<tr>
 			<td></td>
 				<td class="submit-button-right">
-				<input class="send_btn" id="submitBtn" type="submit" 
+				<input class="send_btn" id="submitBtn" type="button" 
 				value="Submit" alt="Submit" title="Submit" disabled/>
 				
 				<input class="send_btn" type="reset" value="Reset" alt="Reset" title="Reset" /></td>
@@ -211,6 +213,9 @@ include_once('navBar.php');
 				<?php echo $msg; ?></td>
 				</tr>
 				</table>
+				
+			
+<?php include 'messageBox.php';?>
 
 </body>
 </html>
