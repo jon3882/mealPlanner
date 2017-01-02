@@ -17,12 +17,6 @@ var returnFlags = new Array(2);
 //************************************************//
 $(document).ready(function(){ 
 
-	preloadImage( "./img/pdfWhite.png" );
-	preloadImage( "./img/pdfBlue.png" );
-	preloadImage( "./img/trashWhite.png" );
-	preloadImage( "./img/trashBlue.png" );
-
-
 	//************************************************//
 	//Mouseover and click events for navigation
 	//menu

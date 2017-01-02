@@ -244,32 +244,6 @@ Protein:<br>
 
 </body>
 
-<!-- /////////////////////////////////////////////////
-////////////////Dropdown menu navbar/////////////// -->
-<div id="dropbtn" class="dropbtn menu" >
-<div  class="dropdown-content">
-				<a class="navMenu dropdown-option" href="#">Navigation</a>
-				<a class="fileMenu dropdown-option" href="#">File Operations</a>			
-</div>
-</div>
-
-
-<div id="navOptions" class="navMenu">
-	<div class="dropdown-content">
-				<a class="dropdown-option" href="index.php">Home</a>
-				<a class="dropdown-option" href="foodData.php">Food Database</a>
-				<a class="dropdown-option" href="php/logout.php">Logout</a>	
-	</div>
-</div>
-		
-<div id="fileOptions" class="fileMenu">
-	<div class="dropdown-content">
-		<a id="newPlanner" class="dropdown-option" href="#">New Planner</a>
-		<a id="createPDF" class="dropdown-option" href="#">Create PDF</a>
-		
-	</div>		
-</div>
-<!-- ////////////////***********/////////////// -->
 
 </div>
 
