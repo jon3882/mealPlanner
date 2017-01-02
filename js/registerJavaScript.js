@@ -24,8 +24,9 @@ $(document).ready(function(){
 			hideLoader();
 			displayMessageToUser("<h3 style=\"color:red\">DISCLAIMER</h3>", "The meal plans created with this website are intended"+
 				" for PERSONAL USE.  The creation of individual meal plans for renumeration is regulated"+
-				" by state law (I.E. commerical use).  Please review the following website for further information" + 
-				" if you intend to create meal plans commerically. <br>"+	
+				" by state law (I.E. commerical use).  If you intend to create meal plans commerically, "+ 
+				" please review the following website for further information." + 
+				" <br>"+	
 				"<a href=\"http://www.nutritionadvocacy.org/laws-state\">http://www.nutritionadvocacy.org/laws-state</a>"+
 				" <br>In summary, IF YOU DON'T HAVE THE EDUCATION REQUIRED"+
 				" BY YOUR RESPECTIVE STATE TO PROVIDE INDIVIDUALIZED NUTRITION COUNSELING," + 
