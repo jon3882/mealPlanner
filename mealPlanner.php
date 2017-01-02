@@ -38,34 +38,6 @@ include_once('navBar.php');
 <!--************Navigation Bar End**********************-->
 <div class="content-wrapper" >
 
-
-<span style="float:right;">
-
-<table style="border-radius: 5px;">
-<tr>
-<td id="pdfContainer" class="qlinkContainer" style="border-radius: 5px;">
-<img id="pdfQLink" class="qlink" src="img/pdfBlue.png" alt="pdf" height="35" width="35">
-</td>
-<td class="qlinkContainer" style="border-radius: 5px;">
-<img class="qlink" src="img/trashBlue.png" alt="trash" height="35" width="35">
-</td>
-<td>
-&nbsp
-&nbsp
-&nbsp
-&nbsp
-</td>
-</tr>
-</table>
-
-</span>
-
-
-
-
-
-
-
 <br>
 
 <table id="planner">
