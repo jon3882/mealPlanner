@@ -53,7 +53,7 @@ $(document).ready(function(){
 	//Mouseover and click events for quick links
 	//************************************************//
 
-	$( "#newPlanner" ).click(function() {
+	function newPlanner() {
 		
 		displayMessageToUser("Are you sure you want to clear the meal planner?  All changes to the working" + 
 		" draft will be lost.", "", "okc", function() {
@@ -61,36 +61,35 @@ $(document).ready(function(){
 		hideMessageToUser();
 		}, hideMessageToUser);
 		
-		});	
+		};	
 		
 	//Changes the quick link and navigation "Create PDF" button to show a message that the 
 	//PDF is in the processs of being created.
-	$( "#createPDF" ).click(function() {
+	function createPDF() {
 		
 		var processMsg = '<i class="fa fa-spinner fa-pulse fa-lg fa-fw qlink loader"></i>';
 		
-		var currentMsg = document.getElementById( "createPDF" ).innerHTML;
+		// var currentMsg = document.getElementById( "createPDF" ).innerHTML;
 		
-		if( !currentMsg.includes( "busy" ) ) {
 		
-				document.getElementById("pdfContainer").title = "processing";
-				//document.getElementById("pdfQLink").alt = "processing";
-				//document.getElementById("pdfQLink").src = "./img/msgBoxLoader.gif";
-				sendToPDF();
-				document.getElementById( "pdfContainer" ).innerHTML = processMsg;
-				
-				} //end of if statement
 		
-			displayMessageToUser("A PDF is currently being created.  You will be alerted"+
-		 	" when the PDF is ready for download", "", "ok", hideMessageToUser, 
-		 	hideMessageToUser);
-		 	
-			});
+		document.getElementById("pdfContainer").title = "processing";
+		//document.getElementById("pdfQLink").alt = "processing";
+		//document.getElementById("pdfQLink").src = "./img/msgBoxLoader.gif";
+		sendToPDF();
+		document.getElementById( "pdfContainer" ).innerHTML = processMsg;
+		
+				 		
+		displayMessageToUser("A PDF is currently being created.  You will be alerted"+
+	 	" when the PDF is ready for download", "", "ok", hideMessageToUser, 
+	 	hideMessageToUser);
+	 	
+		};
 	
 
 	$( ".qlink" ).click(function() {
-                   if( this.title == "pdf" ) $( "#createPDF" ).click();
-                   if( this.title == "trash" ) $( "#newPlanner" ).click();  
+                   if( this.title == "pdf" ) createPDF();
+                   if( this.title == "trash" ) newPlanner();  
                             
 		   });
 
