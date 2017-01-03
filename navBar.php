@@ -29,7 +29,7 @@ else{
 	<a <?php if($thisPage == 'mealPlanner') echo "id = 'currentPage'";?> href="mealPlanner.php">Meal Planner</a>
 	</li>
 	<li class="links icons" style="float: right;" ><a class ="logoutIcon" href="php/logout.php">
-	<i class="fa fa-power-off fa-lg" aria-hidden="true"></i>
+	<i class="fa fa-power-off fa-lg" title="Logout" aria-hidden="true"></i>
 	</a></li>
 	<?php 
 	// adds hotlinks if on meal planner page
@@ -37,12 +37,12 @@ else{
  	if ($thisPage == "mealPlanner"){ 
  	?>
  	<!-- Quick links for meal planner -->
- 	<li id= "pdfContainer" class="links icons qlinkContainer" style="float: right;">
-	<i class="fa fa-file-pdf-o fa-lg qlink" title ="pdf" aria-hidden="true"></i>	
-	</li>
-	<li class="links icons qlinkContainer" style="float: right;">
-	<i class="fa fa-trash-o fa-lg qlink" title="trash" aria-hidden="true"></i>
+ 	<li class="links icons qlinkContainer" style="float: right;">
+	<i class="fa fa-trash-o fa-lg qlink" title="Delete Planner" aria-hidden="true"></i>
 	</li> 	
+	<li id= "pdfContainer" class="links icons qlinkContainer" style="float: right;">
+	<i class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>	
+	</li>
  	<?php
  	}
  	?>

@@ -53,6 +53,10 @@
   background-color: #d9534f;  
 }
 
+.logoutIcon:hover{
+  background-color: #C34A47;
+}
+
 .qlink{
   color: white;
 }

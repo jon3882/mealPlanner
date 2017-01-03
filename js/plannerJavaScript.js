@@ -88,8 +88,8 @@ $(document).ready(function(){
 	
 
 	$( ".qlink" ).click(function() {
-                   if( this.title == "pdf" ) createPDF();
-                   if( this.title == "trash" ) newPlanner();  
+                   if( this.title == "Create PDF" ) createPDF();
+                   if( this.title == "Delete Planner" ) newPlanner();  
                             
 		   });
 
