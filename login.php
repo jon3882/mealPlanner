@@ -29,8 +29,8 @@ if(isset($_POST['userid']) && isset($_POST['userPassword'])){
 		$hashed_password = $row["userPassword"];
 		$id = $row["id"];
 		$uName = $row["firstName"];
-		
-		
+		$lastName = $row["lastName"];
+		$userEmail = $row["user"];
 		$status = $row["status"];
 
 		//$hashed_password = crypt( $hashed_password ); //remove after hash is saved.
@@ -41,6 +41,8 @@ if(isset($_POST['userid']) && isset($_POST['userPassword'])){
 	   		
 	   			$_SESSION["validUser"] = $id;
 	   			$_SESSION["userName"] = $uName;
+	   			$_SESSION["lastName"] = $lastName;
+	   			$_SESSION["email"] = $userEmail;
 	   			header("Location: index.php");
 				exit;
 			

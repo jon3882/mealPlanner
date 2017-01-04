@@ -23,6 +23,7 @@
 #navbar ul {	
   font-size: 17px;
   list-style-type: none;
+  min-width: 680px;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -37,7 +38,7 @@
 #navbar li a, #login, #newUser, #forgotPassword, .qlink {
   display: block;  
   text-align: center;
-  padding: 18px 24px;
+  padding: 18px 20px;
   text-decoration: none;
   
 }

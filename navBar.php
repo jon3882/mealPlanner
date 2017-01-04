@@ -29,6 +29,9 @@ else{
 	<li class="links">
 	<a <?php if($thisPage == 'mealPlanner') echo "id = 'currentPage'";?> href="mealPlanner.php">Meal Planner</a>
 	</li>
+	<li class="links">
+	<a <?php if($thisPage == 'accountSettings') echo "id = 'currentPage'";?> href="accountSettings.php">Account</a>
+	</li>
 	<li class="links icons" style="float: right;" ><a class ="logoutIcon" href="php/logout.php">
 	<i class="fa fa-power-off fa-lg" title="Logout" aria-hidden="true"></i>
 	</a></li>
