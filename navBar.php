@@ -6,6 +6,7 @@
 ///////////////////////////////////////////////////////-->
 <link rel="stylesheet" href="resources/fontawesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/navBarStyle.css">
+<link rel="stylesheet" href="css/generalStyle.css">
 <!-- Navigation Bar -->
 <div id="navbar">
 <ul>

@@ -199,7 +199,7 @@ Protein:<br>
 		</select>
 		<select id="foodSelect" size = "10">   			
 		</select>
-		<button id="add" onclick="insertFoodFromSelect()">Add Food</button>
+		<button class="plannerBtns" id="add" onclick="insertFoodFromSelect()">Add Food</button>
 	</div>
 	<div class="rightSide">
 		<span id="mealID">Monday Breakfast</span>
@@ -230,8 +230,8 @@ Protein:<br>
 			<tr>				
 			</tr>
 		</table>
-		<button id="saveMeal" onclick="pressSaveMealDialogue()">Save Meal</button>
-		<button id="cancelMeal" onclick="pressCancelMealDialogue()">Cancel</button>
+		<button class="plannerBtns" id="saveMeal" onclick="pressSaveMealDialogue()">Save Meal</button>
+		<button class="plannerBtns" id="cancelMeal" onclick="pressCancelMealDialogue()">Cancel</button>
 	</div>
 	</div>
 </div>

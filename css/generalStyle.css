@@ -1,0 +1,32 @@
+/*****************************************************
+****General Styling to be applied throughout all****** 
+****pages of website like colors, fonts and etc..*****
+*****************************************************/
+
+html, body {
+	height: 100%;
+	margin: auto;						
+	text-align:center;	
+	width: 100%;
+	min-width: 500px;	
+	}
+
+body{
+	font-family: "Arial", Gadget, sans-serif;
+	font-size:14px;
+}
+
+button{
+	border-radius: 3px;
+	/*font-weight: bold;*/
+	padding: 5px;
+	color:white;	
+	outline: none;	
+	background-color: #4682B4;
+}
+
+button:hover{
+	background-color: #ffffff;
+	color: #4682B4;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
