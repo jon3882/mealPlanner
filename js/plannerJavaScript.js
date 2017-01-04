@@ -18,38 +18,6 @@ var returnFlags = new Array(2);
 $(document).ready(function(){ 
 
 	//************************************************//
-	//Mouseover and click events for navigation
-	//menu
-	//************************************************//
-
-           $( ".menu" ).mouseover(function() {
-           		             
-                      	$("#dropbtn").show();  
-                       	document.getElementById("dropbtn").style.top = getTitleHeight() + "px";
-           		});
- 
-           $( ".menu" ).mouseout(function() {
-           		
-                      	$("#dropbtn").hide();
-           		});
-           
-           $( ".navMenu" ).mouseover(function() {    
-           
-           		$("#navOptions").show();
-           		$("#dropbtn").show();  
-                          
-           		var menuHeight = getTitleHeight() + 15; 
-                     	document.getElementById("navOptions").style.top = menuHeight + "px";
-                      	var menuWidth = document.getElementById("dropbtn").clientWidth*3;
-                      	document.getElementById("navOptions").style.left = menuWidth + "px";
-           		});
-           
-           $( ".navMenu" ).mouseout(function() {
-                      	$("#navOptions").hide();
-                      	$("#dropbtn").hide();
-           		});	
-           	
-	//************************************************//
 	//Mouseover and click events for quick links
 	//************************************************//
 
@@ -471,8 +439,7 @@ function checkLoadStatus() {
 
 
 //***********************************************//
-//Function loads the global variables, sets the 
-//navagiaton bar menu button height, and populates
+//Function loads the global variables and populates
 //the meal planer with the current data.
 //***********************************************//
 function startup() {

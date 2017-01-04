@@ -344,10 +344,13 @@ button.deleteBtn{
 	border-radius: 5px;
 	margin:0 auto;
 	margin-left: 10px;
-	color: red;
+	color: #d9534f;
 	font-weight: bolder;	
 }
 
+.deleteBtn:hover{
+	color:#C34A47;
+}
 
 /*******Totals table style*******/
 
