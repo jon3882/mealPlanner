@@ -213,7 +213,7 @@ function sendToPDF() {
 				} else { 	
 			
 				document.getElementById( "pdfContainer" ).innerHTML = 
-				'<i class="fa fa-file-pdf-o fa-lg qlink" title ="pdf" aria-hidden="true"></i>';				
+				'<i class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>';				
 				
 
 				displayMessageToUser("Click \"OK\" to access the requested PDF. ", 

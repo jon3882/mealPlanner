@@ -175,7 +175,7 @@ Protein:<br>
 </tr>
 
 </table>
-</div>
+
 
 
 <!-- //////////////////////Dialog Box/////////////////////
@@ -246,7 +246,7 @@ Protein:<br>
 
 
 </div>
-
+</div>
 
 
 <?php include 'messageBox.php';?>
