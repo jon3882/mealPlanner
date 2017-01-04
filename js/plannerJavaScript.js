@@ -86,12 +86,15 @@ $(document).ready(function(){
 	 	
 		};
 	
+	//makes pdf hotlink live even if it is updated in dom after page is loaded
+	$(document).on('click', '#pdfLink', function(){
+		createPDF();
+	});
+	
 
-	$( ".qlink" ).click(function() {
-                   if( this.title == "Create PDF" ) createPDF();
-                   if( this.title == "Delete Planner" ) newPlanner();  
-                            
-		   });
+	$('#trashLink').click(function(){
+		newPlanner();
+	});
 
 	
 		   
@@ -213,7 +216,7 @@ function sendToPDF() {
 				} else { 	
 			
 				document.getElementById( "pdfContainer" ).innerHTML = 
-				'<i class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>';				
+				'<i id = "pdfLink" class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>';				
 				
 
 				displayMessageToUser("Click \"OK\" to access the requested PDF. ", 

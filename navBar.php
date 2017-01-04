@@ -38,10 +38,10 @@ else{
  	?>
  	<!-- Quick links for meal planner -->
  	<li class="links icons qlinkContainer" style="float: right;">
-	<i class="fa fa-trash-o fa-lg qlink" title="Delete Planner" aria-hidden="true"></i>
+	<i id = "trashLink" class="fa fa-trash-o fa-lg qlink" title="Delete Planner" aria-hidden="true"></i>
 	</li> 	
 	<li id= "pdfContainer" class="links icons qlinkContainer" style="float: right;">
-	<i class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>	
+	<i id = "pdfLink" class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>	
 	</li>
  	<?php
  	}
