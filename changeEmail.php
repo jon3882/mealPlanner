@@ -39,8 +39,10 @@ User account: <?php echo $fullName;?><br>
 &nbsp&nbspChange Email Address
 </span>
 <span class="box thin section">
-You may change the email address you would like to have associated<br>
+<div class="desc">
+You may change the email address you would like to have associated
 with your account and click save to finalize the changes.
+</div>
 <form name="frmregister"action="<?= $_SERVER['PHP_SELF'] ?>" method="post" >
 <br>
 <br>

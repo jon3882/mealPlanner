@@ -6,8 +6,6 @@
     margin: 0 auto;
     width: 250px;
     min-height: 100px;
-    
-    
 	padding: 2%;
 	background-color: #DCDCDC;
 	border: solid;
@@ -18,7 +16,7 @@
 }
 
 .messageBox button{
-	min-width: 60px;
+	min-width: 75px;
 }
 
 #messageCancel{

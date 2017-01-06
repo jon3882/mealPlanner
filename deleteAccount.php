@@ -39,9 +39,11 @@ User account: <?php echo $fullName;?><br>
 &nbsp&nbspDelete Account
 </span>
 <span class="box thin section">
-Are you sure you want to delete your account? You will lose all data associated<br>
-with your account to include meal plans and custom foods in the database. If you<br>
+<div class="desc">
+Are you sure you want to delete your account? You will lose all data associated
+with your account to include meal plans and custom foods in the database. If you
 would like to continue please enter your credentials and click delete account.
+</div>
 <form name="frmregister"action="<?= $_SERVER['PHP_SELF'] ?>" method="post" >
 <br>
 <br>

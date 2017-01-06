@@ -12,6 +12,8 @@ h2{
 	min-height: 400px;	
 	max-width: 600px;
 	margin-top: 10px;
+	text-align: left;
+	padding: 10px;
 }
 
 .settings span{
@@ -26,17 +28,13 @@ h2{
    box-shadow: 0 0 1px black;
 }
 
-.settings{
-	text-align: left;
-	padding: 10px;
-}
-
 .acctBtns{
 	float: right;
 }
 
 .section{
 	padding: 10px;
+
 }
 
 .delete{
@@ -73,4 +71,8 @@ a  {
 	font-size: 1em;
 	border-radius: 3px;
 
+}
+
+.desc{
+	max-width: 75%;
 }

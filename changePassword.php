@@ -39,9 +39,9 @@ User account: <?php echo $fullName;?><br>
 &nbsp&nbspChange Password
 </span>
 <span class="box thin section">
-You may change the password you have associated with your account but you<br>
-must first enter your current password, the new password and re-enter the new<br>
-password again. You must click save changes to finalize the changes.
+<div class="desc">
+You may change the password you have associated with your account but you must first enter your current password, the new password and re-enter the new password again. You must click save changes to finalize the changes.
+</div>
 <form name="frmregister"action="<?= $_SERVER['PHP_SELF'] ?>" method="post" >
 <br>
 <br>
