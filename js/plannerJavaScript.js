@@ -6,10 +6,16 @@
 //Global variables
 //************************************************//
 
-var mealSchedule = new Array(42);
+var mealTitle = new Array;
+var mealTitleTemp = new Array();
+
+var mealSchedule = new Array();
+var mealScheduleTemp = new Array();
+
 var foods;
 var mealIndex;
 var meals;
+var selectedPlan = "workingDraft";
 var returnFlags = new Array(2);
 
 //************************************************//
@@ -115,11 +121,22 @@ $(document).ready(function(){
                    if( this.alt == "trash" ) $( "#newPlanner" ).click();           
 		   });
 		   
-	//************************************************//
-	//Mouseover and click events for menu cells
-	//************************************************//		
+		
 			
-	$( ".sq" ).click(function() {
+	
+           
+	}); 
+//***********************************************//
+
+
+//************************************************//
+//Mouseover and click events for menu cells
+//************************************************//	
+function attachMealPlannerEventHandlers() {
+
+	$( ".sq" ).unbind();
+	
+	$( ".sq" ).on("click", function() {
 	
 			var day = this.id.substring(0,3);
                    	var meal = this.id.substring(3,4);
@@ -141,7 +158,7 @@ $(document).ready(function(){
 			openMealDialogue();
 			});
 		
-	$( ".sq" ).mouseover(function() {
+	$( ".sq" ).on("mouseover", function() {
            	
            	   	this.style.color = "white";	             
                    	this.style.backgroundColor = "#4682B4";
@@ -154,7 +171,7 @@ $(document).ready(function(){
                    
                    	});
 
-	 $( ".sq" ).mouseout(function() {
+	 $( ".sq" ).on("mouseout", function() {
                      
                    	this.style.color = "#4682B4";	             
                    	this.style.backgroundColor = "white";
@@ -166,10 +183,176 @@ $(document).ready(function(){
                    	document.getElementById( mt ).style.backgroundColor = "#4682B4";
                                  
            		});
-           
-	}); 
-//***********************************************//
+				
+	$( ".mealName" ).unbind();			
+	$( ".mealName" ).on("mouseout", function() {	
+				
+				this.style.color = "white";	             
+                this.style.backgroundColor = "#4682B4";
+				
+				});
+				
+	$( ".mealName" ).on("mouseover", function() {	
+				
+				this.style.color = "#4682B4";	             
+                this.style.backgroundColor = "white";
+				
+				});		
+	
+	$( ".mealName" ).on("click", function() {	
+				
+				//Creates modification window within a messagebox.
+				displayMessageToUser("<h3 style=\"\">Meal Modification Window</h3>", 
+					//this function writes the HTML of the modification window
+					createMealModificationHTML(), "cu-Save", 
+					//This function is executed when the user clicks "Ok"
+					function() { 
+						
+						//The value of the input boxes that label the meals are 
+						//written to the temp array.
+						for( var k = 0; k<mealTitleTemp.length; k++ ) {
+									var temp = document.getElementById( "modMTitle"+k ).value;
+									mealTitleTemp[k] = temp.replace(",", " ");
+									} //end of for loop
+						
+						//The user is asked if they want to commit their changes to the meal planner
+						displayMessageToUser("WARNING","The data associated with meals that were deleted "+
+							"will be deleted from the meal plan.", "okc", 
+							//Executed if the user clicks "OK"
+							function() {							
+								
+								mealTitle = mealTitleTemp;							
+								mealSchedule = mealScheduleTemp;
+								writePlanner( selectedPlan );
+								hideMessageToUser();
+								},
+							//Executed if user clicks "cancel"
+							function(){ 
+								$( ".mealName" ).click();} );				
+						}, 
+					//Executed the user clicks "cancel on the modification window
+					function() {
+						//Temp array used to store the meal labels is recreated and 
+						//the temp array used to store the meal elements is 
+						//recreated.
+						loadMealArray( "workingDraft", mealSchedule.length );
+						mealTitleTemp = new Array();
+						for( var i = 0; i<mealTitle.length; i++ ) {					
+							mealTitleTemp.push( mealTitle[i] );
+							} //end of for loop
+						
+						hideMessageToUser();
+						}	);
+				
+				//Must be called everytime the meal modification window is created.
+				attachMealPlannerEventHandlers();				
+				});	
+			
+	//Executed when buttons within the meal modification window are
+	//pressed
+	$( ".mealModBtn" ).unbind();
+	$( ".mealModBtn" ).on("click", function() {
+	
+		if( this.id.substring( 0, 4) == "addA" ) {		
+			
+			var i = this.id.substring(8);
+			addMealAbove( i );		
+			$( ".mealName" ).click();
+			
+			} //end of if statement
+		
+		if( this.id.substring( 0, 4) == "addB" ) {
+			
+			var i = this.id.substring(8);
+			addMealBelow( i );		
+			$( ".mealName" ).click();
+			
+			} //end of if statement
+			
+		if( this.id.substring( 0, 4) == "delM" ) {
+			
+			var i = this.id.substring(7);
+			deleteMeal( i );
+			$( ".mealName" ).click();
+		
+			} //end of if statement
+	
+		});	
+				
+	
+	} //end of function 
+	
+function addMealAbove( i ) {
 
+	var oldLabelLength = mealTitleTemp.length;
+	for( var k = 0; k<mealTitleTemp.length; k++ ) {
+		mealTitleTemp[k] = document.getElementById( "modMTitle"+k ).value;
+		} //end of for loop
+		mealTitleTemp.splice(i, 0, "New Meal");
+			
+	for( var k = 0; k<7; k++ ) {	
+		var index = (6*oldLabelLength)-(k*oldLabelLength) + parseInt(i);
+		mealScheduleTemp.splice(index, 0, new Array()); 
+		} //end of for loop
+
+	} //end of function
+
+function addMealBelow( i ) {
+
+	var oldLabelLength = mealTitleTemp.length;
+	for( var k = 0; k<mealTitleTemp.length; k++ ) {
+		mealTitleTemp[k] = document.getElementById( "modMTitle"+k ).value;
+		} //end of for loop
+	i = parseInt( i ) + 1;
+	mealTitleTemp.splice(i, 0, "New Meal");
+			
+	for( var k = 0; k<7; k++ ) {	
+		var index = (6*oldLabelLength)-(k*oldLabelLength) + parseInt(i);
+		mealScheduleTemp.splice(index, 0, new Array()); 
+		} //end of for loop
+	} //end of function
+
+function deleteMeal( i ) {
+
+	var oldLabelLength = mealTitleTemp.length;
+	for( var k = 0; k<mealTitleTemp.length; k++ ) {
+			mealTitleTemp[k] = document.getElementById( "modMTitle"+k ).value;
+			} //end of for loop
+			mealTitleTemp.splice(i, 1);
+			
+	for( var k = 0; k<7; k++ ) {	
+		var index = (6*oldLabelLength)-(k*oldLabelLength) + parseInt(i);
+		mealScheduleTemp.splice(index, 1); 
+			} //end of for loop	
+
+	} //end of function	
+	
+function createMealModificationHTML() {
+	
+	var mealTable = "<table style=\"display:block; background-color:white; border-radius: 25px;" 
+	+"padding: 10px; border: 2px solid #a1a1a1;\"><tr><td><table style=\"display:block;"
+	+"background-color:white; max-height:350px; overflow-y:scroll;\">";
+				
+				for( var i = 0; i<mealTitleTemp.length; i++ ) {
+				
+					mealTable = mealTable + "<tr>"+
+						"<td><input type=\"text\" id=\"modMTitle"+i+"\" value=\""+mealTitleTemp[i]+"\" size=\"10\"></td>"+
+						"<td><table style=\"height:30px;\"><tr>"+
+							"<td><button type=\"button\" class=\"mealModBtn\" id=\"addAbove"+i+"\">ADD ⇧</td>"+
+							"<td><button type=\"button\" class=\"mealModBtn\" id=\"addBelow"+i+"\">ADD ⇩</td>";
+									
+						if( mealTitleTemp.length > 1 ) mealTable = mealTable + 
+						"<td><button type=\"button\" class=\"deleteBtn mealModBtn\" id=\"delMeal"+i+"\">X</td>";
+					
+						mealTable = mealTable + "</tr></table></td></tr>";
+				
+					}//end of for loop
+					
+				mealTable = mealTable + "</table></td></tr></table>";
+				
+			return mealTable;
+	
+	} //end of function
 
 //***********************************************//
 //Function preloads images so they are loaded more
@@ -359,9 +542,10 @@ function clearPlanner() {
 //array used to write the meal elements to the
 //plan.
 //***********************************************//
-function loadMealArray( mealName ) {
+function loadMealArray( mealName, mealPlanSize ) {
 
-	mealSchedule = new Array(42);
+	mealSchedule = new Array( mealPlanSize );
+	mealScheduleTemp = new Array( mealPlanSize );
 	
 	if( meals != undefined ) {
 
@@ -369,15 +553,20 @@ function loadMealArray( mealName ) {
 	
 		var index = parseInt( meals[i].cell );
 	
-		if( mealSchedule[index] == undefined ) mealSchedule[index] = new Array();
-	
-		var f = getFoodElement( meals[i].foodElementID );
+		var f = getFoodElement( meals[i].foodElementID );	
 		
 		if( f != undefined && meals[i].planName == mealName ) {
+			
+			if( mealSchedule[index] == undefined ) mealSchedule[index] = new Array();
+			if( mealScheduleTemp[index] == undefined ) mealScheduleTemp[index] = new Array();
+			
 			var foodElement = new food(f.id,f.macroType, f.cal, f.protein, 
-			f.carb, f.fat, f.foodDesc, meals[i].servingSize, f.measurement);
+			f.carb, f.fat, f.foodDesc, meals[i].servingSize, f.measurement, parseFloat(meals[i].servingSize/f.servingSize) );
+	
+			//alert( index );
 	
 			mealSchedule[index].push( foodElement );
+			mealScheduleTemp[index].push( foodElement );
 			} //end of if statement
 			
 		} //end of for loop
@@ -395,17 +584,78 @@ function loadMealArray( mealName ) {
 //***********************************************//
 function writePlanner( plannerName ) {
 
-	var dType = "no action";
+	var dType = "w";
 	if( plannerName != "workingDraft" ) dType = "save";
 
 	var menuItems = getPlannerItems();
 	
-	ajaxPost( "php/writePlanner.php?name="+plannerName+"&data="+menuItems, "No Message", 
+	var labels = "";
+	
+	for( var i = 0; i<mealTitle.length; i++ ) {
+		
+		if( labels == "" ) labels = mealTitle[i];
+		else labels = labels + "," + mealTitle[i];
+		
+		} //end of for loop 
+		
+	
+	ajaxPost( "php/writePlanner.php?name="+plannerName+"&mealLabels="+labels+"&data="+menuItems, "No Message", 
 		"Error", dType);
 
 	} //end of function
 //***********************************************//
 
+//***********************************************//
+//
+//***********************************************//
+function drawPlanner() {
+	
+	var rowString = "<tr><td></td><td class=\"dTitle\" id=\"sunTitle\">Sunday</td><td class=\"dTitle\""+ 
+		"id=\"monTitle\">Monday</td><td class=\"dTitle\" id=\"tueTitle\">Tuesday</td>"+
+		"<td class=\"dTitle\" id=\"wedTitle\">Wednesday</td><td class=\"dTitle\" id=\"thuTitle\">Thursday</td>"+
+		"<td class=\"dTitle\" id=\"friTitle\">Friday</td><td class=\"dTitle\" id=\"satTitle\">Saturday</td>"+
+		"</tr>";
+	
+	for( var i = 0; i<mealTitle.length; i++ ) {
+		
+		rowString = rowString + "<tr>";
+		rowString = rowString + "<td class=\"mTitle mealName\" id=\"m"+ i +"\">"+mealTitle[i]+"</td><td class=\"sq\" id=\"sun"+i+"\"></td>"+
+					  "<td id=\"mon"+i+"\" class=\"sq\"></td><td class=\"sq\" id=\"tue" +i+ "\">"+
+					  "</td><td class=\"sq\" id=\"wed"+i+"\">"+
+					  "</td><td class=\"sq\" id=\"thu"+i+"\"></td><td class=\"sq\" id=\"fri"+i+"\"></td>"+
+					  "<td class=\"sq\" id=\"sat"+i+"\"></td>";
+		rowString = rowString + "</tr>";
+			
+		} //end of for loop
+	
+	rowString = rowString + "<tr><td class=\"mTitle\" id=\"totalTitle\" >Totals</td>"; 
+
+	for( var i = 0; i<7; i++ ) {
+	
+		rowString = rowString + "<td class=\"totalSQ\">"+
+			"<table class=\"dayTotals\"><tr><td>"+
+			"Calories:<br>"+
+			"Fat:<br>"+
+			"Carbs:<br>"+
+			"Protein:<br>"+
+			"</td><td id=\"total"+i+"\">"+
+			"0<br>"+
+			"0<br>"+
+			"0<br>"+
+			"0<br>"+
+			"</td></tr>"+
+			"</table>"+
+			"</td>";
+	
+	} //end of for loop
+	
+	rowString = rowString + "</tr>";
+	
+	//alert( rowString );
+	
+	document.getElementById( "planner" ).innerHTML = rowString;
+	
+	} //end of function
 
 //***********************************************//
 //Function creates string that is passed to
@@ -457,6 +707,7 @@ function loadDatabaseData() {
 	
 	ajaxPost( "php/getJSON.php?table=foodElement", "No Message", "Error", "f"); 
 	ajaxPost( "php/getJSON.php?table=mealElement", "No Message", "Error", "m");	
+	ajaxPost( "php/getJSON.php?table=mealplans", "No Message", "Error", "p");	
 	setTimeout(checkLoadStatus, 200);
 
 	} //end of function
@@ -470,11 +721,29 @@ function loadDatabaseData() {
 //***********************************************//
 function checkLoadStatus() {
 
-	if( returnFlags[0] && returnFlags[1]) {	
+	if( returnFlags[0] && returnFlags[1] && returnFlags[2]) {	
 			
+						
 				$("#msgContainer").hide();
 				hideLoader();
-				loadMealArray( "workingDraft" );
+				
+				//alert( mealTitle.length );
+
+				mealSchedule = new Array(7*mealTitle.length);
+				mealScheduleTemp = new Array(7*mealTitle.length);
+				
+				//alert( mealSchedule.length );
+				
+				
+				loadMealArray( "workingDraft", mealSchedule.length );  
+				
+				//alert( mealSchedule.length );
+				
+				drawPlanner();
+				attachMealPlannerEventHandlers();
+				
+				//alert( mealSchedule.length );
+				
 				populateCalendar();
 				updatePlannerTotals();
 							
@@ -496,7 +765,7 @@ function checkLoadStatus() {
 function startup() {
 
 		loadDatabaseData();
-	 	populateCalendar();
+		
 	 	
 		} //end of function
 //***********************************************//
@@ -518,13 +787,8 @@ function getMealName(day, meal) {
 	if( day == "fri") fullName = "Friday - ";
 	if( day == "sat") fullName = "Saturday - ";
 
-	if( meal == 0 ) fullName = fullName + "Breakfast";
-	if( meal == 1 ) fullName = fullName + "Snack (after breakfast)";
-	if( meal == 2 ) fullName = fullName + "Lunch";
-	if( meal == 3 ) fullName = fullName + "Snack (after lunch)";
-	if( meal == 4 ) fullName = fullName + "Dinner";
-	if( meal == 5 ) fullName = fullName + "Snack (after dinner)";
-
+	fullName = fullName + mealTitle[meal];
+	
 	return fullName;
 
 	} //end of function
@@ -548,7 +812,7 @@ function setMealIndex(day, meal) {
 	if( day == "fri" ) d = 5;
 	if( day == "sat" ) d = 6;
 
-	mealIndex = (6*d)+parseInt(meal);
+	mealIndex = (mealTitle.length*d)+parseInt(meal);
  
 	} //end of function
 //***********************************************//
@@ -560,8 +824,8 @@ function setMealIndex(day, meal) {
 //***********************************************//
 function getMealPlannerDayId( index ) {
 
-	var day = Math.floor(index/6);
-	var meal = index % 6;
+	var day = Math.floor(index/mealTitle.length);
+	var meal = index % mealTitle.length;
 	
 	if( day == 0 ) day = "sun";
 	if( day == 1 ) day = "mon";
@@ -570,7 +834,7 @@ function getMealPlannerDayId( index ) {
 	if( day == 4 ) day = "thu";
 	if( day == 5 ) day = "fri";
 	if( day == 6 ) day = "sat";
-
+	
 	return day+meal;
 
 	} //end of function
@@ -583,9 +847,15 @@ function getMealPlannerDayId( index ) {
 //***********************************************//
 function populateCalendar() {
 
-	for( var i = 0; i<42; i++ ) {
+	//alert( mealSchedule.length );
+
+	var temp = "";
+	
+	for( var i = 0; i<mealSchedule.length; i++ ) {
 	
 		var mealBlock = document.getElementById(getMealPlannerDayId(i));
+		
+		temp = temp + ", " + i + ":" + getMealPlannerDayId(i) + "<br>";
 
 		if( mealSchedule[i] != undefined ) {
 			
@@ -607,10 +877,15 @@ function populateCalendar() {
 
 			mealBlock.innerHTML = mealFoodList;
 
-			} else { mealBlock.innerHTML = "";  } //end of if statement
+			} else { mealBlock.innerHTML = ""; 
+				} //end of if statement
 
 		} //end of for loop
 
+		
+		
+		//alert( temp );
+		
 	} //end of function
 //***********************************************//
 
@@ -635,19 +910,20 @@ function updatePlannerTotals() {
 	
 		} //end of for loop
 	
-	
-	for( var i = 0; i<42; i++ ) {
+	for( var i = 0; i<mealSchedule.length; i++ ) {
 
 		if( mealSchedule[i] != undefined ) {
 		
 			for( var k = 0; k<mealSchedule[i].length; k++ ) {
 			
-				var totalIndex = Math.floor(i/6);
+				var totalIndex = Math.floor(i/mealTitle.length);
+				
+				//var multiplier = mealSchedule[i][k].servingSize / foodItem.servingSize;	
 			
-				cal[totalIndex] = cal[totalIndex] + parseFloat( mealSchedule[i][k].cal );	
-				fat[totalIndex] = fat[totalIndex] + parseFloat( mealSchedule[i][k].fat );
-				carb[totalIndex] = carb[totalIndex] + parseFloat( mealSchedule[i][k].carb );
-				protein[totalIndex] = protein[totalIndex] + parseFloat( mealSchedule[i][k].protein );
+				cal[totalIndex] = cal[totalIndex] + mealSchedule[i][k].multiplier*parseFloat( mealSchedule[i][k].cal );	
+				fat[totalIndex] = fat[totalIndex] + mealSchedule[i][k].multiplier*parseFloat( mealSchedule[i][k].fat );
+				carb[totalIndex] = carb[totalIndex] + mealSchedule[i][k].multiplier*parseFloat( mealSchedule[i][k].carb );
+				protein[totalIndex] = protein[totalIndex] + mealSchedule[i][k].multiplier*parseFloat( mealSchedule[i][k].protein );
 			
 				} //end of for loop	
 		
@@ -715,6 +991,43 @@ function ajaxPost( url, successMsg, errorMsg, dataType ) {
 						returnFlags[1] = true;
 						} //end of if statement			
 				
+					if( dataType == "p" ) {
+						
+						var temp = jQuery.parseJSON( data ); 
+						
+						for( var i = 0; i<temp.length; i++ ) {
+							
+							if( temp[i].planName == selectedPlan ) {
+								mealTitle = temp[i].mealLabels.split(",");
+								mealTitleTemp = temp[i].mealLabels.split(",");
+								} //end of if statement
+							
+							} //end of for loop
+						
+						
+						
+						returnFlags[2] = true;
+						
+						} //end of if statment
+				
+					if( dataType == "w" ) {
+						
+						//alert( data );
+						
+						showLoader();
+	
+							returnFlags[0] = true;
+							returnFlags[1] = false;
+							returnFlags[2] = false;
+	
+							ajaxPost( "php/getJSON.php?table=mealElement", "No Message", "Error", "m");	
+							ajaxPost( "php/getJSON.php?table=mealplans", "No Message", "Error", "p");	
+							setTimeout(checkLoadStatus, 200);
+						
+						
+						} //end of if statement
+				
+				
 					} else {
 									
 					if( dataType == "f" ) { 	
@@ -725,6 +1038,12 @@ function ajaxPost( url, successMsg, errorMsg, dataType ) {
 					
 						returnFlags[1] = true;
 						} //end of if statement			
+				
+					if( dataType == "p" ) { 
+					
+						returnFlags[2] = true;
+						} //end of if statement
+				
 				
 					} //end of if statement		
 
@@ -1118,7 +1437,7 @@ function populateFinalMeal(){
 		//final protein		
 		var protein = rows[i].cells[5].innerHTML
 		//constructs food object in array
-		finalMeal[i] = new food(id,macroType, cal, protein, carb, fat, foodDesc, servingSize, measurement);
+		finalMeal[i] = new food(id,macroType, cal, protein, carb, fat, foodDesc, servingSize, measurement, null);
 		
 
 		
@@ -1130,7 +1449,7 @@ function populateFinalMeal(){
 }
 
 //constructs food object
-function food(id,macroType, cal, protein, carb, fat, foodDesc, servingSize, measurement){
+function food(id,macroType, cal, protein, carb, fat, foodDesc, servingSize, measurement, multiplier){
 	this.id = id;
 	this.macroType = macroType;
 	this.cal = cal;
@@ -1140,6 +1459,7 @@ function food(id,macroType, cal, protein, carb, fat, foodDesc, servingSize, meas
 	this.foodDesc = foodDesc;
 	this.servingSize = servingSize;
 	this.measurement = measurement;
+	this.multiplier = multiplier;
 	
 }//end of constructor
 

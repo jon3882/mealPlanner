@@ -57,7 +57,11 @@ function displayMessageToUser( msgQ, msgI, msgType, okFunction, cancelFunction )
 
 	if( msgType == "ok" )  $("#msgCancel").hide(); 
 	else $("#msgCancel").show(); 
-
+	
+	if( msgType.substring( 0, 2 ) == "cu" )
+		document.getElementById( "msgOK" ).innerHTML = msgType.substring(3);
+		else document.getElementById( "msgOK" ).innerHTML = "OK";
+	
 	$('#msgOK').unbind('click');
 	$('#msgCancel').unbind('click');
 

@@ -70,7 +70,7 @@ if($result->num_rows == 0 && isset($userid) ) {
 				} //end of if statement
 
 //////////////////////////////////////////////////////////	
-//After getting the id of the new user, create two tables 
+//After getting the id of the new user, create three tables 
 //using the id: foodElement and mealElement.
 //////////////////////////////////////////////////////////		
 
@@ -99,6 +99,20 @@ if($result->num_rows == 0 && isset($userid) ) {
   				"PRIMARY KEY (`id`))";
   				
   		$r = $conn->query($sql);	
+			
+		$sql = "CREATE TABLE IF NOT EXISTS `".$id."_mealplans` (".
+			"`id` int(11) NOT NULL AUTO_INCREMENT,".
+			"`planName` text NOT NULL,".
+			"`mealLabels` text NOT NULL,".
+			"PRIMARY KEY (`id`))"; 
+			
+		$r = $conn->query($sql);	
+		
+		$sql = "INSERT INTO `".$id."_mealplans`".
+			" (`planName`, `mealLabels`) VALUES".
+			" ('workingDraft', 'Breakfast,Snack,Lunch,Snack, Dinner,Snack');";	
+		
+		$r = $conn->query($sql);
 			
 		if( $id != "null" ) {	
 			$msg = "An account with the email test address: ".$userid." was successfully created.";

@@ -13,7 +13,7 @@ include('../../../private/connectDB.php');
 include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["name"]) ) $plannerName = $_GET["name"];
-if( isset($_GET["customer"]) ) $customer = $_GET["customer"];
+if( isset($_GET["mealLabels"]) ) $labels = $_GET["mealLabels"];
 if( isset($_GET["data"]) ) $plannerData = $_GET["data"];
 
 $meal = explode( ";", $plannerData );
@@ -54,6 +54,12 @@ foreach($meal as $mealItem) {
 } //end of for loop
 
 } //end of if statement
+
+$sql = "UPDATE ".$sessionName."mealplans SET mealLabels='".$labels."' WHERE planName='".$plannerName."'";
+
+echo $sql;
+
+$conn->query( $sql ) or die ( mysqli_error($conn) );
 
 mysqli_close( $conn );
 

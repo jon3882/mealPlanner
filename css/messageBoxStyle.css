@@ -1,8 +1,11 @@
 /**************************************
 *************Message Box***************/
 
+
 .messageBox{
-	display: table;  
+	display: table;
+	
+    
     margin: 0 auto;
     width: 250px;
     min-height: 100px;
@@ -41,7 +44,7 @@
 
  	display: none;   
     	align-items: center;
-	position: absolute;
+	position: fixed;
 	left: 0;
     	right: 0;
    	top: 0;

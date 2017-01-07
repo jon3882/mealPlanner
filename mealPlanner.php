@@ -69,6 +69,8 @@ include_once('navBar.php');
 <br>
 
 <table id="planner">
+
+<!--
 <tr>
 <td></td><td class="dTitle" id="sunTitle">Sunday</td><td class="dTitle" id="monTitle">Monday</td><td class="dTitle" id="tueTitle">Tuesday</td><td class="dTitle" id="wedTitle">Wednesday</td><td class="dTitle" id="thuTitle">Thursday</td><td class="dTitle" id="friTitle">Friday</td><td class="dTitle" id="satTitle">Saturday</td>
 </tr>
@@ -200,7 +202,8 @@ Protein:<br>
 </table>
 </td>
 
-</tr>
+-->
+
 
 </table>
 </div>
