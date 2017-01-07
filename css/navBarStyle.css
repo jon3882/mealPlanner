@@ -4,7 +4,7 @@
   color:white;
 }
 
-#navbar li a:hover:not(#currentPage) {
+#navbar li a:hover:not(#currentPage):not(.logoutIcon){
   background-color: #3F75A2;
 }
 
@@ -23,6 +23,7 @@
 #navbar ul {	
   font-size: 17px;
   list-style-type: none;
+  min-width: 680px;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -34,10 +35,10 @@
 
 }
 
-#navbar li a, #login, #newUser, #forgotPassword {
+#navbar li a, #login, #newUser, #forgotPassword, .qlink {
   display: block;  
   text-align: center;
-  padding: 18px 24px;
+  padding: 18px 20px;
   text-decoration: none;
   
 }
@@ -45,4 +46,23 @@
 #login, #newUser, #forgotPassword{
   text-align: center;
   color: white;
+}
+
+/**************Styling for icons******************/
+
+.logoutIcon{
+  background-color: #d9534f;  
+}
+
+.logoutIcon:hover{
+  background-color: #C34A47;
+}
+
+.qlink{
+  color: white;
+}
+
+.qlink:hover:not(.loader){
+  background-color: #3F75A2; 
+  cursor: pointer;
 }

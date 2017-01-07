@@ -134,24 +134,9 @@ include_once('navBar.php');
 </div>
 </div>
 
-
-<!--************Dropdown Menu******************-->
-
-
 </body>
-<!-- /////////////////////////////////////////////////
-////////////////Dropdown menu navbar/////////////// -->
-
-<div id="dropbtn" class="dropbtn menu" >
-<div class="dropdown-content">
-           <a class="dropdown-option" href="index.php">Home</a>
-           <a class="dropdown-option" href="mealPlanner.php">Meal Planner</a>
-           <a class="dropdown-option" href="php/logout.php">Logout</a>
-</div>
-</div>
 
 <?php include 'messageBox.php';?>
-
 
 
 </html>

@@ -38,34 +38,6 @@ include_once('navBar.php');
 <!--************Navigation Bar End**********************-->
 <div class="content-wrapper" >
 
-
-<span style="float:right;">
-
-<table style="border-radius: 5px;">
-<tr>
-<td id="pdfContainer" class="qlinkContainer" style="border-radius: 5px;">
-<img id="pdfQLink" class="qlink" src="img/pdfBlue.png" alt="pdf" height="35" width="35">
-</td>
-<td class="qlinkContainer" style="border-radius: 5px;">
-<img class="qlink" src="img/trashBlue.png" alt="trash" height="35" width="35">
-</td>
-<td>
-&nbsp
-&nbsp
-&nbsp
-&nbsp
-</td>
-</tr>
-</table>
-
-</span>
-
-
-
-
-
-
-
 <br>
 
 <table id="planner">
@@ -206,7 +178,7 @@ Protein:<br>
 
 
 </table>
-</div>
+
 
 
 <!-- //////////////////////Dialog Box/////////////////////
@@ -230,7 +202,7 @@ Protein:<br>
 		</select>
 		<select id="foodSelect" size = "10">   			
 		</select>
-		<button id="add" onclick="insertFoodFromSelect()">Add Food</button>
+		<button class="plannerBtns" id="add" onclick="insertFoodFromSelect()">Add Food</button>
 	</div>
 	<div class="rightSide">
 		<span id="mealID">Monday Breakfast</span>
@@ -261,8 +233,8 @@ Protein:<br>
 			<tr>				
 			</tr>
 		</table>
-		<button id="saveMeal" onclick="pressSaveMealDialogue()">Save Meal</button>
-		<button id="cancelMeal" onclick="pressCancelMealDialogue()">Cancel</button>
+		<button class="plannerBtns" id="saveMeal" onclick="pressSaveMealDialogue()">Save Meal</button>
+		<button class="plannerBtns" id="cancelMeal" onclick="pressCancelMealDialogue()">Cancel</button>
 	</div>
 	</div>
 </div>
@@ -275,35 +247,9 @@ Protein:<br>
 
 </body>
 
-<!-- /////////////////////////////////////////////////
-////////////////Dropdown menu navbar/////////////// -->
-<div id="dropbtn" class="dropbtn menu" >
-<div  class="dropdown-content">
-				<a class="navMenu dropdown-option" href="#">Navigation</a>
-				<a class="fileMenu dropdown-option" href="#">File Operations</a>			
-</div>
-</div>
-
-
-<div id="navOptions" class="navMenu">
-	<div class="dropdown-content">
-				<a class="dropdown-option" href="index.php">Home</a>
-				<a class="dropdown-option" href="foodData.php">Food Database</a>
-				<a class="dropdown-option" href="php/logout.php">Logout</a>	
-	</div>
-</div>
-		
-<div id="fileOptions" class="fileMenu">
-	<div class="dropdown-content">
-		<a id="newPlanner" class="dropdown-option" href="#">New Planner</a>
-		<a id="createPDF" class="dropdown-option" href="#">Create PDF</a>
-		
-	</div>		
-</div>
-<!-- ////////////////***********/////////////// -->
 
 </div>
-
+</div>
 
 
 <?php include 'messageBox.php';?>

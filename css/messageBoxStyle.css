@@ -9,8 +9,6 @@
     margin: 0 auto;
     width: 250px;
     min-height: 100px;
-    
-    
 	padding: 2%;
 	background-color: #DCDCDC;
 	border: solid;
@@ -21,7 +19,7 @@
 }
 
 .messageBox button{
-	min-width: 60px;
+	min-width: 75px;
 }
 
 #messageCancel{
@@ -56,19 +54,7 @@
 	
 	} 
 	
-button{
-	border-radius: 3px;
-	
-	font-weight: bold;
-	padding: 5px;	
-	width: 20%;
-	color:white;	
-	outline: none;	
-	background-color: #4682B4;
+.msgBoxBtn{
+	width: 20%;		
 }
 
-button:hover{
-	background-color: #ffffff;
-	color: #4682B4;
-	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-}

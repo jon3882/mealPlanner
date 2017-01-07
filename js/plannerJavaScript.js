@@ -23,49 +23,11 @@ var returnFlags = new Array(2);
 //************************************************//
 $(document).ready(function(){ 
 
-	preloadImage( "./img/pdfWhite.png" );
-	preloadImage( "./img/pdfBlue.png" );
-	preloadImage( "./img/trashWhite.png" );
-	preloadImage( "./img/trashBlue.png" );
-
-
-	//************************************************//
-	//Mouseover and click events for navigation
-	//menu
-	//************************************************//
-
-           $( ".menu" ).mouseover(function() {
-           		             
-                      	$("#dropbtn").show();  
-                       	document.getElementById("dropbtn").style.top = getTitleHeight() + "px";
-           		});
- 
-           $( ".menu" ).mouseout(function() {
-           		
-                      	$("#dropbtn").hide();
-           		});
-           
-           $( ".navMenu" ).mouseover(function() {    
-           
-           		$("#navOptions").show();
-           		$("#dropbtn").show();  
-                          
-           		var menuHeight = getTitleHeight() + 15; 
-                     	document.getElementById("navOptions").style.top = menuHeight + "px";
-                      	var menuWidth = document.getElementById("dropbtn").clientWidth*3;
-                      	document.getElementById("navOptions").style.left = menuWidth + "px";
-           		});
-           
-           $( ".navMenu" ).mouseout(function() {
-                      	$("#navOptions").hide();
-                      	$("#dropbtn").hide();
-           		});	
-           	
 	//************************************************//
 	//Mouseover and click events for quick links
 	//************************************************//
 
-	$( "#newPlanner" ).click(function() {
+	function newPlanner() {
 		
 		displayMessageToUser("Are you sure you want to clear the meal planner?  All changes to the working" + 
 		" draft will be lost.", "", "okc", function() {
@@ -73,53 +35,42 @@ $(document).ready(function(){
 		hideMessageToUser();
 		}, hideMessageToUser);
 		
-		});	
+		};	
 		
 	//Changes the quick link and navigation "Create PDF" button to show a message that the 
 	//PDF is in the processs of being created.
-	$( "#createPDF" ).click(function() {
+	function createPDF() {
 		
-		var processMsg = "<table><tr><td>Create PDF (busy processing)</td>"+
-		"<td><img src=\"./img/msgBoxLoader.gif\" height=\"50\" width=\"50\"></td></tr></table>";
+		var processMsg = '<i class="fa fa-spinner fa-pulse fa-lg fa-fw qlink loader"></i>';
 		
-		var currentMsg = document.getElementById( "createPDF" ).innerHTML;
+		// var currentMsg = document.getElementById( "createPDF" ).innerHTML;
 		
-		if( !currentMsg.includes( "busy" ) ) {
 		
-				document.getElementById("pdfContainer").alt = "processing";
-				document.getElementById("pdfQLink").alt = "processing";
-				document.getElementById("pdfQLink").src = "./img/msgBoxLoader.gif";
-				sendToPDF();
-				document.getElementById( "createPDF" ).innerHTML = processMsg;
-				
-				} //end of if statement
 		
-			displayMessageToUser("A PDF is currently being created.  You will be alerted"+
-		 	" when the PDF is ready for download", "", "ok", hideMessageToUser, 
-		 	hideMessageToUser);
-		 	
-			});
-			
-	 $( ".qlinkContainer" ).mouseover(function() {
-                   if( this.alt != "processing" ) this.style.backgroundColor = "#4682B4";
-		   });
-		   
-	 $( ".qlinkContainer" ).mouseout(function() {
-                   this.style.backgroundColor = "white";
-		   });
+		document.getElementById("pdfContainer").title = "processing";
+		//document.getElementById("pdfQLink").alt = "processing";
+		//document.getElementById("pdfQLink").src = "./img/msgBoxLoader.gif";
+		sendToPDF();
+		document.getElementById( "pdfContainer" ).innerHTML = processMsg;
+		
+				 		
+		displayMessageToUser("A PDF is currently being created.  You will be alerted"+
+	 	" when the PDF is ready for download", "", "ok", hideMessageToUser, 
+	 	hideMessageToUser);
+	 	
+		};
+	
+	//makes pdf hotlink live even if it is updated in dom after page is loaded
+	$(document).on('click', '#pdfLink', function(){
+		createPDF();
+	});
+	
 
-	$( ".qlink" ).mouseover(function() {
-                   if( this.alt != "processing" ) this.src = "img/"+this.alt+"White.png";
-		   });
-		 
-	$( ".qlink" ).mouseout(function() {
-                   if( this.alt != "processing" ) this.src = "img/"+this.alt+"Blue.png";
-		   });
-		   
-	$( ".qlink" ).click(function() {
-                   if( this.alt == "pdf" ) $( "#createPDF" ).click();
-                   if( this.alt == "trash" ) $( "#newPlanner" ).click();           
-		   });
+	$('#trashLink').click(function(){
+		newPlanner();
+	});
+
+	
 		   
 		
 			
@@ -415,10 +366,9 @@ function sendToPDF() {
 				displayMessageToUser("", data, "ok", function(){ location.reload();}, null);
 				} else { 	
 			
-				document.getElementById( "createPDF" ).innerHTML = "Create PDF";
-				document.getElementById("pdfContainer").alt = "pdf";
-				document.getElementById("pdfQLink").alt = "pdf";
-				document.getElementById("pdfQLink").src = "img/pdfBlue.png";
+				document.getElementById( "pdfContainer" ).innerHTML = 
+				'<i id = "pdfLink" class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>';				
+				
 
 				displayMessageToUser("Click \"OK\" to access the requested PDF. ", 
 				"",
@@ -452,13 +402,13 @@ function sendToPDF() {
 //***********************************************//	
 function applyTempCSS() {
 
-	var ELEMENT = jQuery( "#planner" );
+		var ELEMENT = jQuery( "#planner" );
 	
-	ELEMENT.css( "font-size", "300%" );
-	ELEMENT.css( "border", "6px solid #c4c4c4" );
+		ELEMENT.css( "font-size", "300%" );
+		ELEMENT.css( "border", "6px solid #c4c4c4" );
     	ELEMENT.css( "padding",  "3px 3px 3px 3px" );
 
-	var ELEMENT = jQuery( ".sq"  );
+		var ELEMENT = jQuery( ".sq"  );
     	ELEMENT.css( "border", "6px solid #c4c4c4" );
     	ELEMENT.css( "padding",  "3px 3px 3px 3px" );
     	ELEMENT.css( "color",  "black" );
@@ -474,7 +424,7 @@ function applyTempCSS() {
     	var ELEMENT = jQuery( ".dayTotals"  );
     	ELEMENT.css( "color",  "black" );
     	
-	var ELEMENT = jQuery( "#custInfo"  );
+		var ELEMENT = jQuery( "#custInfo"  );
     	ELEMENT.css( "color", "black" );
     	
     	var ELEMENT = jQuery( ".snack"  );
@@ -489,9 +439,9 @@ function applyTempCSS() {
 //***********************************************//
 function reverseTempCSS() {
 
-	var ELEMENT = jQuery( "#planner"  );
-	ELEMENT.css( "font-size", "100%" );
-	ELEMENT.css( "border", "2px solid #4682B4" );
+		var ELEMENT = jQuery( "#planner"  );
+		ELEMENT.css( "font-size", "100%" );
+		ELEMENT.css( "border", "2px solid #4682B4" );
     	ELEMENT.css( "padding",  "1px 1px 1px 1px" );
     	
     	var ELEMENT = jQuery( ".sq"  );
@@ -529,7 +479,7 @@ function clearPlanner() {
 	mealSchedule = new Array(42);
 	selectedCustomerID = -1;
 	writePlanner( "workingDraft" );
-	writeCustomer();
+	//writeCustomer(); Deleted customer no longer part of planner
 	populateCalendar();
 	updatePlannerTotals();
 
@@ -758,8 +708,7 @@ function checkLoadStatus() {
 
 
 //***********************************************//
-//Function loads the global variables, sets the 
-//navagiaton bar menu button height, and populates
+//Function loads the global variables and populates
 //the meal planer with the current data.
 //***********************************************//
 function startup() {

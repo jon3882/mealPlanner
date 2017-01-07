@@ -44,22 +44,10 @@ $(document).ready(function(){
     	  	
     	$("#delete").click(function(){
     		submitAction( "del" );	
-	  	});	
-	  	
-	$( ".menu" ).mouseover(function() {
-                      $("#dropbtn").show();             
-                      document.getElementById("dropbtn").style.top = getTitleHeight() + "px";
-           	});
- 
-        $( ".menu" ).mouseout(function() {
-                      $("#dropbtn").hide();
-           	}); 	
+	  	});		  	
+	
 	}); 
 //************************************************//
-
-function getTitleHeight(){
-           return document.getElementById("title").clientHeight;
-           } //end of function
 
 //function loads global variable with data from database
 //and populates the listbox.
