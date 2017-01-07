@@ -318,16 +318,7 @@ function preloadImage(url)
 
 
 //***********************************************//
-//Function returns the height of the title bar
-//***********************************************//
-function getTitleHeight(){
-              return document.getElementById("title").clientHeight;
-              } //end of function
-//***********************************************//
-
-
-//***********************************************//
-//Function enlargers the meal planner 3X and applies
+//Function enlarges the meal planner 3X and applies
 //CSS that makes the planner more printer friendly.
 //An image is created from the modified planner. 
 //The image is translated into base64 code and
