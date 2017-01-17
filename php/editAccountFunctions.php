@@ -112,14 +112,15 @@ function deleteAccount($userID){
 	$result = false;
 
 	include_once('../../private/connectDB.php');
+
 	$conn = new mysqli($servername, $username, $password, $dbname);	
 	// Check connection
 	if (!$conn) {
 	    die("Connection failed: " . $conn->connect_error);
 			}
 
-	$table1 = $userID."_foodelement";
-	$table2 = $userID."_mealelement";
+	$table1 = $userID."_foodElement";
+	$table2 = $userID."_mealElement";
 	$table3 = $userID."_mealplans";
 
 	$sql =  "DROP TABLE ".$table1.", ".$table2.", ".$table3;
