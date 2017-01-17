@@ -3,12 +3,7 @@
 // ***************************************************
 // Account settings page. Login protected.
 //****************************************************
-
 include('../../private/loginProtect.php');
-$uName = $_SESSION["userName"];
-$lastName = $_SESSION["lastName"];
-$userEmail = $_SESSION["email"];
-$fullName = $_SESSION["userName"]." ".$_SESSION["lastName"];
 ?>
 
 <!DOCTYPE html>
@@ -29,17 +24,17 @@ include_once('navBar.php');
 <br>
 <div class="content" >
 <h2>Change Account Settings</h2>
-User account: <?php echo $fullName;?> 
+User account: <?php echo $_SESSION["firstName"]." ".$_SESSION["lastName"];?> 
 <div class="settings main">
 <span class="box thin section">
 <b>Name:</b>
 <button class="acctBtns" id="changeName" onclick="location.href = 'changeName.php'" >Edit</button>
-<br> <?php echo $fullName;?>	
+<br> <?php echo $_SESSION["firstName"]." ".$_SESSION["lastName"];?>	
 </span>
 <span class="box thin section">
 <b>Email/Username:</b>
 <button class="acctBtns" onclick="location.href = 'changeEmail.php'">Edit</button>
-<br><?php echo $userEmail; ?>
+<br><?php echo $_SESSION["email"]; ?>
 </span>
 <span class="box thin section">
 <b>Password:</b>

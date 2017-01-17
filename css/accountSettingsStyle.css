@@ -76,3 +76,16 @@ a  {
 .desc{
 	max-width: 75%;
 }
+
+.resultMsg{
+	margin-top: 5px;
+	font-size: 1.5em;
+}
+
+.error{
+	color:red;
+}
+
+.success{
+	color:green;
+}
