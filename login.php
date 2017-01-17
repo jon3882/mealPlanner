@@ -11,7 +11,7 @@ if(isset($_POST['userid']) && isset($_POST['userPassword'])){
 	$userid = $_POST['userid'];
 	$userPassword = $_POST['userPassword'];
     
-	include('/php/authorize.php');
+	include('php/authorize.php');
 	
 	$authorizedMsg = authorizeUser($userid, $userPassword);
 	

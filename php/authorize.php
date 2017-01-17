@@ -2,8 +2,10 @@
 session_start();
 
 function authorizeUser($userid, $userPassword){
-include('/../../../private/connectDB.php');
-    
+
+
+include('../../private/connectDB.php');
+
 	$conn = new mysqli($servername, $username, $password, $dbname);
 		// Check connection
 		if ($conn->connect_error) {
