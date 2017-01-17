@@ -16,7 +16,7 @@ if( isset($_GET["delete"]) ){
 function editName($newFirst, $newLast){
 	$result = false;
 
-	include_once('/../../../private/connectDB.php');
+	include_once('../../private/connectDB.php');
 	$conn = new mysqli($servername, $username, $password, $dbname);	
 	// Check connection
 	if (!$conn) {
@@ -44,7 +44,7 @@ function editName($newFirst, $newLast){
 function editEmail($newEmail){
 	$result = false;
 
-	include_once('/../../../private/connectDB.php');
+	include_once('../../private/connectDB.php');
 	$conn = new mysqli($servername, $username, $password, $dbname);	
 	// Check connection
 	if (!$conn) {
@@ -70,7 +70,7 @@ function editEmail($newEmail){
 function editPassword($currentPass, $newPass1, $newPass2){
 	$result = "<span class='resultMsg error'>Something went wrong! Changes were not made to your account!</span>";
 
-	include_once('/../../../private/connectDB.php');
+	include_once('../../private/connectDB.php');
 	include_once('authorize.php');
 
 	
@@ -111,7 +111,7 @@ function editPassword($currentPass, $newPass1, $newPass2){
 function deleteAccount($userID){
 	$result = false;
 
-	include_once('/../../../private/connectDB.php');
+	include_once('../../private/connectDB.php');
 	$conn = new mysqli($servername, $username, $password, $dbname);	
 	// Check connection
 	if (!$conn) {
