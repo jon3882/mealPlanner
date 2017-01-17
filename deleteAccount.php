@@ -83,7 +83,6 @@ if(isset($_POST['username']) && isset($_POST['userPass'])){
 
 	$authorizedMsg = authorizeUser($userid, $userPassword);
 	
-		
 	if (strcmp($authorizedMsg, "authorized") == 0){
 		?>
 

@@ -4,12 +4,7 @@ session_start();
 // user account from the settings page
 
 		
-//runs delete account function from ajax post
-if( isset($_GET["delete"]) ){
-	echo '<script type="text/javascript">alert("hello!");</script>';
-	$userID = $_SESSION['validUser'];
-	deleteAccount($userID);	
-}
+
 
 //function will change the users first and last name and
 //return true if successful
@@ -106,12 +101,14 @@ function editPassword($currentPass, $newPass1, $newPass2){
 	return $result;	
 }
 
-//function will delete all tables associated with user as well
-//as the row in authorized users table
-function deleteAccount($userID){
+if( isset($_GET["delete"]) ){
+
+	$userID = $_SESSION['validUser'];
 	$result = false;
 
-	include_once('../../private/connectDB.php');
+	//connectDB is called from ajax in js file so it needs to go up 
+	//1 more level in directory
+	include('../../../private/connectDB.php');
 
 	$conn = new mysqli($servername, $username, $password, $dbname);	
 	// Check connection
@@ -132,11 +129,5 @@ function deleteAccount($userID){
 	$result = $conn->query( $sql );	
 	
 }
-
-//ajax post to delete the user account
-if( isset($_GET["delete"]) ){
-	$userID = $_SESSION['validUser'];
-	deleteAccount($userID);	
-} 
 
 ?>

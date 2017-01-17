@@ -25,6 +25,7 @@ function deleteAccount(){
 
 function logout(){
 	window.location.replace("php/logout.php");
+	hideMessageToUser();
 }
 
 //***********************************************************//
@@ -33,13 +34,10 @@ function logout(){
 function ajaxPost( url, successMsg, errorMsg ) {
 	
 	var params = {};
-	//how to add parameters
-	//params["username"] = "";
-
 	$.post(
 		url, 
 		params,
-        	function(data,status){
+        	function(){
 			
 			//success
 			$("#msgContainer").hide();

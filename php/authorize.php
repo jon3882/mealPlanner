@@ -5,18 +5,18 @@ function authorizeUser($userid, $userPassword){
 
 // test to make sure git pull is working on server
 include('../../private/connectDB.php');
-
 	$conn = new mysqli($servername, $username, $password, $dbname);
 		// Check connection
 		if ($conn->connect_error) {
 		    die("Connection failed: " . $conn->connect_error);
 			}
-		
+	 	
 	$sql = "SELECT * FROM authorizedUsers WHERE user='".$userid."'";
 	$result = $conn->query($sql);
 	mysqli_close( $conn );
 
 	if($result->num_rows > 0 ) {
+
 
 		$row = $result->fetch_assoc();
 
