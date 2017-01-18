@@ -50,7 +50,7 @@ include_once('navBar.php');
 
 
 	<form name="frmregister"action="<?= $_SERVER['PHP_SELF'] ?>" method="post" >
-		<table class="form" border="0">
+		<table class="form box thin" border="0">
 
 			<tr>
 			<td></td><td></td>
@@ -68,9 +68,10 @@ include_once('navBar.php');
 			<tr>
 			<td></td>
 				<td class="submit-button-right">
-				<input class="send_btn" type="submit" value="Submit" alt="Submit" title="Submit" />
+				<input class="send_btn btn" type="submit" value="Submit" alt="Submit" title="Submit" />
 				
-				<input class="send_btn" type="reset" value="Reset" alt="Reset" title="Reset" /></td>
+				<input class="send_btn btn" type="reset" value="Reset" alt="Reset" title="Reset" />
+				</td>
 				
 			</tr>
 			<tr>
