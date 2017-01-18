@@ -5,10 +5,6 @@ session_start();
 //****************************************************
 
 include('../../private/loginProtect.php');
-/////////////// Title bar/////////////////
-$thisPage = "accountSettings";
-include_once('navBar.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +19,11 @@ include_once('navBar.php');
 <script src="js/messageBox.js"></script>
 <body>
 
-
-
+<?php
+/////////////// Title bar/////////////////
+$thisPage = "accountSettings";
+include_once('navBar.php');
+?>
 
 <!-- ******************************************* -->
 <br>
