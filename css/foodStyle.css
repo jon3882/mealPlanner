@@ -149,3 +149,8 @@ button{
 text-align: left;
 
 }
+
+.errors{
+	text-align: left;
+	margin:0 auto;	
+}

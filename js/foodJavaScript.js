@@ -388,6 +388,12 @@ function validateFoodInput(){
 		}else if (protein < 0 || protein > 1000){
 			errorMessage += "<li>Protein amount is out of range.</li>";
 		} //end of if statement
+
+		if (errorMessage != ""){
+			newErrorMessage = "<ul class= 'errors'>" + errorMessage + "</ul>";
+			errorMessage = newErrorMessage;
+		}
+		
  		return errorMessage;
 	} //end of function 
  
