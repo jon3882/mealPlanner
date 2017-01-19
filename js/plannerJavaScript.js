@@ -55,7 +55,7 @@ function newPlanner() {
 //PDF is in the processs of being created.
 function createPDF() {
 	
-	var processMsg = '<i class="fa fa-spinner fa-pulse fa-lg fa-fw qlink loader"></i>';
+	var processMsg = '<i class="fa fa-spinner fa-spin fa-lg fa-fw qlink loader"></i>';
 	
 	// var currentMsg = document.getElementById( "createPDF" ).innerHTML;
 	
