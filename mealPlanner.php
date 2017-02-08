@@ -15,9 +15,20 @@ include('../../private/loginProtect.php');
 
 <!-- ***Included files*************************************************************** -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://files.codepedia.info/uploads/iScripts/html2canvas.js"></script>
-<script src="js/plannerJavaScript.js"></script> 
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script src="resources/html2canvas.js"></script>
+<script src="js/planner/plannerJavaScript.js"></script> 
+<script src="js/planner/mealEditor.js"></script>
 <script src="js/messageBox.js"></script>
+<script src="js/planner/contextMenuJS.js"></script>
+<script src="js/planner/mealTitleEditor.js"></script>
+<script src="js/planner/undo.js"></script>
+<script src="js/planner/utilityFunctions.js"></script>
+<script src="js/planner/pdfJS.js"></script>
+<script src="js/planner/drawPlanner.js"></script>
+<script src="js/planner/plannerFileOps.js"></script>
+<script src="resources/contextMenu/jquery.contextMenu.js" type="text/javascript"></script>
+<link rel="stylesheet" href="resources/contextMenu/jquery.contextMenu.css">
 <link rel="stylesheet" href="css/mealPlannerStyle.css">
 <link rel="stylesheet" href="css/messageBoxStyle.css">
 <!-- ******************************************************************************** -->
