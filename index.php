@@ -6,7 +6,7 @@
 //***************************************************************
 
 include('../../private/loginProtect.php');
-$uName = $_SESSION["userName"];
+
 
 ?>
 
@@ -28,7 +28,7 @@ include_once('navBar.php');
 
 <!-- *****************Buttons********************* -->
 <div class="content" >
-<h2>Welcome <?php echo $uName; ?>!</h2>
+<h2>Welcome <?php echo $_SESSION["firstName"]; ?>!</h2>
 <div class="buttons">
 <button class = "indexBtns" onclick="location.href = 'mealPlanner.php'"  id="mealPlanner" type="button">Meal Planner</button>
 </div>

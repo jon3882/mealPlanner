@@ -17,6 +17,8 @@ var mealIndex;
 var meals;
 var selectedPlan = "workingDraft";
 var returnFlags = new Array(2);
+var pdfFunction;
+var trashFunction;
 
 //************************************************//
 //JQuery Functions
@@ -26,8 +28,20 @@ $(document).ready(function(){
 	//************************************************//
 	//Mouseover and click events for quick links
 	//************************************************//
+	$('#pdfLink').on('click',pdfFunction);
+	
+	$('#trashLink').on('click',trashFunction);
 
-	function newPlanner() {
+           
+	}); 
+//***********************************************//
+
+
+
+//***********************************************//
+// Functions dealing with hotlinks
+//***********************************************//
+function newPlanner() {
 		
 		displayMessageToUser("Are you sure you want to clear the meal planner?  All changes to the working" + 
 		" draft will be lost.", "", "okc", function() {
@@ -37,47 +51,41 @@ $(document).ready(function(){
 		
 		};	
 		
-	//Changes the quick link and navigation "Create PDF" button to show a message that the 
-	//PDF is in the processs of being created.
-	function createPDF() {
-		
-		var processMsg = '<i class="fa fa-spinner fa-pulse fa-lg fa-fw qlink loader"></i>';
-		
-		// var currentMsg = document.getElementById( "createPDF" ).innerHTML;
-		
-		
-		
-		document.getElementById("pdfContainer").title = "processing";
-		//document.getElementById("pdfQLink").alt = "processing";
-		//document.getElementById("pdfQLink").src = "./img/msgBoxLoader.gif";
-		sendToPDF();
-		document.getElementById( "pdfContainer" ).innerHTML = processMsg;
-		
-				 		
-		displayMessageToUser("A PDF is currently being created.  You will be alerted"+
-	 	" when the PDF is ready for download", "", "ok", hideMessageToUser, 
-	 	hideMessageToUser);
-	 	
-		};
+//Changes the quick link and navigation "Create PDF" button to show a message that the 
+//PDF is in the processs of being created.
+function createPDF() {
 	
-	//makes pdf hotlink live even if it is updated in dom after page is loaded
-	$(document).on('click', '#pdfLink', function(){
-		createPDF();
-	});
+	var processMsg = '<i class="fa fa-spinner fa-spin fa-lg fa-fw qlink loader"></i>';
 	
+	// var currentMsg = document.getElementById( "createPDF" ).innerHTML;
+	
+	
+	
+	document.getElementById("pdfContainer").title = "Processing";
+	//document.getElementById("pdfQLink").alt = "processing";
+	//document.getElementById("pdfQLink").src = "./img/msgBoxLoader.gif";
+	sendToPDF();
+	document.getElementById( "pdfContainer" ).innerHTML = processMsg;
+	
+			 		
+	displayMessageToUser("A PDF is currently being created.  You will be alerted"+
+ 	" when the PDF is ready for download", "", "ok", hideMessageToUser, 
+ 	null);
+ 	
+	};
 
-	$('#trashLink').click(function(){
-		newPlanner();
-	});
+//variables to call functions in jquery on/off
+var pdfFunction = function(){
+	createPDF();
+};
 
-	
-		   
-		
-			
-	
-           
-	}); 
-//***********************************************//
+var trashFunction = function(){
+	newPlanner();
+};
+
+
+
+
 
 
 //************************************************//
@@ -318,16 +326,7 @@ function preloadImage(url)
 
 
 //***********************************************//
-//Function returns the height of the title bar
-//***********************************************//
-function getTitleHeight(){
-              return document.getElementById("title").clientHeight;
-              } //end of function
-//***********************************************//
-
-
-//***********************************************//
-//Function enlargers the meal planner 3X and applies
+//Function enlarges the meal planner 3X and applies
 //CSS that makes the planner more printer friendly.
 //An image is created from the modified planner. 
 //The image is translated into base64 code and
@@ -368,7 +367,8 @@ function sendToPDF() {
 			
 				document.getElementById( "pdfContainer" ).innerHTML = 
 				'<i id = "pdfLink" class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>';				
-				
+				//enables click after pdf created
+				$('#pdfLink').on("click", pdfFunction);
 
 				displayMessageToUser("Click \"OK\" to access the requested PDF. ", 
 				"",
@@ -1072,16 +1072,28 @@ function cancelMealDialogue(){
 //////Jquery functions to hide and show dialogue///
 //////////////////////////////////////////////////
 
+var pdfFunction = function(){
+		createPDF();
+	};
+
+var trashFunction = function(){
+	newPlanner();
+};
 // opens the meal dialogue box
 function showDialogueBox(){
 	$(".dialogueBox").fadeIn();
-	$("#planner").hide();// this is where your container will go
+	$("#planner").hide();
+	$('#trashLink').off();
+	$('#pdfLink').off();
 }
 
 function hideDialogueBox(){
 	$(".dialogueBox").hide();
-	$("#planner").fadeIn(); // your container here
+	$("#planner").fadeIn(); 
+	$('#trashLink').on("click", trashFunction);
+	$('#pdfLink').on("click", pdfFunction);
 }
+
 
 
 /////////////////////////////////////////////////////
@@ -1133,7 +1145,7 @@ function getFoodElement(id){
 }
 
 ////////////////////////////////////////////////////////////////
-///Functions that organize food objects and populate listboxe///
+///Functions that organize food objects and populate listbox///
 ////////////////////////////////////////////////////////////////
 
 //fills food item list box

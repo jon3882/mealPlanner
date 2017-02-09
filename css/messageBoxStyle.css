@@ -7,7 +7,7 @@
 	
     
     margin: 0 auto;
-    width: 250px;
+    width: 300px;
     min-height: 100px;
 	padding: 2%;
 	background-color: #DCDCDC;
@@ -28,8 +28,7 @@
 
 #loaderContainer {
 
-	display: block;   
-    	
+	display: block;
 	text-align:center;
 	margin: auto;					 
 	height: 100%;

@@ -8,9 +8,9 @@ body { height: 100%; background-color: #FFFFFF; font: 1.2em Verdana, Arial, Helv
 
 /* ==================== Form style sheet ==================== */
 
-table.form { margin:0 auto; border-collapse: collapse; border: 1px solid #DDDDDD; }
+table.form { margin:0 auto; border-collapse: collapse; }
 
-table.form th, table.form td { padding: 4px 5px 10px; text-align: left; font-weight: normal; }
+table.form th, table.form td { padding: 4px 10px 10px 10px; text-align: left; font-weight: normal; }
 
 table.form label { font-family: Verdana, Arial, Helvetica, sans-serif; color: #181818; margin-right: 12px; }
 
@@ -26,9 +26,9 @@ table.form input.answer { width: 53px; }
 
 table.form textarea { width: 400px; height: 160px; }
 
-table.form input.inp-text, table.form input.answer, table.form textarea
+input.inp-text, table.form input.answer, table.form textarea
 
-{ border: 1px solid #909090; padding: 2px; }
+{ border: 1px solid #909090; padding: 5px; }
 
 table.form th.message-up { vertical-align: top !important; }
 
@@ -38,9 +38,18 @@ table.form td.submit-button-right { text-align: right !important; }
 
 table.form input.submit-text { font: 1.4em Georgia, "Times New Roman", Times, serif; letter-spacing: 1px; width: auto  }
 
-table.form label.email { border-bottom: 1px dotted #000000; }
+
+.thin {
+    border: 1px solid white;
+    box-shadow: 0 1px 0 gray;
+}
+.box {
+   box-shadow: 0 0 1px black;
+}
 
 /* ==================== Form style sheet END ==================== */
+
+
 
 .thanks-text{margin-left: 250px; margin-top: 100px;}
 
@@ -50,47 +59,27 @@ table.form label.email { border-bottom: 1px dotted #000000; }
 	font-weight: bold;
 	margin:0 auto;
 	margin-bottom: 3%;
-	padding: 15px;	
+	/*padding: 15px;	*/
 	
-	font-size: 125%;
+	font-size: 100%;
 	color:white;	
 	outline: none;	
 	background-color: #4682B4;
-	
-
-}
-
-
-.send_btn {
-
-    background: none repeat scroll 0 0 #4682B4;
-
+	background: none repeat scroll 0 0 #4682B4;
     border: medium none;
-
     color: #FFFFFF;
-
     cursor: pointer;
-
-    
-
-   font: bold 15px/43px Arial,Helvetica,sans-serif;
-
+   	font: 15px/43px Arial,Helvetica,sans-serif;
     width: 100px !important;
 
 }
 
-.title{	
-	background-color: #4682B4;
-	margin:0 auto;
-	font-size: 150%;		
-	color: white;
-	display: block;
-	padding:2% 2% 2% 15px;
-	text-align: center;	
-	}
-	
+.send_btn {
+
+    
+
+}
+
 #links {
-
 	margin: auto;
-
 	}

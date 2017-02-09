@@ -7,63 +7,23 @@ $userPassword = null;
 $msg = '';
 
 if(isset($_POST['userid']) && isset($_POST['userPassword'])){
+
 	$userid = $_POST['userid'];
 	$userPassword = $_POST['userPassword'];
-
-	include('../../private/connectDB.php');
-
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-	    die("Connection failed: " . $conn->connect_error);
-		}
+    
+	include('php/authorize.php');
+	
+	$authorizedMsg = authorizeUser($userid, $userPassword);
+	
 		
-	$sql = "SELECT * FROM authorizedUsers WHERE user='".$userid."'";
-	$result = $conn->query($sql);
-	mysqli_close( $conn );
-
-	if($result->num_rows > 0 ) {
-
-		$row = $result->fetch_assoc();
-
-		$hashed_password = $row["userPassword"];
-		$id = $row["id"];
-		$uName = $row["firstName"];
-		$lastName = $row["lastName"];
-		$userEmail = $row["user"];
-		$status = $row["status"];
-
-		//$hashed_password = crypt( $hashed_password ); //remove after hash is saved.
-
-		if (hash_equals($hashed_password, crypt($userPassword, $hashed_password))) {
-	   		
-	   		if( $status == "active" ) {	
-	   		
-	   			$_SESSION["validUser"] = $id;
-	   			$_SESSION["userName"] = $uName;
-	   			$_SESSION["lastName"] = $lastName;
-	   			$_SESSION["email"] = $userEmail;
-	   			header("Location: index.php");
-				exit;
-			
-				} else {
-				
-				$msg = "The account associated with email ".$userid." is not active: ".$status;
-				
-				} //end of if statement
-	   		
-			} else {
-			
-			if(isset($userid) || isset($userPassword)) $msg = "The email/password combination entered were not found.";
-			
-			} //end of if statement
-
-		} else {
-
-		if( isset($userid) || isset($userPassword) ) $msg = "The email/password combination entered were not found.";
-
-		} //end of if statement
+	if (strcmp($authorizedMsg, "authorized") == 0){
+		header("Location: index.php");		
+	}else if(strcmp($authorizedMsg, "inactive") == 0){
+		$msg = "The account associated with email ".$userid." is no longer active.";
+	}else{
+		$msg = "The email/password combination entered were not found.";
 	}
+}
 
 ?>
 
@@ -90,7 +50,7 @@ include_once('navBar.php');
 
 
 	<form name="frmregister"action="<?= $_SERVER['PHP_SELF'] ?>" method="post" >
-		<table class="form" border="0">
+		<table class="form box thin" border="0">
 
 			<tr>
 			<td></td><td></td>
@@ -108,9 +68,10 @@ include_once('navBar.php');
 			<tr>
 			<td></td>
 				<td class="submit-button-right">
-				<input class="send_btn" type="submit" value="Submit" alt="Submit" title="Submit" />
+				<input class="send_btn btn" type="submit" value="Submit" alt="Submit" title="Submit" />
 				
-				<input class="send_btn" type="reset" value="Reset" alt="Reset" title="Reset" /></td>
+				<input class="send_btn btn" type="reset" value="Reset" alt="Reset" title="Reset" />
+				</td>
 				
 			</tr>
 			<tr>

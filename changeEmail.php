@@ -1,14 +1,26 @@
 <?php
-
+session_start();
 // ***************************************************
-// Account settings page. Login protected.
+// Change name page. Login protected.
 //****************************************************
 
 include('../../private/loginProtect.php');
-$uName = $_SESSION["userName"];
-$lastName = $_SESSION["lastName"];
-$userEmail = $_SESSION["email"];
-$fullName = $_SESSION["userName"]." ".$_SESSION["lastName"];
+
+$msg = "";
+
+if(isset($_POST['email'])){
+	$newEmail = $_POST['email'];
+	
+	include('php/editAccountFunctions.php');
+	$edited = editEmail($newEmail);
+
+	if($edited){
+		$msg = "<span class='resultMsg success'>You have successfully changed your email address!</span>";
+	}else{
+		$msg = "<span class='resultMsg error'>Something went wrong. Changes were not made to your account!</span>";
+	}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +43,7 @@ include_once('navBar.php');
 <!-- ***************Content of Page**************-->
 <div class="content" >
 <h2>Change Account Settings</h2>
-User account: <?php echo $fullName;?><br>
+User account: <?php echo $_SESSION["firstName"]." ".$_SESSION["lastName"];?><br>
 
 <div class="settings main">
 <span class="breadCrumb"><a href="accountSettings.php">Account Settings</a>
@@ -48,12 +60,13 @@ with your account and click save to finalize the changes.
 <br>
 <b>Email/Username</b>
 <br>
-<?php echo '<input class="box thin" type="text" name="first" id="first" value="'.$userEmail.'">'?>
+<?php echo '<input class="box thin" type="text" name="email" id="email" value="'.$_SESSION["email"].'">'?>
 <br>
 <br>
 <button type="submit">Save Changes</button>
 </form>
 </span>
+<?php echo $msg;?>
 </div>
 </div>
 

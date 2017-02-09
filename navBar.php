@@ -24,11 +24,11 @@ else{
 	<a <?php if($thisPage == 'Home') echo "id = 'currentPage'";?> href="index.php">Home</a>
 	</li>
 	<li class="links">
-	<a <?php if($thisPage == 'foodData') echo "id = 'currentPage'";?> href="foodData.php">Food Database</a>
-	</li>	
-	<li class="links">
 	<a <?php if($thisPage == 'mealPlanner') echo "id = 'currentPage'";?> href="mealPlanner.php">Meal Planner</a>
 	</li>
+	<li class="links">
+	<a <?php if($thisPage == 'foodData') echo "id = 'currentPage'";?> href="foodData.php">Food Database</a>
+	</li>	
 	<li class="links">
 	<a <?php if($thisPage == 'accountSettings') echo "id = 'currentPage'";?> href="accountSettings.php">Account</a>
 	</li>
