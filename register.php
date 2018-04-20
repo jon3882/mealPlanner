@@ -7,7 +7,6 @@
 session_start();
 
 
-
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
 $userid = $_POST['userid'];
@@ -69,50 +68,15 @@ if($result->num_rows == 0 && isset($userid) ) {
 	
 				} //end of if statement
 
-//////////////////////////////////////////////////////////	
-//After getting the id of the new user, create three tables 
-//using the id: foodElement and mealElement.
-//////////////////////////////////////////////////////////		
-
-		$sql = "CREATE TABLE IF NOT EXISTS `".$id."_foodElement` (".
-  				"`id` int(11) NOT NULL AUTO_INCREMENT,".
-  				"`macroType` text NOT NULL,".
-  				"`cal` decimal(10,1) NOT NULL,".
-  				"`protein` decimal(10,1) NOT NULL,".
-  				"`carb` decimal(10,1) NOT NULL,".
-  				"`fat` decimal(10,1) NOT NULL,".
-  				"`foodDesc` text NOT NULL,".
-  				"`servingSize` decimal(10,1) NOT NULL,".
-  				"`measurement` text NOT NULL,".
-  				"PRIMARY KEY (`id`))";
-  				
-  		$r = $conn->query($sql);
-  		
-  		
-
-		$sql = "CREATE TABLE IF NOT EXISTS `".$id."_mealElement` (".
-  				"`id` int(11) NOT NULL AUTO_INCREMENT,".
-  				"`foodElementID` int(11) NOT NULL,".
-  				"`cell` text NOT NULL,".
-  				"`servingSize` text NOT NULL,".
-  				"`planName` text NOT NULL,".
-  				"PRIMARY KEY (`id`))";
-  				
-  		$r = $conn->query($sql);	
-			
-		$sql = "CREATE TABLE IF NOT EXISTS `".$id."_mealplans` (".
-			"`id` int(11) NOT NULL AUTO_INCREMENT,".
-			"`planName` text NOT NULL,".
-			"`mealLabels` text NOT NULL,".
-			"PRIMARY KEY (`id`))"; 
-			
-		$r = $conn->query($sql);	
+		//Insert default meal plan format.
 		
-		$sql = "INSERT INTO `".$id."_mealplans`".
-			" (`planName`, `mealLabels`) VALUES".
-			" ('workingDraft', 'Breakfast,Snack,Lunch,Snack, Dinner,Snack');";	
+		$sql = "INSERT INTO `mealplans`".
+			" (`userID`, `planName`, `mealLabels`) VALUES".
+			" (".$id.",'workingDraft', 'Breakfast,Snack,Lunch,Snack, Dinner,Snack');";	
 		
 		$r = $conn->query($sql);
+		
+		
 			
 		if( $id != "null" ) {	
 			$msg = "An account with the email test address: ".$userid." was successfully created.";

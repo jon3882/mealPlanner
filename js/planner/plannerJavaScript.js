@@ -20,6 +20,7 @@ var clipboardData = "";
 
 //Stores returned JSON
 var foods; //Food elements entered by user / frequently used.
+var usdaFoods;  //Food elements from USDA Nutrient Database.
 var mealIndex;  //Stores the currently selected meal
 var meals;  //Meal elements as JSON used to builds
 			//mealSchedule array
@@ -144,7 +145,8 @@ function attachMealPlannerEventHandlers() {
 				
 			});		
 	
-	$( ".mealName" ).on("click", 
+	$( ".mealName" ).on("click", null
+		/*
 		function() {	
 				
 			//Creates modification window within a messagebox.
@@ -195,7 +197,9 @@ function attachMealPlannerEventHandlers() {
 				
 				//Must be called everytime the meal modification window is created.
 				attachMealPlannerEventHandlers();				
-				});	
+				}
+				
+				*/);	
 			
 	//Executed when buttons within the meal modification window are
 	//pressed
@@ -278,15 +282,20 @@ function loadDatabaseData(isLoadedFood, isLoadedMeal, isLoadedPlan) {
 			
 	if( !isLoadedMeal ) ajaxPost( "php/getJSON.php?table=mealElement", "No Message", "Error", function(data) {
 		
+		
+		
 		if( data != "0 results" ) { 
 			meals = jQuery.parseJSON( data ); 	
 			returnFlags[1] = true;
 			} else {
+			meals = new Array();
 			returnFlags[1] = true;
 			
 			}});
 		
 	if( !isLoadedPlan ) ajaxPost( "php/getJSON.php?table=mealplans", "No Message", "Error", function(data) {
+		
+		//alert( data );
 		
 		if( data != "0 results" ) { 	
 			var temp = jQuery.parseJSON( data ); 
@@ -479,14 +488,26 @@ function deleteMeal( i ) {
 //***********************************************//
 function clearPlanner( selPlanner ) {
 
+	
+	pushUndoActions();
 	mealSchedule = new Array( mealSchedule.length );
-	writePlanner( selPlanner, function(data){ 
+	if( !undoActionsMealPlannerChangedState() ) undoActions.pop();
+	writePlanner( "workingDraft", function(data){ 
 	
 		loadDatabaseData(true, false, false);
 	
 		});
-	populateCalendar();
-	updatePlannerTotals();
+		
+	
+	//pushUndoActions();
+	//mealSchedule[ mealIndex ] = finalMeal;
+	//if( !undoActionsMealPlannerChangedState() )	undoActions.pop();
+	//populateCalendar();
+	//updatePlannerTotals();
+	
+		
+		//mealSchedule[mealIndex] = JSON.parse( clipboardData );
+		//writePlanner( "workingDraft", function(data){ loadDatabaseData(true, false, false); });
 
 	} //end of if statement
 //***********************************************//

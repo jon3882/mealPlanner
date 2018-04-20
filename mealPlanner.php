@@ -9,7 +9,7 @@ include('../../private/loginProtect.php');
 
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html>
 <head>
 
@@ -20,6 +20,7 @@ include('../../private/loginProtect.php');
 <script src="js/planner/plannerJavaScript.js"></script> 
 <script src="js/planner/mealEditor.js"></script>
 <script src="js/messageBox.js"></script>
+<script src="js/usdaSearch.js"></script>
 <script src="js/planner/contextMenuJS.js"></script>
 <script src="js/planner/mealTitleEditor.js"></script>
 <script src="js/planner/undo.js"></script>
@@ -200,16 +201,6 @@ Protein:<br>
 	<div class="foodDataContainer">
 	<div class="leftSide">
 		<select onchange="populateFoodListBox();" id="foodType">
-			<option value="1">Meat and Poultry</option>
-			<option value="2">Seafood</option>
-			<option value="3">Dairy</option>
-			<option value="4">Fruit</option>
-			<option value="5">Vegetable</option>
-			<option value="6">Beverages</option>
-			<option value="7">Grains</option>
-			<option value="8">Fat</option>
-			<option value="9">Nuts and Seeds</option>
-			<option value="10">Kitchen Staples</option>
 		</select>
 		<select id="foodSelect" size = "10">   			
 		</select>

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/generalStyle.css">
 <!-- Navigation Bar -->
 <div id="navbar">
-<ul>
+<table style="width:100%;background-color:"><tr>
 <?php 
 if ($thisPage == "Login") {
 echo "<li id ='login'>Sign In</li>";
@@ -20,39 +20,55 @@ echo"<li id ='newUser'>Register New Account</li>";
 }
 else{
 	?>  
-	<li class="links">
-	<a <?php if($thisPage == 'Home') echo "id = 'currentPage'";?> href="index.php">Home</a>
-	</li>
-	<li class="links">
-	<a <?php if($thisPage == 'mealPlanner') echo "id = 'currentPage'";?> href="mealPlanner.php">Meal Planner</a>
-	</li>
-	<li class="links">
-	<a <?php if($thisPage == 'foodData') echo "id = 'currentPage'";?> href="foodData.php">Food Database</a>
-	</li>	
-	<li class="links">
-	<a <?php if($thisPage == 'accountSettings') echo "id = 'currentPage'";?> href="accountSettings.php">Account</a>
-	</li>
-	<li class="links icons" style="float: right;" ><a class ="logoutIcon" href="php/logout.php">
-	<i class="fa fa-power-off fa-lg" title="Logout" aria-hidden="true"></i>
-	</a></li>
+	
+	<td class="link" <?php if($thisPage == 'mealPlanner') echo "id = 'currentPage'";?> >
+	<a style="text-decoration: none;"  href="mealPlanner.php">Meal Planner</a>
+	</td>
+	<td class="link" <?php if($thisPage == 'accountSettings') echo "id = 'currentPage'";?> >
+	<a style="text-decoration: none;"  href="accountSettings.php">Account</a>
+	</td>
+	
+	<td></td>
+	
 	<?php 
 	// adds hotlinks if on meal planner page
  	
  	if ($thisPage == "mealPlanner"){ 
  	?>
  	<!-- Quick links for meal planner -->
- 	<li class="links icons qlinkContainer" style="float: right;">
-	<i id = "trashLink" class="fa fa-trash-o fa-lg qlink" title="Delete Planner" aria-hidden="true"></i>
-	</li> 	
-	<li id= "pdfContainer" class="links icons qlinkContainer" style="float: right;">
-	<i id = "pdfLink" class="fa fa-file-pdf-o fa-lg qlink" title ="Create PDF" aria-hidden="true"></i>	
-	</li>
+	
+	<td class="linkIcon" style="">
+			<a href="#" title="Search for food item."><img style="" src="img/search.png"></a>
+	</td>
+	
+	<td class="linkIcon" style="">
+			<a href="#" title="Save meal plan."><img style="" src="img/save.png"></a>
+	</td>
+	
+	<td class="linkIcon" style="">
+			<a href="#" title="Open meal plan."><img style="" src="img/open.png"></a>
+	</td>
+ 	
+	<td class="linkIcon" style="">
+			<a id="trashLink" href="#" title="Clear meal plan."><img style="" src="img/trash.png"></a>
+	</td>
+	
+	
+	
  	<?php
  	}
  	?>
+	
+	<td class="linkIcon" style="">
+	</td>
+	
+	<td class="logoutIcon linkIcon" ><a href="php/logout.php">
+		<img style="" src="img/logout.png">
+	</a></td>
+	
 <?php } ?>
 
-</ul>
+<tr></table>
 </div>
 
 

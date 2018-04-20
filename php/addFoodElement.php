@@ -26,15 +26,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO ".$sessionName."foodElement (macroType, cal, protein, carb, fat, servingSize, measurement, foodDesc)".
+$sql = "INSERT INTO foodElement (macroType, cal, protein, carb, fat, servingSize, measurement, userID, foodDesc)".
                                         " VALUES ('".
-					$macroType."','".
+										$macroType."','".
                                         $cal."','".
-					$protein."','".
-					$carb."','".
+										$protein."','".
+										$carb."','".
                                         $fat."','". 
                                         $servingSize."','". 
-                                        $measurement."','".               
+                                        $measurement."',".   
+										$sessionName.",'".
                                         $foodDesc."')";
 
 $conn->query( $sql ) or die ( mysqli_error($conn) );
@@ -44,7 +45,7 @@ $conn->query( $sql ) or die ( mysqli_error($conn) );
 //Creates JSON object from the foodElement table and returns it to the requestor.
 //**************************************************************************************//
 
-$sql = "SELECT * FROM ".$sessionName."foodElement ORDER BY foodDesc";
+$sql = "SELECT * FROM foodElement WHERE userID = ".$sessionName." ORDER BY foodDesc";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

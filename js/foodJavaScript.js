@@ -46,6 +46,9 @@ $(document).ready(function(){
     		submitAction( "del" );	
 	  	});		  	
 	
+	//attachBrowseDialog( "searchBtn", function( obj ){ alert( obj.foodDesc ); } );
+	//attachUSDANutrient( "browseBtn", function( obj ){ alert( obj.foodDesc ); });
+	
 	}); 
 //************************************************//
 
@@ -55,7 +58,7 @@ function startup() {
 
 	showLoader();
 	
-	ajaxPost( "php/getJSON.php?table=foodElement", "No Message", "Error"); 
+	ajaxFoodPost( "php/getJSON.php?table=foodElement", "No Message", "Error" ); 
 
 	} //end of function
 
@@ -82,9 +85,9 @@ function submitAction( actionType ) {
 	
 		var func = function() {
 			var index = document.getElementById( "save" ).value;		
-			if( index == 0) ajaxPost( makeAddURL( index ), "The following food element was successfully added:<br>" + 
+			if( index == 0) ajaxFoodPost( makeAddURL( index ), "The following food element was successfully added:<br>" + 
 				foodDesc, "Error" );
-			   else ajaxPost( makeAddURL( index ), "The following food element was successfully edited:<br>" + 
+			   else ajaxFoodPost( makeAddURL( index ), "The following food element was successfully edited:<br>" + 
 				foodDesc, "Error" );
 			showLoader();
 			} //end of fucntion definition
@@ -108,7 +111,7 @@ function submitAction( actionType ) {
 		var func = function() {
 			var delURL = "php/deleteFoodElement.php?id="+$('#foodSelect option:selected').val();
 		
-			ajaxPost( delURL, "The following food element was successfully deleted:<br>" + 
+			ajaxFoodPost( delURL, "The following food element was successfully deleted:<br>" + 
 				foodElement.foodDesc, "Error" );
 			showLoader();
 			} //end of fucntion definition
@@ -171,7 +174,7 @@ function getFoodElement( id ) {
 //***********************************************************//
 //ajax posts made through this function
 //***********************************************************//	
-function ajaxPost( url, successMsg, errorMsg ) {
+function ajaxFoodPost( url, successMsg, errorMsg ) {
 
 	var params = {};
 	//how to add parameters

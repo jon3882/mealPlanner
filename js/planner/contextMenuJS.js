@@ -11,6 +11,7 @@
 			$.contextMenu({
 				selector: '.sq, .mealName', 
 				autoHide: false,
+				
 				positionSubmenu: function( $menu ) {
 				
 						$menu.css( "width", "80px" );
@@ -21,6 +22,7 @@
 								});
 				
 							},
+							
 				events: {
 				show : function(options){
             
@@ -42,6 +44,11 @@
 							name: "<div style='text-align:left;width:100%;padding-left: 8px'>Edit</div>",
 							icon: "edit",
 							isHtmlName: true,
+							disabled: function(key, opt) {
+								
+										if( opt.$trigger.attr('class').indexOf("mealName") >= 0 ) return true;
+			
+										},
 							callback: function(key, opt) {
 						
 											setMealIndex( opt.$trigger.attr('id') );
@@ -53,7 +60,7 @@
 							isHtmlName: true,
 							disabled: function(key, opt) {
 								
-										if( opt.$trigger.attr('class').includes("mealName") ) return true;
+										if( opt.$trigger.attr('class').indexOf("mealName") >= 0 ) return true;
 										if( mealSchedule[mealIndex].length == 0 ) {
 										return true;
 										}}, 
@@ -65,7 +72,7 @@
 							isHtmlName: true,
 							disabled: function(key, opt) {
 							
-										if( opt.$trigger.attr('class').includes("mealName") ) return true;
+										if( opt.$trigger.attr('class').indexOf("mealName") >= 0 ) return true;
 										if(mealSchedule[mealIndex].length == 0) {
 										return true;
 							
@@ -81,7 +88,7 @@
 					isHtmlName: true,
 					disabled: function(key, opt) {
 					if( clipboardData == "" ) return true;
-					if( opt.$trigger.attr('class').includes("mealName") ) return true;
+					if( opt.$trigger.attr('class').indexOf("mealName") >= 0)  return true;
 					}
 					, callback: function(key, opt) {
 						clipBoardFunctions( "paste" )
@@ -90,7 +97,7 @@
 					icon: "delete", 
 					isHtmlName: true,
 					disabled: function(key, opt) {
-					if( opt.$trigger.attr('class').includes("mealName") ) return true;
+					if( opt.$trigger.attr('class').indexOf("mealName") >= 0 ) return true;
 					if( mealSchedule[mealIndex].length == 0 ) {
 					return true;
 					}
@@ -229,10 +236,14 @@ function clipBoardFunctions( func ) {
 
 	if( func == "clear" ) {
 		
+		//alert( JSON.stringify( mealSchedule[mealIndex] ));
+		
 		pushUndoActions();
 		mealSchedule[mealIndex] = new Array();	
 		if( !undoActionsMealPlannerChangedState() ) undoActions.pop();
-		writePlanner( "workingDraft", function(data){ loadDatabaseData(true, false, false); });
+		writePlanner( "workingDraft", function(data){ 
+					
+		loadDatabaseData(true, false, false); });
 		
 		
 		} //end of if statement

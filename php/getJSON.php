@@ -12,8 +12,6 @@ include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["table"]) ) $tableName = $_GET["table"];
 
-$tableName = $sessionName.$tableName; 
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -24,10 +22,8 @@ if ($conn->connect_error) {
 $sortingSQL = "";
 if( $tableName == "customer" ) $sortingSQL = " ORDER BY customerLastName, customerFirstName";
 if( $tableName == "foodElement" ) $sortingSQL = " ORDER BY foodDesc";
-if( $tableName == "mealCustomer" ) $sortingSQL = " ORDER BY planName";
 
-$sql = "SELECT * FROM ".$tableName.$sortingSQL;
-
+$sql = "SELECT * FROM ".$tableName." WHERE userID=".$sessionName.$sortingSQL;
 
 $result = $conn->query($sql);
 

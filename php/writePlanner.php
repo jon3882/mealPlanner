@@ -31,9 +31,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-
-$sql = "DELETE FROM ".$sessionName."mealElement WHERE planName='".$plannerName."'";
+$sql = "DELETE FROM mealElement WHERE planName='".$plannerName."' AND userID=".$sessionName;
 
 $conn->query( $sql ) or die ( mysqli_error($conn) );
 
@@ -41,12 +39,12 @@ if( strpos($plannerData, ',') !== false) {
 
 foreach($meal as $mealItem) {
 
-
-	$sql = "INSERT INTO ".$sessionName."mealElement (planName, cell, servingSize, foodElementID)"." VALUES ('".
-					$plannerName."','".
+	$sql = "INSERT INTO mealElement (planName, userID, cell, servingSize, foodElementID)"." VALUES ('".
+					$plannerName."',".
+					$sessionName.",'".
 					$mealItem[0]."','".
 					$mealItem[1]."','".
-                                        $mealItem[2]."')";
+                    $mealItem[2]."')";
 	//print $sql;
 	$conn->query( $sql ) or die ( mysqli_error($conn) );
 
@@ -55,7 +53,7 @@ foreach($meal as $mealItem) {
 
 } //end of if statement
 
-$sql = "UPDATE ".$sessionName."mealplans SET mealLabels='".$labels."' WHERE planName='".$plannerName."'";
+$sql = "UPDATE mealplans SET mealLabels='".$labels."' WHERE planName='".$plannerName."' AND userID=".$sessionName;
 
 echo $sql;
 

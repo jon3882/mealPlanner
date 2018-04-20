@@ -20,13 +20,13 @@ if ($conn->connect_error) {
 }
 
 
-$sql = "DELETE FROM ".$sessionName."foodElement WHERE id = ".$foodID;
+$sql = "DELETE FROM foodElement WHERE id = ".$foodID. " AND userID = ".$sessionName;
 
 //print $sql;
 
 $conn->query( $sql ) or die ( mysqli_error($conn) );
 
-$sql = "DELETE FROM ".$sessionName."mealElement WHERE foodElementID = ".$foodID;
+$sql = "DELETE FROM mealElement WHERE id = ".$foodID. " AND userID = ".$sessionName;
 
 $conn->query( $sql ) or die ( mysqli_error($conn) );
 
@@ -34,7 +34,7 @@ $conn->query( $sql ) or die ( mysqli_error($conn) );
 //Creates JSON object from the foodElement table and returns it to the requestor.
 //**************************************************************************************//
 
-$sql = "SELECT * FROM ".$sessionName."foodElement ORDER BY foodDesc";
+$sql = "SELECT * FROM foodElement WHERE userID = ".$sessionName." ORDER BY foodDesc";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

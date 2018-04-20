@@ -12,6 +12,9 @@
 
 //*****************Messagebox Javascript*******************************//	
 
+//Global variable holds inital execution function
+var initFunction;
+
 //***********************************************************//
 //Shows the loader message while waiting for AJAX requests
 //to return.
@@ -52,6 +55,9 @@ function hideLoader() {
 //***********************************************************//	
 function displayMessageToUser( msgQ, msgI, msgType, okFunction, cancelFunction ) {
 
+	setMsgBoxWidth( "300px" );
+	msgBoxOKBtnDisable( false );
+
 	document.getElementById( "msgQuestion" ).innerHTML = msgQ;
 	document.getElementById( "msgItem" ).innerHTML = msgI;
 
@@ -65,6 +71,8 @@ function displayMessageToUser( msgQ, msgI, msgType, okFunction, cancelFunction )
 	$('#msgOK').unbind('click');
 	$('#msgCancel').unbind('click');
 
+	initFunction = okFunction;
+	
 	$("#msgOK").click( okFunction );
 	$("#msgCancel").click( cancelFunction );
 	
@@ -89,3 +97,70 @@ function hideMessageToUser() {
 
 	} //end of function
 //***********************************************************//
+
+//***********************************************************//
+//Enables and disables the OK button using a boolean argument.
+//***********************************************************//
+function msgBoxOKBtnDisable( requestedState ) {
+	
+	if( requestedState ) {
+		$("#msgOK").prop("disabled",true);
+		$("#msgOK").fadeTo(0, 0.5);
+		} //end of if statement
+		
+	if( !requestedState ) {
+		$("#msgOK").prop("disabled",false);
+		$("#msgOK").fadeTo(0, 1);
+		} //end of if statement
+
+	} //end of function 
+	
+//***********************************************************//
+//Changes the width of the displayed message box.
+//***********************************************************//
+function setMsgBoxWidth( w ) {
+	
+	$(".messageBox").css( "width", w );
+	
+	} //end of function
+
+//***********************************************************//
+//Changes the function executed when the OK button is pressed.
+//***********************************************************//
+function msgBoxSetOKFunction( func ) {
+	
+	$('#msgOK').unbind('click');	
+	$("#msgOK").click( func );
+	
+	} //end of function
+
+//***********************************************************//
+//Retrieves the initial function set for the msgbox.
+//***********************************************************//	
+function msgBoxGetInitFunction() {
+	
+	return initFunction;
+	
+	} //end of function
+	
+function msgBoxCancelBtnHide( state ) {
+	
+	if( state )  $("#msgCancel").hide(); 
+	else $("#msgCancel").show(); 
+	
+	} //end of if statement
+	
+function msgBoxOKBtnSize( percent ) {
+	
+	$("#msgOK").css( "width", percent );
+		
+	} //end of if statement
+	
+//***********************************************************//
+//Sets the text displayed on the OK button.
+//***********************************************************//	
+function msgBoxSetOKButtonCaption( btnText ) {
+
+	document.getElementById( "msgOK" ).innerHTML = btnText;
+
+	} //end of function 

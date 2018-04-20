@@ -3,7 +3,9 @@ session_start();
 // This php file contains functions to be used to edit a 
 // user account from the settings page
 
-		
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);		
 
 
 //function will change the users first and last name and
@@ -18,8 +20,8 @@ function editName($newFirst, $newLast){
 	    die("Connection failed: " . $conn->connect_error);
 			}
 
-	$sql = "UPDATE authorizedUsers SET firstName='".$newFirst."',
-	lastName='".$newLast."' WHERE id=".$_SESSION["validUser"];
+	$sql = "UPDATE authorizedUsers SET firstName='".$newFirst."',lastName='".
+		$newLast."' WHERE id=".$_SESSION["validUser"];
 	
 	$result = $conn->query( $sql );
 
@@ -115,19 +117,17 @@ if( isset($_GET["delete"]) ){
 	if (!$conn) {
 	    die("Connection failed: " . $conn->connect_error);
 			}
-
-	$table1 = $userID."_foodElement";
-	$table2 = $userID."_mealElement";
-	$table3 = $userID."_mealplans";
-
-	$sql =  "DROP TABLE ".$table1.", ".$table2.", ".$table3;
-
-	$result = $conn->query( $sql );
-
-	$sql = "DELETE FROM authorizedUsers WHERE id='".$userID."'";
-
+			
+	$sql = "DELETE FROM authorizedUsers WHERE id=".$sessionName;
 	$result = $conn->query( $sql );	
-	
+	$sql = "DELETE FROM foodElement WHERE userID=".$sessionName;
+	$result = $conn->query( $sql );
+	$sql = "DELETE FROM mealElement WHERE userID=".$sessionName;
+	$result = $conn->query( $sql );
+	$sql = "DELETE FROM mealPlans WHERE userID=".$sessionName;
+	$result = $conn->query( $sql );
+	$sql = "DELETE FROM favorites WHERE userID=".$sessionName;
+	$result = $conn->query( $sql );
 }
 
 ?>

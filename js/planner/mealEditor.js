@@ -9,6 +9,7 @@
 //opens dialogue
 function openMealDialogue(){
 	showDialogueBox();
+	populateFoodCategories();
 	populateFoodListBox();
 	updateTotals(); //creates total box
 	finalMeal = []; //empties final meal array for new meal
@@ -138,6 +139,57 @@ function getFoodElement(id){
 	} //end of function
 //***********************************************//
 	
+function populateFoodCategories() {
+	
+	var macroTypes = buildArrayOfMacroType();
+	var listboxItems = "";
+	
+	for( var i = 0; i<macroTypes.length; i++ ) {
+	
+		if( i == 0 ) var begOpt = "<option selected value=\"";
+		else begOpt = "<option value=\"";
+		
+		//organizes list with food type selected
+
+		listboxItems += begOpt +"\">"+ macroTypes[i]
+							+"</option>";	
+		} //end of for loop
+		
+		document.getElementById("foodType").innerHTML = listboxItems;
+	
+	} //end of function
+
+function buildArrayOfMacroType() {
+	
+	var macroTypes = [];
+	var count = 0;
+
+	for(var i = 0; i< foods.length; i++){
+		
+		if( count == 0 ){
+			macroTypes[count] = foods[i].macroType;
+			count++;
+			} //end of if statement
+		else {
+				var addMacroTypeToArray = true;
+				for( var k = 0; k<macroTypes.length; k++ ) {
+					
+					if( macroTypes[k] == foods[i].macroType ) addMacroTypeToArray = false;
+					
+					} //end of for loop
+					
+				if( addMacroTypeToArray ) {
+					//alert( foods[i].macroType );
+					macroTypes[count] = foods[i].macroType;
+					count++;
+					}
+			
+				} //end of if statement
+	
+			} //end of for loop	
+	return macroTypes.sort();
+	
+	} //end of function
 	
 //***********************************************//
 ///Functions that organize food objects and
@@ -181,6 +233,7 @@ function organizeFoods() {
 	
 	} //end of function
 //***********************************************//
+
 
 
 //***********************************************//
@@ -424,8 +477,11 @@ function populateFinalMeal(){
 	pushUndoActions();
 	mealSchedule[ mealIndex ] = finalMeal;
 	if( !undoActionsMealPlannerChangedState() )	undoActions.pop();	 
-	populateCalendar();
-	updatePlannerTotals();
+	writePlanner( "workingDraft", function(data){ loadDatabaseData(true, false, false); });
+	
+	
+	//populateCalendar();
+	//updatePlannerTotals();
 
 	} //end of function
 //***********************************************//
