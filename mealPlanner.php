@@ -5,7 +5,7 @@
 //Interface for meal planner webpage.  Login protected.
 //***************************************************************
 
-include('../../private/loginProtect.php');
+include('../private/loginProtect.php');
 
 ?>
 
