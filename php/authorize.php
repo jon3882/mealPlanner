@@ -4,7 +4,7 @@ session_start();
 function authorizeUser($userid, $userPassword){
 
 // test to make sure git pull is working on server
-include('../../private/connectDB.php');
+include('../private/connectDB.php');
 	$conn = new mysqli($servername, $username, $password, $dbname);
 		// Check connection
 		if ($conn->connect_error) {
