@@ -48,7 +48,19 @@ if( isset($_GET["foodID"]) && isset($_GET["foodTable"]) ) {
 //Creates JSON object from favorites table and returns it to the requestor.
 //**************************************************************************************//
 
-	$sql = "SELECT * FROM favorites WHERE userID = ".$sessionName;
+	$sql = "(SELECT favorites.foodTable,foodelement.id,foodelement.macroType,foodelement.cal,".
+		"foodelement.protein,foodelement.carb, foodelement.fat, foodelement.foodDesc,".
+		" foodelement.servingSize,foodelement.measurement,foodelement.shortDesc".
+		" FROM favorites INNER JOIN foodelement ON favorites.foodID = foodelement.id".
+		" WHERE favorites.userID = ".$sessionName." AND favorites.foodTable = 'user')".
+		" UNION ALL".
+		" (SELECT favorites.foodTable,usdanutrientdb.id,usdanutrientdb.macroType,usdanutrientdb.cal,".
+		" usdanutrientdb.protein,usdanutrientdb.carb, usdanutrientdb.fat, usdanutrientdb.foodDesc,".
+		" usdanutrientdb.servingSize,usdanutrientdb.measurement,usdanutrientdb.shortDesc".
+		" FROM favorites INNER JOIN usdanutrientdb ON favorites.foodID = usdanutrientdb.id".
+		" WHERE favorites.userID = ".$sessionName." AND favorites.foodTable = 'usda') ORDER BY foodDesc";
+		
+	//$sql = "SELECT * FROM favorites WHERE userID = ".$sessionName;
 	$result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

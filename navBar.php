@@ -38,15 +38,15 @@ else{
  	<!-- Quick links for meal planner -->
 	
 	<td class="linkIcon" style="">
-			<a href="#" title="Search for food item."><img style="" src="img/search.png"></a>
+			<a id="browseUSDA" href="#" title="Search for food item."><img style="" src="img/search.png"></a>
 	</td>
 	
 	<td class="linkIcon" style="">
-			<a href="#" title="Save meal plan."><img style="" src="img/save.png"></a>
+			<a id="saveLink" href="#" title="Save meal plan."><img style="" src="img/save.png"></a>
 	</td>
 	
 	<td class="linkIcon" style="">
-			<a href="#" title="Open meal plan."><img style="" src="img/open.png"></a>
+			<a id="openLink" href="#" title="Open meal plan."><img style="" src="img/open.png"></a>
 	</td>
  	
 	<td class="linkIcon" style="">

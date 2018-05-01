@@ -7,7 +7,7 @@
 //must be set for file to function.
 //**************************************************************************************//
 
-include('../../../private/connectDB.php');
+include('../../private/connectDB.php');
 include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["macroType"]) ) $macroType = $_GET["macroType"];

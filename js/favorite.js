@@ -11,23 +11,16 @@ var favoriteObj;
 //in the favorites list or not.  The state of
 //of the food element is toggled.
 //***********************************************//
-function changeFavoriteStatus( container, id, foodTable ) {
+function changeFavoriteStatus( id, foodTable ) {
 	
-		document.getElementById( container + id + foodTable ).innerHTML = "<div><span style=\"width:100%;\" class=\"fa-stack fa-1x\">"
-				+"<i class=\"fa fa-spinner fa-spin fa-stack-1x fa-fw\"" 
-				+" style=\"width:100%;color:#4682B4\"></i><span></div>";
+		$( "#fav"+foodTable+id ).attr("src", "img/smallLoader.gif");
 	
 		ajaxPost( "php/favorite.php?foodID="+id+"&foodTable="+foodTable, "No Message", "Error retriving favorites database.", 
 		function(data) {
 	
-			document.getElementById( container + id + foodTable ).innerHTML = "<div class=\"userDefinedHover\"><span class=\"fa-stack fa-1x\"><i class=\"fa fa-star-o fa-stack-2x\"  aria-hidden=\"true\" style=\"color:#4682B4\"></i></span></div>";
-	
-			if( data != "0 results" ) { 
-	
-				favoriteObj = jQuery.parseJSON( data );		
-				writeFavorites( container, foodTable );
-				
-				} //end of if statement
+			favoriteObj = null;
+			if( data != "0 results" ) favoriteObj = jQuery.parseJSON( data );
+			writeFavorites();
 		
 		});
 	
@@ -40,12 +33,9 @@ function getFavorites( containerPrefix, foodTable) {
 	ajaxPost( "php/favorite.php", "No Message", "Error retriving favorites database.", 
 		function(data) {
 	
-	if( data != "0 results" ) { 
-	
-		favoriteObj = jQuery.parseJSON( data );
-		writeFavorites( containerPrefix, foodTable );
-		
-		} //end of if statement
+	favoriteObj = null;
+	if( data != "0 results" ) favoriteObj = jQuery.parseJSON( data );
+	writeFavorites();
 	
 		});
 	
@@ -56,19 +46,19 @@ function getFavorites( containerPrefix, foodTable) {
 //star (default).  To gold star if the food item
 //is already a favorite. 
 //***********************************************//
-function writeFavorites( containerPrefix, foodTable ) {
+function writeFavorites() {
+	
+	$(".favoriteIcon").attr("src", "img/notFavorite.png");
+	
+	if( favoriteObj != null ) {
 	
 	for( var i =0; i<favoriteObj.length; i++ ) {
 		
-		if( document.getElementById( containerPrefix + favoriteObj[i].foodID + foodTable ) != null ) {
-		
-			document.getElementById( containerPrefix + favoriteObj[i].foodID + foodTable ).innerHTML = "<div class=\"userDefinedHover\"><span class=\"fa-stack fa-1x\">"+
-			"<i class=\"fa fa-star fa-stack-2x\" style=\"color:#ffff4d\"></i>"+
-			"<i class=\"fa fa-star-o fa-stack-2x\" style=\"color:#4682B4\"></i></div>"+
-			"</span>";
-				
-			} //end of if statement
-		
+		$( "#favuser"+favoriteObj[i].id ).attr("src", "img/favorite.png");
+		$( "#favusda"+favoriteObj[i].id ).attr("src", "img/favorite.png");
+
 		} //end of for loop
+		
+		} //end of if statement
 	
 	} //end of function

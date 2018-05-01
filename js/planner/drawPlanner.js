@@ -78,7 +78,7 @@ function populateCalendar() {
 
 				
 				mealFoodList = mealFoodList + 
-					"<table><tr><td>&#8226&nbsp</td><td>" +
+					"<table><tr><td style='padding-left:2px'>&#8226&nbsp</td><td>" +
 					mealSchedule[i][k].foodDesc +
 					" (" + mealSchedule[i][k].servingSize + " " + mealSchedule[i][k].measurement + ")" + 
 					"</td></tr></table>";

@@ -14,11 +14,20 @@ include('../private/loginProtect.php');
 <head>
 
 <!-- ***Included files*************************************************************** -->
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="resources/bootStrapSelect/dist/js/bootstrap-select.js"></script>
+<link rel="stylesheet" href="resources/bootStrapSelect/dist/css/bootstrap-select.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+
 <script src="resources/html2canvas.js"></script>
 <script src="js/planner/plannerJavaScript.js"></script> 
-<script src="js/planner/mealEditor.js"></script>
+
 <script src="js/messageBox.js"></script>
 <script src="js/usdaSearch.js"></script>
 <script src="js/planner/contextMenuJS.js"></script>
@@ -28,10 +37,17 @@ include('../private/loginProtect.php');
 <script src="js/planner/pdfJS.js"></script>
 <script src="js/planner/drawPlanner.js"></script>
 <script src="js/planner/plannerFileOps.js"></script>
+<script src="js/usdaSearch.js"></script> 
+<script src="js/favorite.js"></script> 
+<script src="js/browseFood.js"></script>
+
+
 <script src="resources/contextMenu/jquery.contextMenu.js" type="text/javascript"></script>
 <link rel="stylesheet" href="resources/contextMenu/jquery.contextMenu.css">
 <link rel="stylesheet" href="css/mealPlannerStyle.css">
 <link rel="stylesheet" href="css/messageBoxStyle.css">
+<link rel="stylesheet" href="css/foodStyle.css">
+
 <!-- ******************************************************************************** -->
 
 <title>Meal Planner</title>	
@@ -207,8 +223,8 @@ Protein:<br>
 		<button class="plannerBtns" id="add" onclick="insertFoodFromSelect()">Add Food</button>
 	</div>
 	<div class="rightSide">
-		<span id="mealID">Monday Breakfast</span>
-		<table id="meal">
+		<span id="mealID-1">Monday Breakfast</span>
+		<table id="meal-1">
 			<thead>
 			<tr>
 				<th>Food Name</th>
@@ -220,11 +236,11 @@ Protein:<br>
 				<th>Delete</th>
 			</tr>
 			</thead>
-			<tbody id="tbody">			
+			<tbody id="tbody-1">			
 			</tbody>			
 		</table>
 		
-		<table id="totals">
+		<table id="totals-1">
 			<tr>
 				<th >Meal Totals</th>
 				<th>Calories</th>
@@ -245,7 +261,7 @@ Protein:<br>
 
 <br>
 
-
+<input type="file" id="file-input" style="display:none;" />
 
 </body>
 

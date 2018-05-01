@@ -1,10 +1,10 @@
 /****Styling for navigation bar*********/
 
-a{ color:white };
+a:not(.downloadLink){ color:white };
 
 #navbar table tr td:not(#currentPage){
   
-  
+ 
 }
 
 #navbar li a:hover:not(#currentPage):not(.logoutIcon){
@@ -35,6 +35,7 @@ a{ color:white };
   background-color: #4682B4;
   border-collapse: collapse;
   border-width: 0px;
+  box-sizing: content-box;
 }
 
 #navbar table tr td:not(.logoutIcon):not(.linkIcon){
@@ -46,10 +47,12 @@ a{ color:white };
 	
  .link {
 	width:150px;
+	box-sizing: content-box;
 	}
 
 .linkIcon {
 	width:60px;
+	box-sizing: content-box;
 	}	
 
 	

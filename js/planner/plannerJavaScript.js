@@ -47,9 +47,13 @@ $(document).ready(function(){
 	
 	//Attaches a click event to the pdf link. Executed
 	//function is defined in pdfJS.js
-	$(document).on('click', '#pdfLink', function(){
-		createPDF();
-		});	        
+	//$(document).on('click', '#pdfLink', function(){
+	//	createPDF();
+	//	});	        
+		
+	//attachBrowseDialog( "searchBtn", function( obj ){ alert( obj.foodDesc ); } );
+	//attachUSDANutrient( "browseBtn", function( obj ){ alert( obj.foodDesc ); });	
+			
 	}); //end of document ready function 
 //***********************************************//
 
@@ -63,7 +67,28 @@ function attachMealPlannerEventHandlers() {
 	$( ".mealName" ).unbind();	//titles of meal planner meals
 	$( ".mealModBtn" ).unbind(); //buttons used in the meal planner modfication window
 	$('#trashLink').unbind(); //button used to clear the meal planner
+	$('#saveLink').unbind(); //button used to save the meal planner
+	$('#openLink').unbind(); //button used to open the meal planner
+	$('#file-input').unbind(); //button used to select the meal plan file.
+	$('#browseUSDA').unbind(); //button used to find a USDA food.
 	
+	
+	$('#browseUSDA').click(function(e) {
+		browseDialog( function( obj ){ alert( obj.foodDesc );}, null);
+		});
+	
+	$("#openLink").on('click', function(e){
+		e.preventDefault();
+        $("#file-input:hidden").trigger('click');
+		});
+	
+	$('#file-input').change(function(e) {
+		readSingleFile( e );
+		});
+	
+	$('#saveLink').click(function(){
+		savePlanner( selectedPlan );
+		});
 	
 	$('#trashLink').click(function(){
 		newPlanner( selectedPlan );
@@ -242,7 +267,52 @@ function attachMealPlannerEventHandlers() {
 		} //end of function 
 //***********************************************//
 
+	
+//***********************************************//
+//
+//***********************************************//
+function readSingleFile(e) {
+  var file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    loadContents(contents);
+  };
+  reader.readAsText(file);
+}
+//***********************************************//
+
+
+//***********************************************//
+//
+//***********************************************//
+function loadContents(contents) {
+//check if JSON is correct
+//load JSON
+//refresh
+  alert( contents );
+}
+//***********************************************//
+
+
+//***********************************************//
+//
+//***********************************************//
+function savePlanner( selPlanner ) {
 		
+		displayMessageToUser("The following files are available for download." + 
+		'<br> - <a href="#" class="downloadLink">Data File</a> - <br>(Used to load meal plan at a later date)'+
+		'<br> - <a href="#" class="downloadLink">Formatted Copy</a> - <br>(Used to load into Google Sheets)', "", "ok", function() {
+		hideMessageToUser();
+		}, hideMessageToUser);
+		
+		};	
+//***********************************************//
+
+
 //***********************************************//
 //Clears the contents of a selected planner and
 //writes the empty cells to the database.

@@ -9,7 +9,7 @@
 //elements associated with the meal plan and then writes the new data.
 //**************************************************************************************//
 
-include('../../../private/connectDB.php');
+include('../../private/connectDB.php');
 include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["name"]) ) $plannerName = $_GET["name"];
