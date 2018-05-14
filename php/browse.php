@@ -4,7 +4,9 @@
 //PHP that is accessed through AJAX requests.  PHP file provides the function of 
 //**************************************************************************************//
 
-include('../../../private/connectDB.php');
+error_reporting(E_ERROR | E_PARSE);
+
+include('../../private/connectDB.php');
 include('phpFunctionLoginProtect.php');
 
 if( isset($_GET["category"]) ) $category = $_GET["category"];

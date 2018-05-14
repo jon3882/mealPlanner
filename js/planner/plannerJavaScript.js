@@ -37,13 +37,15 @@ $(document).ready(function(){
 	//functions called are defined in contextMenuJS.js
 	$(document.body).on("contextmenu:focus", ".context-menu-item", 
     function(e){ 
-        var contextFocus = $(this).closest('li').find('div').html();		
+		var contextFocus = $(this).closest('li').find('div').html();		
 		var t = mealIndex;
 		if( t < 0 ) t = -mealIndex;
 		unHighlight( getHighLightID( t, "row") );
 		doHighlight( contextFocus, mealIndex);
 		
 		}); //end of function	
+		
+	
 	
 	//Attaches a click event to the pdf link. Executed
 	//function is defined in pdfJS.js
@@ -71,10 +73,10 @@ function attachMealPlannerEventHandlers() {
 	$('#openLink').unbind(); //button used to open the meal planner
 	$('#file-input').unbind(); //button used to select the meal plan file.
 	$('#browseUSDA').unbind(); //button used to find a USDA food.
-	
+	$('.contextAction').unbind();//buttons for renaming, adding, and deleting meals from the context menu
 	
 	$('#browseUSDA').click(function(e) {
-		browseDialog( function( obj ){ alert( obj.foodDesc );}, null);
+		
 		});
 	
 	$("#openLink").on('click', function(e){
@@ -99,20 +101,15 @@ function attachMealPlannerEventHandlers() {
 	
 			var day = this.id.substring(0,3);
             var meal = this.id.substring(3,4);
-            document.getElementById( "mealID" ).innerHTML = getMealName(day, meal);
+            //document.getElementById( "mealID" ).innerHTML = getMealName(day, meal);
+			
+			
                    	
             setMealIndex(this.id);
-            if( mealSchedule[mealIndex] != undefined ) {
-                   	
-                 for( var k = 0; k<mealSchedule[mealIndex].length; k++ ) {  		
-                   	insertFood( mealSchedule[mealIndex][k].id, mealSchedule[mealIndex][k].servingSize );	
-                   	} //end for loop
-                   	
-                   	updateMacros();
-                   	
-                } //end of if statement         	
-                   	
-			openMealDialogue();
+			
+			openMealDialogue( getMealName(day, meal) );      	
+          
+			
 			});
 		
 	$( ".sq" ).on("mouseover", 
@@ -264,6 +261,13 @@ function attachMealPlannerEventHandlers() {
 	
 			});	
 				
+				
+		$( ".contextAction" ).on("mouseover", 
+		function() { this.src = $( this ).attr("data-select"); });
+		
+		$( ".contextAction" ).on("mouseout", 
+		function() { this.src = $( this ).attr("data-unselect"); });
+		
 		} //end of function 
 //***********************************************//
 
@@ -274,6 +278,7 @@ function attachMealPlannerEventHandlers() {
 function readSingleFile(e) {
   var file = e.target.files[0];
   if (!file) {
+	  //alert( "error" );
     return;
   }
   var reader = new FileReader();
@@ -290,10 +295,17 @@ function readSingleFile(e) {
 //
 //***********************************************//
 function loadContents(contents) {
+	var obj = jQuery.parseJSON( contents );
+	mealTitle = obj.mealLabels.split(",");
+	mealSchedule = obj.data;
+	writePlanner( "workingDraft", function(data){ 
+		document.getElementById('file-input').value = null;
+		loadDatabaseData(true, false, false); });
+	
 //check if JSON is correct
 //load JSON
 //refresh
-  alert( contents );
+//alert( contents );
 }
 //***********************************************//
 
@@ -303,11 +315,19 @@ function loadContents(contents) {
 //***********************************************//
 function savePlanner( selPlanner ) {
 		
-		displayMessageToUser("The following files are available for download." + 
-		'<br> - <a href="#" class="downloadLink">Data File</a> - <br>(Used to load meal plan at a later date)'+
-		'<br> - <a href="#" class="downloadLink">Formatted Copy</a> - <br>(Used to load into Google Sheets)', "", "ok", function() {
-		hideMessageToUser();
-		}, hideMessageToUser);
+		//add functionality to save online using selPlanner variable
+		
+		savePlannerToFile( function( data ) {
+		
+			displayMessageToUser("The following files are available for download." + 
+				'<br> - <a href="php/downloadMeal.php" class="downloadLink">Data File</a> - <br>(Used to load meal plan at a later date)'+
+				'<br> - <a href="#" class="downloadLink">Formatted Copy</a> - <br>(Used to load into Google Sheets)', "", "ok", function() {
+				hideMessageToUser();
+				}, hideMessageToUser);
+				
+				//alert( data );
+		
+				}) //end of function
 		
 		};	
 //***********************************************//
@@ -342,19 +362,21 @@ function loadDatabaseData(isLoadedFood, isLoadedMeal, isLoadedPlan) {
 	
 	if( !isLoadedFood ) ajaxPost( "php/getJSON.php?table=foodElement", "No Message", "Error", function(data) {
 		
+		//alert( data );
 		if( data != "0 results" ) { 
+			data = data.replace(/\'/g, "" );
 			foods = jQuery.parseJSON( data );
 			returnFlags[0] = true;
 			} else {
 			returnFlags[0] = true;	
 			
 			}});
-			
-	if( !isLoadedMeal ) ajaxPost( "php/getJSON.php?table=mealElement", "No Message", "Error", function(data) {
 		
-		
+	if( !isLoadedMeal ) ajaxPost( "php/loadPlanner.php", "No Message", "Error", function(data) {
 		
 		if( data != "0 results" ) { 
+			data = data.replace(/\'/g, "" );
+			//alert( data );
 			meals = jQuery.parseJSON( data ); 	
 			returnFlags[1] = true;
 			} else {
@@ -407,16 +429,7 @@ function checkLoadStatus() {
 						
 				$("#msgContainer").hide();
 				hideLoader();
-
-				mealSchedule = new Array(7*mealTitle.length);
-				mealScheduleTemp = new Array(7*mealTitle.length);
-				
-				loadMealArray( "workingDraft", mealSchedule.length );  
-				drawPlanner();
-				attachMealPlannerEventHandlers();
-				populateCalendar();
-				updatePlannerTotals();
-			
+				refreshPlanner();		
 							
 		} else {
 				
@@ -427,6 +440,23 @@ function checkLoadStatus() {
 	} //end of if statement
 //***********************************************//
 
+
+//***********************************************//
+//
+//***********************************************//
+function refreshPlanner() {
+	
+		mealSchedule = new Array(7*mealTitle.length);
+		mealScheduleTemp = new Array(7*mealTitle.length);
+		loadMealArray( "workingDraft", mealSchedule.length );  
+		drawPlanner();
+		attachMealPlannerEventHandlers();
+		populateCalendar();
+		updatePlannerTotals();
+	
+	} //end of function
+//***********************************************//
+	
 //***********************************************//
 //Function loads the global variables and populates
 //the meal planer with the current data.
@@ -507,10 +537,16 @@ function addMealAbove( i, mealLabel ) {
 
 	var oldLabelLength = mealTitleTemp.length;
 	mealTitleTemp.splice(i, 0, mealLabel);
-			
+					
 	for( var k = 0; k<7; k++ ) {	
 		var index = (6*oldLabelLength)-(k*oldLabelLength) + parseInt(i);
 		mealScheduleTemp.splice(index, 0, new Array()); 
+		} //end of for loop
+			
+	for( var i2 = 0; i2<mealScheduleTemp.length; i2++ ) {
+		for( var k2 = 0; k2<mealScheduleTemp[i2].length; k2++ ) {
+			mealScheduleTemp[i2][k2].cell = i2;
+			} //end of for loop
 		} //end of for loop
 
 	} //end of function
@@ -519,7 +555,7 @@ function addMealAbove( i, mealLabel ) {
 	
 //***********************************************//	
 //Adds a row (meal) below the row of the selected
-//index
+//index.
 //***********************************************//
 function addMealBelow( i, mealLabel ) {
 
@@ -531,6 +567,14 @@ function addMealBelow( i, mealLabel ) {
 		var index = (6*oldLabelLength)-(k*oldLabelLength) + parseInt(i);
 		mealScheduleTemp.splice(index, 0, new Array()); 
 		} //end of for loop
+		
+	for( var i2 = 0; i2<mealScheduleTemp.length; i2++ ) {
+		for( var k2 = 0; k2<mealScheduleTemp[i2].length; k2++ ) {
+			mealScheduleTemp[i2][k2].cell = i2;
+			} //end of for loop
+		} //end of for loop
+	
+	
 	} //end of function
 
 //***********************************************//
@@ -548,6 +592,12 @@ function deleteMeal( i ) {
 		var index = (6*oldLabelLength)-(k*oldLabelLength) + parseInt(i);
 		mealScheduleTemp.splice(index, 1); 
 			} //end of for loop	
+			
+	for( var i2 = 0; i2<mealScheduleTemp.length; i2++ ) {
+		for( var k2 = 0; k2<mealScheduleTemp[i2].length; k2++ ) {
+			mealScheduleTemp[i2][k2].cell = i2;
+			} //end of for loop
+		} //end of for loop
 
 	} //end of function	
 //***********************************************//
@@ -606,7 +656,8 @@ function loadMealArray( mealName, mealPlanSize ) {
 	
 		var index = parseInt( meals[i].cell );
 	
-		var f = getFoodElement( meals[i].foodElementID );	
+		var f = meals[i];
+		//var f = getFoodElement( meals[i].foodElementID );	
 		
 		if( f != undefined && meals[i].planName == mealName ) {
 			
@@ -614,7 +665,7 @@ function loadMealArray( mealName, mealPlanSize ) {
 			if( mealScheduleTemp[index] == undefined ) mealScheduleTemp[index] = new Array();
 			
 			var foodElement = new food(f.id,f.macroType, f.cal, f.protein, 
-			f.carb, f.fat, f.foodDesc, meals[i].servingSize, f.measurement, parseFloat(meals[i].servingSize/f.servingSize) );
+			f.carb, f.fat, f.foodDesc, f.servingSize, f.measurement, f.multiplier, f.db, f.cell);
 	
 			//alert( index );
 	

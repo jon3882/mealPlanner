@@ -9,7 +9,7 @@
 //***********************************************//
 function writePlanner( plannerName, func ) {
 
-	var menuItems = getPlannerItems();
+	var menuItems = JSON.stringify( mealSchedule ).replace(/&/g,"and");
 	
 	var labels = "";
 	
@@ -20,8 +20,12 @@ function writePlanner( plannerName, func ) {
 		
 		} //end of for loop 
 		
+		//alert( menuItems );
+		
 	ajaxPost( "php/writePlanner.php?name="+plannerName+"&mealLabels="+labels+"&data="+menuItems, "No Message", 
 		"Error", function(data) {
+		
+			//alert( data );
 		
 			func( data );
 			
@@ -30,6 +34,30 @@ function writePlanner( plannerName, func ) {
 	} //end of function
 //***********************************************//
 
+function savePlannerToFile( func ) {
+
+	var menuItems = JSON.stringify( mealSchedule ).replace(/&/g,"and");
+	
+	var labels = "";
+	
+	for( var i = 0; i<mealTitle.length; i++ ) {
+		
+		if( labels == "" ) labels = mealTitle[i];
+		else labels = labels + "," + mealTitle[i];
+		
+		} //end of for loop 
+		
+	ajaxPost( "php/savePlannerToFile.php?mealLabels="+labels+"&data="+menuItems, "No Message", 
+		"Error", function(data) {
+		
+			func( data );
+			
+			});
+
+	} //end of function
+
+
+//not used
 //***********************************************//
 //Function creates string that is passed to
 //writePlanner.php as the data variable.  The

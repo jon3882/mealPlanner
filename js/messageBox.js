@@ -81,6 +81,10 @@ function displayMessageToUser( msgQ, msgI, msgType, okFunction, cancelFunction )
 	$(".content-wrapper").fadeTo(.5, .3);
 	$(".content-wrapper *").prop('disabled',true); 
 	$(".messageBox").fadeIn();
+	
+	$('#msgContainer').click(function(e){
+		e.stopPropagation();
+		});
 
 	} //end of function
 //***********************************************************//

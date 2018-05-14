@@ -31,7 +31,7 @@ function attachBrowseDialog( elementID, selectFunc ) {
 //given focus and the cursor moved to the end of the
 //input.
 //***********************************************//
-function browseDialog( func, el ) {
+function browseDialog( func, mealTitle ) {
 	
 	//execute in ajax request callback fill categories global variable
 	ajaxPost( "php/browse.php", "No Message", "Error retriving categories.", 
@@ -44,26 +44,27 @@ function browseDialog( func, el ) {
 	var browseHTML = "<select id=\"foodBrowse\" name=\"foodBrowseName\" " +
 	"onchange='requestUpdateBrowseResults( this )'"+
 	" style=\"width:90%;\"></select>"+
-	createBrowseResultsHTML( el );
-	
+	createBrowseResultsHTML( null );
 		
-	displayMessageToUser( "<h4>Browse - USDA Nutrient Database</h4>"+
+	displayMessageEditor( "<h4>Browse - USDA Nutrient Database</h4>"+
 	"<div style=\"font-size: 80%;\"><span style\"\">POWERED BY </span>U.S. Department of Agriculture,"+
 	" Agricultural Research Service. 20xx. USDA National Nutrient"+
 	" Database for Standard Reference, Release . Nutrient Data Laboratory Home Page, "+
 	"http://www.ars.usda.gov/nutrientdata<div>", '<div class="row"><div id="foodSelectionWindow" class="col-sm-8">'+
-		browseHTML+'</div><div id="mealStatusWindow" class="col-sm-4">'+ displayCellData() +'</div>', "okc",
+		browseHTML+'</div><div id="mealStatusWindow" class="col-sm-4">'+ displayCellData( mealTitle ) +'</div>', "okc",
 	function() { 
 	
-		var selFood = $(".searchResultSelect").attr("id");
-		func( bResults[selFood] );	
+		//var selFood = $(".searchResultSelect").attr("id");
+		pressOKMealEdit( func, mealTitle );
 	
 		} //end of function
-	, hideMessageToUser);
+	, function() { pressCancelMealEdit(); }  ); 
 	
-	setMsgBoxWidth( "650px" );
+	//pressCancelMealEdit
+	
+	//setMsgBoxWidth( "650px" );
 		
-	msgBoxOKBtnDisable( true );
+	//msgBoxOKBtnDisable( true );
 	
 	document.getElementById("foodBrowse").innerHTML = writeDropDown( "No Category Selected." );
 	attachMealEditorEventHandlers();
@@ -73,10 +74,10 @@ function browseDialog( func, el ) {
 	}//end of function
 //***********************************************//
 
-function displayCellData(){
+function displayCellData( mealTitle ){
 	
  	var temp = '<div>'+
-		'<span id="mealID">Monday Breakfast</span>'+
+		'<span id="mealID">' + mealTitle + '</span>'+
 		'<table id="meal">'+
 			'<thead>'+
 			'<tr>'+
@@ -92,7 +93,7 @@ function displayCellData(){
 				'<th class="expandVersion">Delete</th>'+
 			'</tr>'+
 			'</thead>'+
-			'<tbody id="tbody">'+			
+			'<tbody id="mealBody">'+			
 			'</tbody>'+			
 		'</table>'+
 		'<table id="mealTotals">'+
@@ -264,6 +265,8 @@ function writeFavoriteResults( stringToMatch, temp ) {
 	ajaxPost( "php/favorite.php", "No Message", "Error retriving favorites database.", 
 		function(data) {
 			
+		//alert( data );
+	
 	
 		if( data == "0 results" ) document.getElementById( "browseRC" ).innerHTML = makeEmptyResults();
 			else {
@@ -391,7 +394,8 @@ function makeUSDAListing( foodListing, temp ) {
 						" , '"+ fTable +"' )\"><div class=\"userDefinedHover\"><span class=\"fa-stack fa-1x\">"+
 						"<i class=\"fa fa-star-o fa-stack-2x\"  aria-hidden=\"true\" style=\"color:#4682B4\"></i><span>"+
 						"</td>;*/
-							
+	foodListing.db = "usda";						
+			
 	return formatFoodListing( foodListing, temp )+icon;				
 	
 	} //end of function
@@ -408,6 +412,8 @@ function makeUserListing( foodListing, temp ) {
 		'<img class="favoriteIcon" id="favuser' + foodListing.id + 
 		'" style="display:inline; padding-left:5px;padding-right:5px;" '+
 		'src="img/notFavorite.png"></a>'
+		
+	foodListing.db = "user";
 	
 	return formatFoodListing( foodListing, temp )+icon;	
 	
@@ -418,7 +424,9 @@ function formatFoodListing( foodListing, temp ) {
 	var foodDesc =  foodListing.foodDesc;
 	var details = "Calories: "+foodListing.cal+", Carbs: "+foodListing.carb+
 					", Protein: "+foodListing.protein+", Fat: "+foodListing.fat;
-	foodDesc = '<a onclick="selectBrowseFoodElement( this )" style="color:#4682B4" href="#" title="' + details + '">'+foodDesc + " (" + foodListing.servingSize + " " 
+	foodDesc = '<a onclick="selectBrowseFoodElement( this )" data-food='
+	+ "'" + JSON.stringify( foodListing ).replace(/\'/g, "" ) + "'" +
+	' style="color:#4682B4" href="#" title="' + details + '">'+foodDesc + " (" + foodListing.servingSize + " " 
 					+ foodListing.measurement + ")</a>";
 					
 	return foodDesc;
@@ -558,7 +566,11 @@ function organizeFoods( selectedType ) {
 //***********************************************//
 function selectBrowseFoodElement( obj ) {
 	
-	alert( "where to add food." );
+	var item = JSON.parse( $( obj ).attr( "data-food" ) );
+	
+	insertFoodMealEditor( item, "NA" );
+	
+	//alert( item.id  );
 	
 	//$(".searchResult").attr("class", "searchResult"); 
 	//obj.className = "searchResult searchResultSelect";
@@ -645,7 +657,7 @@ function attachMealEditorEventHandlers() {
 	
 function openEditor(){
 	
-	populateFoodCategories();
+	//populateFoodCategories();
 	updateEditorTotals(); //creates total box
 	
 }//end of function
@@ -663,10 +675,9 @@ function getFoodElement(id){
 //***********************************************//
 	
 //inserts food into meal table
-function insertFoodMealEditor( foodID, servingUserInput ) {
-	var id = foodID;
-	var foodElement = getFoodElement(id);
-	var tbody = document.getElementById("tbody");
+function insertFoodMealEditor( foodElement, servingUserInput ) {
+	
+	var tbody = document.getElementById("mealBody");
     var row = tbody.insertRow(-1);
     var foodDesc = row.insertCell(0);
     var servingSize = row.insertCell(1);
@@ -675,16 +686,28 @@ function insertFoodMealEditor( foodID, servingUserInput ) {
     var carbs = row.insertCell(4);
     var protein = row.insertCell(5);
     var deleteBtn = row.insertCell(6);
+	var multiplier = foodElement.multiplier;
+	
+	$( servingSize ).addClass( "expandVersion" );
+	$( calories ).addClass( "expandVersion" );
+	$( fat ).addClass( "expandVersion" );
+	$( carbs ).addClass( "expandVersion" );
+	$( protein ).addClass( "expandVersion" );
+	$( deleteBtn ).addClass( "expandVersion" );
     
-    if( servingUserInput == "NA" ) servingUserInput = foodElement.servingSize;
+	if( foodElement.multiplier == null ) multiplier = 1;
+    //if( servingUserInput == "NA" ) 
+		
+	servingUserInput = parseFloat( foodElement.servingSize*multiplier ).toFixed(1);
+	
    
     foodDesc.innerHTML = foodElement.foodDesc;
-    servingSize.innerHTML = "<input class ='servingInput' id='" + foodElement.id + "' value=" + 
+    servingSize.innerHTML = "<input style='width:30px;' class ='servingInput' data-food='" + JSON.stringify( foodElement ) + "' id='" + foodElement.id + "' value=" + 
 		servingUserInput + " oninput='updateMacros()'> &nbsp" + foodElement.measurement; 
-    calories.innerHTML = parseFloat(foodElement.cal).toFixed(1);
-    fat.innerHTML = parseFloat(foodElement.fat).toFixed(1);
-    carbs.innerHTML = parseFloat(foodElement.carb).toFixed(1);
-    protein.innerHTML = parseFloat(foodElement.protein).toFixed(1);
+    calories.innerHTML = parseFloat(foodElement.cal*multiplier).toFixed(1);
+    fat.innerHTML = parseFloat(foodElement.fat*multiplier).toFixed(1);
+    carbs.innerHTML = parseFloat(foodElement.carb*multiplier).toFixed(1);
+    protein.innerHTML = parseFloat(foodElement.protein*multiplier).toFixed(1);
     deleteBtn.innerHTML = "<button class='deleteBtn' onclick= 'deleteRow(this)'>X</button>";
     updateEditorTotals();     
 }//end of function
@@ -695,16 +718,15 @@ function insertFoodMealEditor( foodID, servingUserInput ) {
 //serving size
 //***********************************************//
 function updateMacros(){
-	var rows = document.getElementById("tbody").rows;
-	var table = document.getElementById("tbody");
+	var rows = document.getElementById("mealBody").rows;
+	var table = document.getElementById("mealBody");
 	//console.log(rows.length);
 	for(var i = 0; i < rows.length; i++){
 
+		var obj = $( rows[i].cells[1].children[0] ).attr( "data-food" );
+	
 		// food id for original macros
-		var id = rows[i].cells[1].children[0].id;
-
-		//food element
-		var foodItem = getFoodElement(id);		
+		var foodItem = jQuery.parseJSON( obj );
 		
 		//gets the current serving in input and returns 0 if not a number
 		var currentServing = isNumber(rows[i].cells[1].children[0].value);
@@ -725,7 +747,81 @@ function updateMacros(){
 	}//end of loop
 
 	updateTotals();
+	$(".expandVersion").css("display", "table-cell");
 }//end of function
+//***********************************************//
+
+//***********************************************//
+//
+//***********************************************//
+function openMealDialogue( mealTitle ){
+	
+	browseDialog( function( obj ){ 
+		populateFinalMeal();
+		hideEditorToUser();
+		}, mealTitle);
+	
+	} //end of function
+//***********************************************//
+
+
+//***********************************************//
+//Creates array of food objects that is passed
+//to planner.  Array of food elements is 
+//written to the database and associated 
+//with the index of the selected cell.
+//***********************************************//
+function populateFinalMeal(){
+	var finalMeal = [];
+	var rows = document.getElementById("mealBody").rows;
+	
+	for(var i = 0; i < rows.length; i++){		
+		
+		var obj = JSON.parse( $( rows[i].cells[1].children[0] ).attr( "data-food" ) );
+		
+		//alert( JSON.stringify(obj) );
+		//alert( obj.macroType );
+		
+		//macroType
+		var macroType = obj.macroType;
+		//foodDesc	
+		var foodDesc = obj.foodDesc;
+		//Serving size		
+		var servingSize = obj.servingSize;
+		//multipler
+		var multiplier = rows[i].cells[1].children[0].value / obj.servingSize;	
+		//measurement
+		var measurement = obj.measurement;				
+		//final calories		
+		var cal = rows[i].cells[2].innerHTML
+		//final fat		
+		var fat = rows[i].cells[3].innerHTML
+		//final carbs		
+		var carb = rows[i].cells[4].innerHTML
+		//final protein		
+		var protein = rows[i].cells[5].innerHTML
+		//cell food is written to
+		var cellIndex = mealIndex;
+		//database of foo
+		//var database = obj.
+		
+		
+		
+		//constructs food object in array
+		finalMeal[i] = new food(obj.id, macroType, cal, protein, carb, fat, foodDesc, servingSize, measurement, multiplier, obj.db, cellIndex);
+			
+		}//end of loop
+	
+	pushUndoActions();
+	mealSchedule[ mealIndex ] = finalMeal;
+	if( !undoActionsMealPlannerChangedState() )	undoActions.pop();	 
+	writePlanner( "workingDraft", function(data){ loadDatabaseData(true, false, false); });
+	
+	
+	//populateCalendar();
+	//updatePlannerTotals();
+
+	} //end of function
 //***********************************************//
 
 
@@ -734,7 +830,7 @@ function updateMacros(){
 //totals table.
 //***********************************************//
 function updateEditorTotals(){
-	var table = document.getElementById("totals");
+	var table = document.getElementById("mealTotals");
 	var row = table.insertRow(-1);
 	table.deleteRow(1);
 
@@ -745,6 +841,40 @@ function updateEditorTotals(){
 	var fat = row.insertCell(2);
 	var carbs = row.insertCell(3);
 	var protein = row.insertCell(4);
+	
+	$( fat ).addClass( "expandVersion" );
+	$( carbs ).addClass( "expandVersion" );
+	$( protein ).addClass( "expandVersion" );
+
+	//inserts new totals in cells
+	calories.innerHTML = getCaloriesTotal();
+	fat.innerHTML = getFatTotal();
+	carbs.innerHTML = getCarbsTotal();
+	protein.innerHTML = getProteinTotal();
+	
+	}//end of function
+//***********************************************//
+
+//***********************************************//
+//This function generates the totals for 
+//totals table.
+//***********************************************//
+function updateTotals(){
+	var table = document.getElementById("mealTotals");
+	var row = table.insertRow(-1);
+	table.deleteRow(1);
+
+	//create cells in total table
+	var blankCell = row.insertCell(0);
+	blankCell.style.backgroundColor = "#DCDCDC";
+	var calories = row.insertCell(1);
+	var fat = row.insertCell(2);
+	var carbs = row.insertCell(3);
+	var protein = row.insertCell(4);
+	
+	$( fat ).addClass( "expandVersion" );
+	$( carbs ).addClass( "expandVersion" );
+	$( protein ).addClass( "expandVersion" );
 
 	//inserts new totals in cells
 	calories.innerHTML = getCaloriesTotal();
@@ -762,7 +892,8 @@ function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("meal").deleteRow(i);
     updateMacros();
-    updateTotals();
+   // updateEditorTotals();
+//	$(".expandVersion").css("display", "table-cell");
 	}//end of function
 //***********************************************//
 
@@ -877,9 +1008,46 @@ function getProteinTotal(){
 //***********************************************//
 
 //***********************************************//
+//Function returns a readable string describing the
+//selected meal that is being modified.
+//***********************************************//
+function getMealName(day, meal) {
+
+	var fullName = "";
+
+	if( day == "sun") fullName = "Sunday - ";
+	if( day == "mon") fullName = "Monday - ";
+	if( day == "tue") fullName = "Tuesday - ";
+	if( day == "wed") fullName = "Webnesday - ";
+	if( day == "thu") fullName = "Thursday - ";
+	if( day == "fri") fullName = "Friday - ";
+	if( day == "sat") fullName = "Saturday - ";
+
+	fullName = fullName + mealTitle[meal];
+	
+	return fullName;
+
+	} //end of function
+//***********************************************//
+
+//***********************************************//
+//Function to validate serving size inputs
+//***********************************************//
+function isNumber(e){
+	if (isNaN(e)){
+			return "";
+		}else if (e <= 0 || e > 1000){
+			return "";
+		}else{
+			return e;
+		} //end of if statement
+	} //end of function
+//***********************************************//	
+
+//***********************************************//
 //Food element object constructor
 //***********************************************//
-function food(id,macroType, cal, protein, carb, fat, foodDesc, servingSize, measurement, multiplier){
+function food(id,macroType, cal, protein, carb, fat, foodDesc, servingSize, measurement, multiplier, db, cell){
 	this.id = id;
 	this.macroType = macroType;
 	this.cal = cal;
@@ -890,6 +1058,8 @@ function food(id,macroType, cal, protein, carb, fat, foodDesc, servingSize, meas
 	this.servingSize = servingSize;
 	this.measurement = measurement;
 	this.multiplier = multiplier;
+	this.db = db;
+	this.cell = cell;
 	}//end of constructor
 //***********************************************//
 

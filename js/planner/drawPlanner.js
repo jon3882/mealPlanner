@@ -52,6 +52,9 @@ function drawPlanner() {
 	
 	document.getElementById( "planner" ).innerHTML = rowString;
 	
+	//table#planner tbody tr#row2
+	//$("table#planner tbody tr#row2 *").css("background-color", "red");
+	
 	} //end of function
 //***********************************************//
 	
@@ -74,13 +77,13 @@ function populateCalendar() {
 			
 			var mealFoodList = "";
 
-			for( var k = 0; k<mealSchedule[i].length; k++ ) {
+			for( var k = 0; k<mealSchedule[i].length; k++ ) { 
 
 				
 				mealFoodList = mealFoodList + 
-					"<table><tr><td style='padding-left:2px'>&#8226&nbsp</td><td>" +
+					"<table style='width:100%'><tr><td style='padding-left:2px'>&#8226&nbsp</td><td>" +
 					mealSchedule[i][k].foodDesc +
-					" (" + mealSchedule[i][k].servingSize + " " + mealSchedule[i][k].measurement + ")" + 
+					" (" + parseFloat(mealSchedule[i][k].servingSize*mealSchedule[i][k].multiplier).toFixed(1) + " " + mealSchedule[i][k].measurement + ")" + 
 					"</td></tr></table>";
 						
 

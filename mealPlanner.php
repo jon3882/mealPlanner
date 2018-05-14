@@ -37,6 +37,7 @@ include('../private/loginProtect.php');
 <script src="js/planner/pdfJS.js"></script>
 <script src="js/planner/drawPlanner.js"></script>
 <script src="js/planner/plannerFileOps.js"></script>
+<script src="js/planner/mealEdit.js"></script>
 <script src="js/usdaSearch.js"></script> 
 <script src="js/favorite.js"></script> 
 <script src="js/browseFood.js"></script>
@@ -58,14 +59,15 @@ include('../private/loginProtect.php');
 <body onload="startup()">
 
 
+
 <!--***************Navigation Bar**********************-->
 <?php  
 $thisPage = 'mealPlanner';
 include_once('navBar.php');
 ?>
 <!--************Navigation Bar End**********************-->
-<div class="content-wrapper" >
 
+<div class="content-wrapper" >
 <br>
 
 <table id="planner">
@@ -269,9 +271,7 @@ Protein:<br>
 </div>
 </div>
 
-
 <?php include 'messageBox.php';?>
-
-
+<?php include 'php/mealEditor.php';?>
 
 </html>

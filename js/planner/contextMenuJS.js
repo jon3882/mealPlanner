@@ -91,7 +91,7 @@
 					if( opt.$trigger.attr('class').indexOf("mealName") >= 0)  return true;
 					}
 					, callback: function(key, opt) {
-						clipBoardFunctions( "paste" )
+						clipBoardFunctions( "paste" );
 					}},					
 				"clear": {name: "<div style='text-align:left;width:100%;padding-left: 8px'>Clear</div>", 
 					icon: "delete", 
@@ -113,11 +113,11 @@
 						"mealInput1": {
 						type: "html",
 						html: "<div  style='text-align: left;'><input id=\"contextrn\" type=\"text\""+
-						"style='width:80%; height=100%' placeholder=\"\">"+
+						"style='width:70%; height=100%' placeholder=\"\">"+
 						"<span style='height=100%; padding-left: 5px'>"+  
-						"<i class=\"fa fa-pencil-square fa-lg mealModBtn\" onclick='"+
+						"<a href='#' id='renameContextMsg' title='undefined' onclick='"+
 						"contextMenuMealModification( \"rn\", document.getElementById(\"contextrn\").value )'>"+
-						"</i></span></div>",
+						"<img class='contextAction' data-unSelect='img/pencilBlue.png' data-Select='img/pencilBlueSelect.png' src='img/pencilBlue.png' ></a></span></div>",
 						}}}, 
 				"addabove": {name: "<div style='text-align:left;width:100%;padding-left: 8px'>Add Above</div>",
 					icon: "add", 
@@ -126,11 +126,11 @@
 						"mealInput1": {
 						type: "html",
 						html: "<div  style='text-align: left;'><input id=\"contextAb\" type=\"text\""+
-						"style='width:80%; height=100%' placeholder=\"New Meal\">"+
+						"style='width:70%; height=100%' placeholder=\"New Meal\">"+
 						"<span style='height=100%; padding-left: 5px'>"+  
-						"<i class=\"fa fa-plus-square fa-lg mealModBtn\" onclick='"+
+						"<a href='#' id='addAboveContextMsg' title='undefined' onclick='"+
 						"contextMenuMealModification( \"ab\", document.getElementById(\"contextAb\").value )'>"+
-						"</i></span></div>",
+						"<img class='contextAction' data-unSelect='img/pencilBlue.png' data-Select='img/pencilBlueSelect.png' src='img/pencilBlue.png' ></a></span></div>",
 						}}}, 
 				"addbelow": {name: "<div style='text-align:left;width:100%;padding-left: 8px'>Add Below</div>", 
 					icon: "add", 
@@ -139,11 +139,11 @@
 						"mealInput1": {
 						type: "html",
 						html: "<div  style='text-align: left;'><input id=\"contextBe\" type=\"text\""+
-						"style='width:80%; height=100%' placeholder=\"New Meal\">"+
+						"style='width:70%; height=100%' placeholder=\"New Meal\">"+
 						"<span style='height=100%; padding-left: 5px'>"+  
-						"<i class=\"fa fa-plus-square fa-lg mealModBtn\" onclick='"+
+						"<a href='#' id='addBelowContextMsg' title='undefined' onclick='"+
 						"contextMenuMealModification( \"be\", document.getElementById(\"contextBe\").value)'>"+
-						"</i></span></div>",
+						"<img class='contextAction' data-unSelect='img/pencilBlue.png' data-Select='img/pencilBlueSelect.png' src='img/pencilBlue.png' ></a></span></div>",
 						}}}, 
 				 "delete": {name: "<div style='text-align:left;width:100%;padding-left: 8px'>Delete Meal</div>", 
 					icon: "add", 
@@ -153,9 +153,9 @@
 						type: "html",
 						html: "<div  style='text-align: left;'>Highlighted data will be lost."+
 						"<span style='height=100%; padding-left: 5px'>"+  
-						"<i class=\"fa fa-times fa-lg mealModBtnDel\" onclick='"+
+						"<a href='#' id='deleteContextMsg' title='undefined' onclick='"+
 						"contextMenuMealModification( \"de\", \"\" )'>"+
-						"</i></span></div>",	
+						"<img class='contextAction' data-unSelect='img/delete.png' data-Select='img/deleteSelect.png' src='img/delete.png' ></a></span></div>",	
 						}}}, 
                 "sep2": "---------",
 				"undo": {name: "<div style='text-align:left;width:100%;padding-left: 8px'>Undo</div>",
@@ -179,44 +179,47 @@
 //selected option from the context menu
 //***********************************************//	
 function doHighlight( contextFocus, selIndex ) {
-	
 		if( contextFocus == "Edit" ) {
-			if( selIndex > 0 ) highlight( getHighLightID( selIndex, "cell"), "#4682B4", "#eaf08f", "#4682B4"  );		
+			if( selIndex > 0 ) highlightPlan( getHighLightID( selIndex, "cell"), "#4682B4", "#eaf08f", "#4682B4"  );		
 			} //end of if statement				
 		if( contextFocus == "Copy" ) {
-			highlight( getHighLightID( selIndex, "cell"), "#4682B4", "#eaf08f", "#4682B4"  );
+			highlightPlan( getHighLightID( selIndex, "cell"), "#4682B4", "#eaf08f", "#4682B4"  );
 			} //end of if statement
 		if( contextFocus == "Cut" ) {
-			highlight( getHighLightID( selIndex, "cell"), "white", "#C34A47", "#C34A47"  );
+			highlightPlan( getHighLightID( selIndex, "cell"), "white", "#C34A47", "#C34A47"  );
 			} //end of if statement
 		if( contextFocus == "Paste" ) {
-			highlight( getHighLightID( selIndex, "cell"), "#4682B4", "#eaf08f", "#4682B4"  );
+			highlightPlan( getHighLightID( selIndex, "cell"), "#4682B4", "#eaf08f", "#4682B4"  );
 			} //end of if statement
 		if( contextFocus == "Clear" ) {
-			highlight( getHighLightID( selIndex, "cell"), "white", "#C34A47", "#C34A47"  );
+			highlightPlan( getHighLightID( selIndex, "cell"), "white", "#C34A47", "#C34A47"  );
 			} //end of if statement
 		if( contextFocus == "Add Above" ) {
 			var temp = selIndex;
 			if( temp < 0 ) temp = -selIndex;
-			highlight( getHighLightID( temp, "row"), "#4682B4", "#eaf08f", "#4682B4"  );
+			highlightPlan( getHighLightID( temp, "row"), "#4682B4", "#eaf08f", "#4682B4"  );
+			document.getElementById("addAboveContextMsg").title = "Add a new meal above meal ( " + mealTitle[temp%mealTitle.length] + " ).";
 			} //end of if statement
 		if( contextFocus == "Add Below" ) {
 			var temp = selIndex;
 			if( temp < 0 ) temp = -selIndex;	
-			highlight( getHighLightID( temp, "row"), "#4682B4", "#eaf08f", "#4682B4"  );
+			highlightPlan( getHighLightID( temp, "row"), "#4682B4", "#eaf08f", "#4682B4"  );
+			document.getElementById("addBelowContextMsg").title = "Add a new meal below meal: ( " + mealTitle[temp%mealTitle.length] + " ).";
 			} //end of if statement
 		if( contextFocus == "Delete Meal" ) {
 			var temp = selIndex;
 			if( temp < 0 ) temp = -selIndex;
 			if( selIndex < 0 ) temp = -selIndex;	
-			highlight( getHighLightID( temp, "row"), "white", "#C34A47", "#C34A47"  );
+			highlightPlan( getHighLightID( temp, "row"), "white", "#C34A47", "#C34A47"  );
+			document.getElementById("deleteContextMsg").title = "Delete meal ( " + mealTitle[temp%mealTitle.length] + " ). All data within this meal will be lost.";
 			} //end of if statement
 		if( contextFocus == "Rename Meal" ) {
 			var temp = selIndex;
 			if( temp < 0 ) temp = -selIndex;
 			if( selIndex < 0 ) temp = -selIndex;	
-			highlight( getHighLightID( temp, "meal"), "#4682B4", "#eaf08f", "#4682B4");
+			highlightPlan( getHighLightID( temp, "meal"), "#4682B4", "#eaf08f", "#4682B4");
 			document.getElementById("contextrn").placeholder = mealTitle[temp%mealTitle.length];
+			document.getElementById("renameContextMsg").title = "Rename meal ( " + mealTitle[temp%mealTitle.length] + " ) to a new value.";
 			} //end of if statement
 	
 	} //end of function
@@ -251,7 +254,12 @@ function clipBoardFunctions( func ) {
 	if( func == "paste" ) {
 		
 		pushUndoActions();
-		mealSchedule[mealIndex] = JSON.parse( clipboardData );
+		
+		var mealData = JSON.parse( clipboardData );
+		for( var i = 0; i<mealData.length; i++ ) {
+			mealData[i].cell = mealIndex;
+			} //end of for loop
+		mealSchedule[mealIndex] = mealData;
 		if( !undoActionsMealPlannerChangedState() ) undoActions.pop();
 		writePlanner( "workingDraft", function(data){ loadDatabaseData(true, false, false); });
 		
@@ -263,15 +271,14 @@ function clipBoardFunctions( func ) {
 //Highlights a row or cell associated with an
 //id.
 //***********************************************//
-function highlight( id, c, bc, brdc ) {
+function highlightPlan( id, c, bc, brdc ) {
 	
-	$(id).css("color", c);
-	$(id).css("backgroundColor", bc);
-	$(id).css("border-color", brdc);
+	//alert( id );
 	
-	$(id+" *").css("color", c);
-	$(id+" *").css("backgroundColor", bc);
-	$(id+" *").css("border-color", brdc);
+	$( id ).css("border-color", brdc);
+	$( id ).css("color", c);
+	$( id ).css("backgroundColor", bc);
+	$( id ).css("border-color", brdc);
 	
 	//$(id).fadeTo(10,0.8);
 	
@@ -326,19 +333,19 @@ function getHighLightID( i, item) {
 		
 		//alert( dayIndex + mIndex );
 		
-		return "#"+dayIndex+mIndex;
+		return "table#planner tbody tr#row"+mIndex +" td#"+ dayIndex+mIndex + " *";
 		
 		} //end of if statement
 	
 	if( item == "row" ) {
 		
-		return "#row"+mIndex;
+		return "table#planner tbody tr#row"+mIndex + " *";
 		
 		} //end of if statement 
 		
 	if( item == "meal" ) {
 		
-		return "#mea"+mIndex;
+		return "table#planner tbody tr#row"+mIndex +" td#mea"+mIndex;
 		
 		} //end of if statement 	
 		
@@ -350,6 +357,9 @@ function getHighLightID( i, item) {
 //meals displayed in the planner.
 //***********************************************//	
 function contextMenuMealModification( modType, mealLabel ) {
+	
+	mealLabel = mealLabel.replace(/\'/g, "" );
+	mealLabel = mealLabel.replace(/\'/g, "\"" );
 	
 	$('.context-menu-list').trigger('contextmenu:hide');
 	var mIndex = mealIndex%mealTitle.length;

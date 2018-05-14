@@ -479,11 +479,10 @@ function populateFinalMeal(){
 	if( !undoActionsMealPlannerChangedState() )	undoActions.pop();	 
 	writePlanner( "workingDraft", function(data){ loadDatabaseData(true, false, false); });
 	
-	
-	//populateCalendar();
-	//updatePlannerTotals();
+		populateCalendar();
+		updatePlannerTotals();
 
-	} //end of function
+		} //end of function
 //***********************************************//
 
 

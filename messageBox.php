@@ -1,5 +1,6 @@
 <!-- //////////////////////Message Box/////////////////////
 ////////////////////////////////////////////////////////// -->
+<div id="msgBoxBlockOtherContent">
 <div id="msgContainer">
 <div class="messageBox">
 	<p id="msgQuestion"></p>
@@ -10,6 +11,7 @@
 	</div>
 	<div id="loaderContainer" ><img id="loader" src="img/msgBoxLoader.gif">
 	<div>&nbsp</div><div>Working...</div></div>
+</div>
 </div>
 </div>
 <!--////////////////////////////////////////////////////////// -->

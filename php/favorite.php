@@ -5,8 +5,9 @@
 //returning favorite list and toggling the favorite status of seleced food items.
 //**************************************************************************************//
 
-include('../../../private/connectDB.php');
 include('phpFunctionLoginProtect.php');
+include('../../private/connectDB.php');
+
 
 if( isset($_GET["foodID"]) ) $foodID = $_GET["foodID"];
 if( isset($_GET["foodTable"]) ) $foodTable = $_GET["foodTable"];
@@ -15,7 +16,7 @@ if( isset($_GET["foodTable"]) ) $foodTable = $_GET["foodTable"];
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: ".$conn->error);
 	} //end of if statement
 
 if( isset($_GET["foodID"]) && isset($_GET["foodTable"]) ) {	
@@ -35,6 +36,8 @@ if( isset($_GET["foodID"]) && isset($_GET["foodTable"]) ) {
 	
 		$sql = "INSERT INTO favorites (foodID, userID, foodTable)". 
 		" VALUES (".$foodID.",".$sessionName.",'".$foodTable."')";	
+		
+		//echo $sql;
 	
 		} //end of if statement
 		
@@ -61,8 +64,10 @@ if( isset($_GET["foodID"]) && isset($_GET["foodTable"]) ) {
 		" WHERE favorites.userID = ".$sessionName." AND favorites.foodTable = 'usda') ORDER BY foodDesc";
 		
 	//$sql = "SELECT * FROM favorites WHERE userID = ".$sessionName;
-	$result = $conn->query($sql);
+	$result = $conn->query($sql); //or die($conn->error());
 
+	
+	
 if ($result->num_rows > 0) {
     // output data of each row
 	$str = "[";

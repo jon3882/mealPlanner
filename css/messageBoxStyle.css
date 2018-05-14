@@ -18,6 +18,25 @@
 	border-style: outset;
 }
 
+.messageBoxEditor{
+	display: table;
+    margin: 0 auto;
+    width: 650px;
+    min-height: 100px;
+	padding: 2%;
+	background-color: #DCDCDC;
+	border: solid;
+	border-width: 5px;
+	border-width: 3px;
+	border-radius: 8px;
+	border-style: outset;
+}
+
+.messageBox button.deleteBtn {
+	min-width: 25px;
+}
+
+
 .messageBox button{
 	min-width: 75px;
 }
@@ -37,7 +56,36 @@
 	
 	} 
 		
+		
+#loaderContainerEditor {
+
+	display: none;
+	text-align:center;
+	margin: auto;					 
+	height: 100%;
+	width: 100%;					
+	vertical-align: middle;
+	
+	} 		
+		
 #msgContainer {
+
+ 	display: none;   
+    	align-items: center;
+	position: fixed;
+	z-index: 10;
+	left: 0;
+    	right: 0;
+   	top: 0;
+   	bottom: 0;
+	text-align:center;
+	margin: auto;
+	height: 100%;
+	width: 100%;
+	
+	} 
+	
+#mealEditorContainer {
 
  	display: none;   
     	align-items: center;
@@ -52,6 +100,8 @@
 	width: 100%;
 	
 	} 
+	
+
 	
 .msgBoxBtn{
 	width: 20%;		

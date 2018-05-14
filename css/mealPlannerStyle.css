@@ -275,20 +275,24 @@ table#meal{
 
 /*****food description column*****/
 #meal tbody td:first-child{
-    width: 160px;
-}
+    width: 158px;
+	text-align: left;
+	padding-left:5px;
+	}
 
 #meal thead th:first-child{
-	width: 195px;
+	width: 165px;
 }
 
 /****servings column*/
 #meal th:nth-child(2){
-	width: 120px;
+	width: 128px;
+	
 }
 #meal tbody td:nth-child(2){
 	text-align: left;
-	width: 100px;
+	width: 125px;
+	
 }
 
 /****calories column*/
@@ -296,36 +300,50 @@ table#meal{
 	width: 68px;
 }
 #meal tbody td:nth-child(3){
-	width: 60px;
+	width: 68px;
+	text-align:right;
+	padding-right:5px;
 }
 
 /****fat column*****/
 #meal th:nth-child(4){
-	width: 68px;
+	width: 60px;
 }
 #meal tbody td:nth-child(4){
-	width: 55px;
+	width: 60px;
+	text-align:right;
+	padding-right:5px;
 }
 /***carbs column***/
 #meal th:nth-child(5){
 	width: 80px;
 }
+#meal tbody td:nth-child(5){
+	width: 78px;
+	text-align:right;
+	padding-right:5px;
+}
 
 /*****protein column****/
 #meal th:nth-child(6){
-	width: 100px;
+	width: 80px;
+}
+#meal tbody td:nth-child(6){
+	width: 78px;
+	text-align:right;
+	padding-right:5px;
 }
 
-/*****delete column******/
-#meal thead th:last-child{
-	width: 60px;
-}
 
 /*****general sizeing for remaining columns***/
 #meal tbody td, #meal thead th {
-    width: 70px;
+    width: 78px;
 }
 
+/*****delete column******/
+#meal tbody td, #meal thead th:last-child{
+	width: 55px;
+}
 
 /*******General table style for both tables******/
 th{
@@ -352,7 +370,8 @@ input.servingInput {
 }
 
 button.deleteBtn{
-	width: 40%;
+	
+	width: 40px;
 	background-color: white;
 	padding: 5px;
 	border-radius: 5px;

@@ -4,7 +4,7 @@
 //bar will also include reference to the general style 
 //css file to be applied to all pages in the site.
 ///////////////////////////////////////////////////////-->
-<link rel="stylesheet" href="resources/fontawesome/css/font-awesome.min.css">
+
 <link rel="stylesheet" href="css/navBarStyle.css">
 <link rel="stylesheet" href="css/generalStyle.css">
 <!-- Navigation Bar -->
@@ -35,12 +35,12 @@ else{
  	
  	if ($thisPage == "mealPlanner"){ 
  	?>
- 	<!-- Quick links for meal planner -->
+ 	<!-- Quick links for meal planner 
 	
-	<td class="linkIcon" style="">
+	<!--<td class="linkIcon" style="">
 			<a id="browseUSDA" href="#" title="Search for food item."><img style="" src="img/search.png"></a>
-	</td>
-	
+	</td>-->
+	 
 	<td class="linkIcon" style="">
 			<a id="saveLink" href="#" title="Save meal plan."><img style="" src="img/save.png"></a>
 	</td>

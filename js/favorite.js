@@ -18,6 +18,8 @@ function changeFavoriteStatus( id, foodTable ) {
 		ajaxPost( "php/favorite.php?foodID="+id+"&foodTable="+foodTable, "No Message", "Error retriving favorites database.", 
 		function(data) {
 	
+			//alert( data );
+	
 			favoriteObj = null;
 			if( data != "0 results" ) favoriteObj = jQuery.parseJSON( data );
 			writeFavorites();
@@ -32,6 +34,8 @@ function getFavorites( containerPrefix, foodTable) {
 	
 	ajaxPost( "php/favorite.php", "No Message", "Error retriving favorites database.", 
 		function(data) {
+			
+			//alert( data );
 	
 	favoriteObj = null;
 	if( data != "0 results" ) favoriteObj = jQuery.parseJSON( data );

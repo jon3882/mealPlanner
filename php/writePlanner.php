@@ -9,20 +9,19 @@
 //elements associated with the meal plan and then writes the new data.
 //**************************************************************************************//
 
-include('../../private/connectDB.php');
 include('phpFunctionLoginProtect.php');
+include('../../private/connectDB.php');
+
 
 if( isset($_GET["name"]) ) $plannerName = $_GET["name"];
 if( isset($_GET["mealLabels"]) ) $labels = $_GET["mealLabels"];
-if( isset($_GET["data"]) ) $plannerData = $_GET["data"];
+if( isset($_GET["data"]) ) $plannerData = json_decode( $_GET["data"] );
 
-$meal = explode( ";", $plannerData );
-
-for ($i = 0; $i < count($meal); $i++) {
-
-	$meal[$i] = explode( "," , $meal[$i] );
-
-	} //end of for loop 
+//print_r( $plannerData );
+//$meal = explode( ";", $plannerData );
+//for ($i = 0; $i < count($meal); $i++) {
+//	$meal[$i] = explode( "," , $meal[$i] );
+//	} //end of for loop 
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -35,29 +34,40 @@ $sql = "DELETE FROM mealElement WHERE planName='".$plannerName."' AND userID=".$
 
 $conn->query( $sql ) or die ( mysqli_error($conn) );
 
-if( strpos($plannerData, ',') !== false) {
+echo $plannerData->count;
 
-foreach($meal as $mealItem) {
+foreach($plannerData as $meal ) {
 
-	$sql = "INSERT INTO mealElement (planName, userID, cell, servingSize, foodElementID)"." VALUES ('".
-					$plannerName."',".
-					$sessionName.",'".
-					$mealItem[0]."','".
-					$mealItem[1]."','".
-                    $mealItem[2]."')";
-	//print $sql;
-	$conn->query( $sql ) or die ( mysqli_error($conn) );
+	foreach( $meal as $mealItem ) {
+		
+		if( $mealItem->id != null ) { 
+	
+			$sql = "INSERT INTO mealElement (planName, userID, cell, multiplier, db, foodElementID)"." VALUES ('".
+						$plannerName."',".
+						$sessionName.",'".
+						$mealItem->cell."',".
+						$mealItem->multiplier.",'".
+						$mealItem->db."',".
+						$mealItem->id.")";
+	
+			//print_r( $plannerData );
+			echo $sql;
+			$conn->query( $sql ) or die ( mysqli_error($conn) );
+		
+			} //end of if statement
+
+	} //end of for loop
+	
+	} //end of for loop
 
 
-} //end of for loop
-
-} //end of if statement
 
 $sql = "UPDATE mealplans SET mealLabels='".$labels."' WHERE planName='".$plannerName."' AND userID=".$sessionName;
 
 echo $sql;
 
 $conn->query( $sql ) or die ( mysqli_error($conn) );
+
 
 mysqli_close( $conn );
 
