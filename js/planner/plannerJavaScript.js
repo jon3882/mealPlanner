@@ -362,7 +362,7 @@ function loadDatabaseData(isLoadedFood, isLoadedMeal, isLoadedPlan) {
 	
 	if( !isLoadedFood ) ajaxPost( "php/getJSON.php?table=foodelement", "No Message", "Error", function(data) {
 		
-		//alert( data );
+		alert( data );
 		if( data != "0 results" ) { 
 			data = data.replace(/\'/g, "" );
 			
