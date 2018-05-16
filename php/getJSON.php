@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 
 $sortingSQL = "";
 if( $tableName == "customer" ) $sortingSQL = " ORDER BY customerLastName, customerFirstName";
-if( $tableName == "foodElement" ) $sortingSQL = " ORDER BY foodDesc";
+if( $tableName == "foodelement" ) $sortingSQL = " ORDER BY foodDesc";
 
 $sql = "SELECT * FROM ".$tableName." WHERE userID=".$sessionName.$sortingSQL;
 
