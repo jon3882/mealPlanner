@@ -6,6 +6,7 @@
 //***************************************************************
 
 include('../private/loginProtect.php');
+header("Location: mealPlanner.php");
 
 
 ?>

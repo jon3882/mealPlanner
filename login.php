@@ -17,7 +17,7 @@ if(isset($_POST['userid']) && isset($_POST['userPassword'])){
 	
 		
 	if (strcmp($authorizedMsg, "authorized") == 0){
-		header("Location: index.php");		
+		header("Location: mealPlanner.php");		
 	}else if(strcmp($authorizedMsg, "inactive") == 0){
 		$msg = "The account associated with email ".$userid." is no longer active.";
 	}else{
