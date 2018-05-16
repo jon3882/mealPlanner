@@ -354,6 +354,8 @@ function newPlanner( selPlanner ) {
 //***********************************************//
 function loadDatabaseData(isLoadedFood, isLoadedMeal, isLoadedPlan) {
 
+	alert( "Executing" );
+
 	showLoader();
 	
 	returnFlags[0] = isLoadedFood;
