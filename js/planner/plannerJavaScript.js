@@ -354,7 +354,7 @@ function newPlanner( selPlanner ) {
 //***********************************************//
 function loadDatabaseData(isLoadedFood, isLoadedMeal, isLoadedPlan) {
 
-	alert( "Executing" );
+	//alert( "Executing" );
 
 	showLoader();
 	
@@ -364,11 +364,11 @@ function loadDatabaseData(isLoadedFood, isLoadedMeal, isLoadedPlan) {
 	
 	if( !isLoadedFood ) ajaxPost( "php/getJSON.php?table=foodelement", "No Message", "Error", function(data) {
 		
-		alert( data );
+		//alert( data );
 		if( data != "0 results" ) { 
 			data = data.replace(/\'/g, "" );
 			
-			alert( data );
+			//alert( data );
 			
 			foods = jQuery.parseJSON( data );
 			returnFlags[0] = true;

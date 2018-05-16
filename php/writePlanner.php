@@ -30,7 +30,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "DELETE FROM mealElement WHERE planName='".$plannerName."' AND userID=".$sessionName;
+$sql = "DELETE FROM mealelement WHERE planName='".$plannerName."' AND userID=".$sessionName;
 
 $conn->query( $sql ) or die ( mysqli_error($conn) );
 
@@ -42,7 +42,7 @@ foreach($plannerData as $meal ) {
 		
 		if( $mealItem->id != null ) { 
 	
-			$sql = "INSERT INTO mealElement (planName, userID, cell, multiplier, db, foodElementID)"." VALUES ('".
+			$sql = "INSERT INTO mealelement (planName, userID, cell, multiplier, db, foodElementID)"." VALUES ('".
 						$plannerName."',".
 						$sessionName.",'".
 						$mealItem->cell."',".
