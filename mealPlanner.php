@@ -71,151 +71,13 @@ include_once('navBar.php');
 <br>
 
 <table id="planner">
-
-<!--
-<tr>
-<td></td><td class="dTitle" id="sunTitle">Sunday</td><td class="dTitle" id="monTitle">Monday</td><td class="dTitle" id="tueTitle">Tuesday</td><td class="dTitle" id="wedTitle">Wednesday</td><td class="dTitle" id="thuTitle">Thursday</td><td class="dTitle" id="friTitle">Friday</td><td class="dTitle" id="satTitle">Saturday</td>
-</tr>
-<tr>
-<td class="mTitle" id="m0">Breakfast</td><td class="sq" id="sun0"></td><td id="mon0" class="sq"></td><td class="sq" id="tue0"></td><td class="sq" id="wed0"></td><td class="sq" id="thu0"></td><td class="sq" id="fri0"></td><td class="sq" id="sat0"></td>
-</tr>
-<tr>
-<td class="mTitle" id="m1">Snack</td><td class="sq" id="sun1"></td><td id="mon1" class="sq"></td><td class="sq" id="tue1"></td><td class="sq" id="wed1"></td><td class="sq" id="thu1"></td><td class="sq" id="fri1"></td><td class="sq" id="sat1"></td>
-</tr>
-<tr>
-<td class="mTitle" id="m2">Lunch</td><td class="sq" id="sun2"></td><td id="mon2" class="sq"></td><td class="sq" id="tue2"></td><td class="sq" id="wed2"></td><td class="sq" id="thu2"></td><td class="sq" id="fri2"></td><td class="sq" id="sat2"></td>
-</tr>
-<tr>
-<td class="mTitle" id="m3">Snack</td><td class="sq" id="sun3"></td><td id="mon3" class="sq"></td><td class="sq" id="tue3"></td><td class="sq" id="wed3"></td><td class="sq" id="thu3"></td><td class="sq" id="fri3"></td><td class="sq" id="sat3"></td>
-</tr>
-<tr>
-<td class="mTitle" id="m4">Dinner</td><td class="sq" id="sun4"></td><td id="mon4" class="sq"></td><td class="sq" id="tue4"></td><td class="sq" id="wed4"></td><td class="sq" id="thu4"></td><td class="sq" id="fri4"></td><td class="sq" id="sat4"></td>
-</tr>
-<tr>
-<td class="mTitle" id="m5">Snack</td><td class="sq" id="sun5"></td><td id="mon5" class="sq"></td><td class="sq" id="tue5"></td><td class="sq" id="wed5"></td><td class="sq" id="thu5"></td><td class="sq" id="fri5"></td><td class="sq" id="sat5"></td>
-</tr>
-
-<tr>
-<td class="mTitle" id="totalTitle" >Totals</td> 
-
-<td class="totalSQ">
-<table class="dayTotals"><tr><td>
-Calories:<br>
-Fat:<br>
-Carbs:<br>
-Protein:<br>
-</td><td id="total0">
-0<br>
-0<br>
-0<br>
-0<br>
-</td></tr>
 </table>
-</td>
-
-<td class="totalSQ">
-<table class="dayTotals"><tr><td>
-Calories:<br>
-Fat:<br>
-Carbs:<br>
-Protein:<br>
-</td><td id="total1">
-0<br>
-0<br>
-0<br>
-0<br>
-</td></tr>
-</table>
-</td>
-
-<td class="totalSQ">
-<table class="dayTotals"><tr><td>
-Calories:<br>
-Fat:<br>
-Carbs:<br>
-Protein:<br>
-</td><td id="total2">
-0<br>
-0<br>
-0<br>
-0<br>
-</td></tr>
-</table>
-</td>
-
-<td class="totalSQ">
-<table class="dayTotals"><tr><td>
-Calories:<br>
-Fat:<br>
-Carbs:<br>
-Protein:<br>
-</td><td id="total3">
-0<br>
-0<br>
-0<br>
-0<br>
-</td></tr>
-</table>
-</td>
-
-<td class="totalSQ">
-<table class="dayTotals"><tr><td>
-Calories:<br>
-Fat:<br>
-Carbs:<br>
-Protein:<br>
-</td><td id="total4">
-0<br>
-0<br>
-0<br>
-0<br>
-</td></tr>
-</table>
-</td>
-
-<td class="totalSQ">
-<table class="dayTotals"><tr><td>
-Calories:<br>
-Fat:<br>
-Carbs:<br>
-Protein:<br>
-</td><td id="total5">
-0<br>
-0<br>
-0<br>
-0<br>
-</td></tr>
-</table>
-</td>
-
-
-<td class="totalSQ">
-<table class="dayTotals"><tr><td>
-Calories:<br>
-Fat:<br>
-Carbs:<br>
-Protein:<br>
-</td><td id="total6">
-0<br>
-0<br>
-0<br>
-0<br>
-</td></tr>
-</table>
-</td>
-
--->
-
-
-</table>
-
-
 
 <!-- //////////////////////Dialog Box/////////////////////
-////////////////////////////////////////////////////////// -->
+////////////////////////////////////////////////////////// 
 <div class="content" >
 <div class="dialogueBox">
-	<!-- Heading for Dialogue Box -->
+	<!-- Heading for Dialogue Box 
 	<div class="foodDataContainer">
 	<div class="leftSide">
 		<select onchange="populateFoodListBox();" id="foodType">
@@ -265,13 +127,11 @@ Protein:<br>
 
 <input type="file" id="file-input" style="display:none;" />
 
-</body>
-
-
 </div>
-</div>
+<!--</div>-->
 
 <?php include 'messageBox.php';?>
 <?php include 'php/mealEditor.php';?>
 
+</body>
 </html>

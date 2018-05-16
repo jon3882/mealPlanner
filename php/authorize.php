@@ -27,7 +27,7 @@ include('../private/connectDB.php');
 		$userEmail = $row["user"];
 		$status = $row["status"];
 
-		
+		echo $uName;
 
 		if (hash_equals($hashed_password, crypt($userPassword, $hashed_password))) {
 			if ($status == "active"){
