@@ -11,7 +11,7 @@ include('../private/connectDB.php');
 		    die("Connection failed: " . $conn->connect_error);
 			}
 	 	
-	$sql = "SELECT * FROM authorizedUsers WHERE user='".$userid."'";
+	$sql = "SELECT * FROM authorizedusers WHERE user='".$userid."'";
 	$result = $conn->query($sql);
 	mysqli_close( $conn );
 

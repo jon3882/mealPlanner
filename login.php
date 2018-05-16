@@ -21,7 +21,7 @@ if(isset($_POST['userid']) && isset($_POST['userPassword'])){
 	}else if(strcmp($authorizedMsg, "inactive") == 0){
 		$msg = "The account associated with email ".$userid." is no longer active.";
 	}else{
-		$msg = "The email/password combination entered were not found. ".$authorizedMsg."-";
+		$msg = "The email/password combination entered were not found."; //.$authorizedMsg."-";
 	}
 }
 
