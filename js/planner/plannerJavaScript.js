@@ -360,13 +360,13 @@ function loadDatabaseData(isLoadedFood, isLoadedMeal, isLoadedPlan) {
 	returnFlags[1] = isLoadedMeal;
 	returnFlags[2] = isLoadedPlan;
 	
-	if( !isLoadedFood ) ajaxPost( "php/getJSON.php?table=foodElement", "No Message", "Error", function(data) {
+	if( !isLoadedFood ) ajaxPost( "php/getJSON.php?table=foodelement", "No Message", "Error", function(data) {
 		
 		//alert( data );
 		if( data != "0 results" ) { 
 			data = data.replace(/\'/g, "" );
 			
-			alert( data );
+			//alert( data );
 			
 			foods = jQuery.parseJSON( data );
 			returnFlags[0] = true;
