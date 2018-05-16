@@ -366,7 +366,7 @@ function loadDatabaseData(isLoadedFood, isLoadedMeal, isLoadedPlan) {
 		if( data != "0 results" ) { 
 			data = data.replace(/\'/g, "" );
 			
-			//alert( data );
+			alert( data );
 			
 			foods = jQuery.parseJSON( data );
 			returnFlags[0] = true;
