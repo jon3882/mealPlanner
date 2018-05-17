@@ -321,7 +321,7 @@ function savePlanner( selPlanner ) {
 		
 			displayMessageToUser("The following files are available for download." + 
 				'<br> - <a href="php/downloadMeal.php" class="downloadLink">Data File</a> - <br>(Used to load meal plan at a later date)'+
-				'<br> - <a href="#" class="downloadLink">Formatted Copy</a> - <br>(Used to load into Google Sheets)', "", "ok", function() {
+				'<br> - <a href="php/downloadSheet.php" class="downloadLink">Formatted Copy</a> - <br>(Used to load into Google Sheets)', "", "ok", function() {
 				hideMessageToUser();
 				}, hideMessageToUser);
 				

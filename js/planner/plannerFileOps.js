@@ -47,15 +47,32 @@ function savePlannerToFile( func ) {
 		
 		} //end of for loop 
 		
+	var totals = JSON.stringify( updatePlannerTotals() );
+		
 	ajaxPost( "php/savePlannerToFile.php?mealLabels="+labels+"&data="+menuItems, "No Message", 
 		"Error", function(data) {
-		
-			func( data );
+			
+			makeExcelFormat( menuItems, labels, totals, function(){ func( data ); } );
 			
 			});
 
 	} //end of function
 
+	
+function makeExcelFormat( menuItems, labels, totals, func ) {
+	
+	alert( totals );
+	
+	ajaxPost( "php/makeSheet.php?mealLabels="+labels+"&totals="+totals+"&data="+menuItems, "No Message", 
+		"Error", function(data) {
+			
+			alert( data );
+			func();
+			
+			});
+	
+	
+	} //end of function
 
 //not used
 //***********************************************//

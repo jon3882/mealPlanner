@@ -147,6 +147,14 @@ function updatePlannerTotals() {
 		round(cal[i],1)+" <br>"+round(fat[i],1)+"g <br>"+round(carb[i],1)+"g <br>"+round(protein[i],1)+"g <br>";
 
 		} //end of for loop
+			
+	var totalObj = {};
+	totalObj.cal = cal;
+	totalObj.fat = fat;
+	totalObj.carb = carb;
+	totalObj.protein = protein;
+	
+	return totalObj;
 	
 	} //end of function
 //***********************************************//
