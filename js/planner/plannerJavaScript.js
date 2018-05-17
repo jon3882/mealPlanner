@@ -320,11 +320,19 @@ function savePlanner( selPlanner ) {
 		savePlannerToFile( function( data ) {
 		
 			displayMessageToUser("The following files are available for download." + 
-				'<br> - <a href="php/downloadMeal.php" class="downloadLink">Data File</a> - <br>(Used to load meal plan at a later date)'+
-				'<br> - <a href="php/downloadSheet.php" class="downloadLink">Formatted Copy</a> - <br>(Used to load into Google Sheets)', "", "ok", function() {
+			'<br> - <a href="php/downloadMeal.php" title="Download data file to your computer." class="downloadLink">Data File</a> - <br>(Used to load meal plan at a later date)'+
+			"<br><br>Formatted Copy"+
+				'<div id="googleSaveBtnContainer">'+
+				'<div class="g-savetodrive"'+
+					'data-src="php/downloadSheet.php"'+
+					'data-filename="planner.xlsx"'+
+					'data-sitename="Slims Fitness">'+
+				'</div></div>( Download sheets document to gDrive )',
+				"", "ok", function() {
 				hideMessageToUser();
 				}, hideMessageToUser);
 				
+				gapi.savetodrive.go('googleSaveBtnContainer');
 				//alert( data );
 		
 				}) //end of function
