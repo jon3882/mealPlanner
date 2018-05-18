@@ -48,6 +48,8 @@ function savePlannerToFile( func ) {
 		} //end of for loop 
 		
 	var totals = JSON.stringify( updatePlannerTotals() );
+	
+	showLoader();
 		
 	ajaxPost( "php/savePlannerToFile.php?mealLabels="+labels+"&data="+menuItems, "No Message", 
 		"Error", function(data) {
@@ -61,12 +63,13 @@ function savePlannerToFile( func ) {
 	
 function makeExcelFormat( menuItems, labels, totals, func ) {
 	
-	alert( totals );
+	//alert( totals );
 	
 	ajaxPost( "php/makeSheet.php?mealLabels="+labels+"&totals="+totals+"&data="+menuItems, "No Message", 
 		"Error", function(data) {
 			
-			alert( data );
+			hideLoader();
+			//alert( data );
 			func();
 			
 			});

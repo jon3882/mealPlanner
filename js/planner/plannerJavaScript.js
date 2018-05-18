@@ -321,24 +321,43 @@ function savePlanner( selPlanner ) {
 		
 			displayMessageToUser("The following files are available for download." + 
 			'<br> - <a href="php/downloadMeal.php" title="Download data file to your computer." class="downloadLink">Data File</a> - <br>(Used to load meal plan at a later date)'+
-			"<br><br>Formatted Copy"+
-				'<div id="googleSaveBtnContainer">'+
-				'<div class="g-savetodrive"'+
-					'data-src="php/downloadSheet.php"'+
-					'data-filename="planner.xlsx"'+
-					'data-sitename="Slims Fitness">'+
-				'</div></div>( Download sheets document to gDrive )',
+			"<br><br>Formatted Copy<br>"+
+				'<div id="googleSaveBtnContainer"></div>'+
+				'<img id="googleBusy" src="img/smallLoader.gif" >'+
+				'<br>(Download sheets document to gDrive)',
 				"", "ok", function() {
 				hideMessageToUser();
 				}, hideMessageToUser);
 				
-				gapi.savetodrive.go('googleSaveBtnContainer');
+				//loadingSaveButton( 20 );
+				
+				gapi.savetodrive.render('googleSaveBtnContainer', {"src": "php/downloadSheet.php", "filename": "planner.xlsx", "sitename": "Meal Planner"});
+				
+				//$( "#googleSaveBtnContainer" ).find("iframe")
+				
+				document.getElementById( document.getElementById("googleSaveBtnContainer").children[0].id ).onload = function() {
+        
+						$("#googleBusy").css("display","none");
+		
+						};
+				
 				//alert( data );
 		
 				}) //end of function
 		
 		};	
 //***********************************************//
+
+function loadingSaveButton( count ) {
+	
+	
+	
+	console.log( htmlContent );
+	count--;
+	
+	if( count > 0 ) setTimeout( function(){ loadingSaveButton( count ); }, 100);
+	
+	} //end of function
 
 
 //***********************************************//
