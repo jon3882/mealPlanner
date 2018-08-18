@@ -319,7 +319,7 @@ function savePlanner( selPlanner ) {
 		
 		savePlannerToFile( function( data ) {
 		
-			displayMessageToUser("The following files are available for download." + 
+			displayMessageToUser("The followng files are available for download." + 
 			'<br> - <a href="php/downloadMeal.php" title="Download data file to your computer." class="downloadLink">Data File</a> - <br>(Used to load meal plan at a later date)'+
 			"<br><br>Formatted Copy<br>"+
 				'<div id="googleSaveBtnContainer"></div>'+
