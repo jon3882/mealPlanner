@@ -74,63 +74,18 @@ include_once('navBar.php');
 <table id="planner">
 </table>
 
-<!-- //////////////////////Dialog Box/////////////////////
-////////////////////////////////////////////////////////// 
-<div class="content" >
-<div class="dialogueBox">
-	<!-- Heading for Dialogue Box 
-	<div class="foodDataContainer">
-	<div class="leftSide">
-		<select onchange="populateFoodListBox();" id="foodType">
-		</select>
-		<select id="foodSelect" size = "10">   			
-		</select>
-		<button class="plannerBtns" id="add" onclick="insertFoodFromSelect()">Add Food</button>
-	</div>
-	<div class="rightSide">
-		<span id="mealID-1">Monday Breakfast</span>
-		<table id="meal-1">
-			<thead>
-			<tr>
-				<th>Food Name</th>
-				<th>Servings</th>
-				<th>Calories</th>
-				<th>Fat (g)</th>
-				<th>Carbs (g)</th>
-				<th>Protein (g)</th>
-				<th>Delete</th>
-			</tr>
-			</thead>
-			<tbody id="tbody-1">			
-			</tbody>			
-		</table>
-		
-		<table id="totals-1">
-			<tr>
-				<th >Meal Totals</th>
-				<th>Calories</th>
-				<th>Fat (g)</th>
-				<th>Carbs (g)</th>
-				<th>Protein (g)</th>				
-			</tr>
-			<tr>				
-			</tr>
-		</table>
-		<button class="plannerBtns" id="saveMeal" onclick="pressSaveMealDialogue()">Save Meal</button>
-		<button class="plannerBtns" id="cancelMeal" onclick="pressCancelMealDialogue()">Cancel</button>
-	</div>
-	</div>
-</div>
-</div>
-<!-- ////////////////////////////////////////////////////////// -->
+
 
 <br>
 
+<!-- Needs to be tried into a package. Create a file operations package.-->
 <input type="file" id="file-input" style="display:none;" />
 
 </div>
-<!--</div>-->
 
+<!-- 	Common library messageBox. Prompts the user with
+		information or allow the user to make a decision regard his
+		action.  Can be a warning or execute an action.  -->
 <?php include 'messageBox.php';?>
 <?php include 'php/mealEditor.php';?>
 

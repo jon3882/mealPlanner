@@ -326,21 +326,58 @@ function savePlanner( selPlanner ) {
 				'<img id="googleBusy" src="img/smallLoader.gif" >'+
 				'<br>(Download sheets document to gDrive)',
 				"", "ok", function() {
+				var frameID = document.getElementById("googleSaveBtnContainer").children[0].id;
+				//frame.parentNode.removeChild(frame);
+				$(document).find( "#"+frameID ).remove();
+				
+				//document.removeChild( frame0 );
+				
 				hideMessageToUser();
-				}, hideMessageToUser);
+				//location.reload();
+				}, function(){ 
+					
+					hideMessageToUser(); });
 				
 				//loadingSaveButton( 20 );
-				
+				/*
+				window.addEventListener('message',function(e) {
+					var key = e.message ? 'message' : 'data';
+					var data = e[key];
+					
+					//alert( data );
+					if( data == "hideLoaderGDriveBtn" ) $("#googleBusy").css("display","none");
+					
+					},false);
+				*/
+				//alert( "test" );
 				gapi.savetodrive.render('googleSaveBtnContainer', {"src": "php/downloadSheet.php", "filename": "planner.xlsx", "sitename": "Meal Planner"});
 				
 				//$( "#googleSaveBtnContainer" ).find("iframe")
 				
-				document.getElementById( document.getElementById("googleSaveBtnContainer").children[0].id ).onload = function() {
+				var iframeID = document.getElementById("googleSaveBtnContainer").children[0].id;
+				//var iframe = document.getElementById("googleSaveBtnContainer").children[0];
+				
+				document.getElementById( iframeID ).onload = function() {
         
 						$("#googleBusy").css("display","none");
 		
+						//window.postMessage("hideLoaderGDriveBtn","*");  //  `*` on any domain
+						/*iframe.contentWindow.addEventListener("message", function(e) {
+							var key = e.message ? 'message' : 'data';
+							var data = e[key];
+							
+							console.log( data );
+							}, false);*/
+		
 						};
-				
+				/*
+				document.getElementById( iframeID ).contentWindow.addEventListener("message", 
+					function( evt ) {
+					
+						
+					
+						}, false);
+				*/
 				//alert( data );
 		
 				}) //end of function
